@@ -1,0 +1,237 @@
+.register-page {
+  min-height: 100vh;
+  background: #004C64;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.register-card {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.register-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #6b7c02;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.title-underline {
+  width: 400px;
+  height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  margin: 0 auto 2.5rem auto;
+  border-radius: 2px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Two Column Layout */
+.form-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.column-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.personal-info .column-title {
+  color: #0f766e;
+}
+
+.address-info .column-title {
+  color: #7c2d12;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-input-register {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 1.5px solid #727c36;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  color: #000000;
+  box-sizing: border-box;
+} 
+
+.form-input-register:focus {
+  outline: none;
+  background-color: white;
+}
+
+.form-input-register::placeholder {
+  color: #585b60;
+  font-size: 0.9rem;
+}
+
+.form-label-register {
+  font-size: 0.75rem;
+  color: #242527;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* Phone input styling */
+.phone-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.country-select {
+  padding: 1rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.country-select:focus {
+  outline: none;
+  border-color: #0f766e;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.phone-input {
+  flex: 1;
+}
+
+/* License plate styling */
+.license-plate-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.license-plate {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border: 3px solid #1e40af;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  min-width: 180px;
+  justify-content: center;
+}
+
+.plate-nl {
+  background: #1d4ed8;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.plate-number {
+  background: #fbbf24;
+  color: #1f2937;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  flex: 1;
+  text-align: center;
+}
+
+.button-row {
+  grid-column: span 2;
+  margin-top: 1rem;
+}
+
+.register-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1f2937;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(251, 191, 36, 0.3);
+}
+
+.register-button:hover {
+    background: linear-gradient(135deg, #e9ae1a, #cb840a);
+
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
+}
+
+.register-button:active {
+  transform: translateY(0);
+}
+
+.register-footer {
+  text-align: center;
+}
+
+.login-redirect-link {
+  color: #0f766e;
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.login-redirect-link:hover {
+  color: #0d9488;
+  text-decoration: underline;
+}
+

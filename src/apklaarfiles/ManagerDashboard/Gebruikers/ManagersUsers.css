@@ -1,0 +1,135 @@
+.manager-users-container {
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Header */
+.manager-users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.manager-users-header h2 {
+  margin: 0;
+  color: #1e3a5f;
+}
+
+.manager-users-count {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Search */
+.manager-users-search-wrapper {
+  margin-bottom: 20px;
+}
+
+.manager-users-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.manager-users-search:focus {
+  outline: none;
+  border-color: #2d5aa0;
+  box-shadow: 0 0 0 2px rgba(45, 90, 160, 0.1);
+}
+
+/* Table */
+.manager-users-table-container {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.manager-users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.manager-users-table thead {
+  background-color: #f8f9fa;
+}
+
+.manager-users-table th {
+  padding: 14px 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.manager-users-table td {
+  padding: 14px 12px;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.manager-users-table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* User info */
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.userid {
+  font-size: 12px;
+  color: #888;
+  font-family: monospace;
+}
+
+/* Status badge */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.verified {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.unverified {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .manager-users-container {
+    padding: 16px;
+  }
+
+  .manager-users-table {
+    min-width: 700px;
+  }
+
+  .manager-users-table-container {
+    overflow-x: auto;
+  }
+}

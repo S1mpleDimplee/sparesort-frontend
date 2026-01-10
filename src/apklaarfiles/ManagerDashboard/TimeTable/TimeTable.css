@@ -1,0 +1,365 @@
+/* ManagerAppointmentsOverview.css */
+
+.manager-appointments-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Header Styles */
+.manager-appointments-header {
+  background: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.manager-appointments-breadcrumb {
+  font-size: 14px;
+  color: #666;
+}
+
+.manager-appointments-separator {
+  margin: 0 8px;
+}
+
+.manager-appointments-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.manager-appointments-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7043, #ff5722);
+}
+
+.manager-appointments-user-name {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Main Content */
+.manager-appointments-main-content {
+  padding: 24px;
+}
+
+/* Filters Section */
+.manager-appointments-filters {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.manager-appointments-filters-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.manager-appointments-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.manager-appointments-filter-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.manager-appointments-filter-input,
+.manager-appointments-filter-select {
+  padding: 8px 12px;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.manager-appointments-filter-input:focus,
+.manager-appointments-filter-select:focus {
+  outline: none;
+  border-color: #2d5aa0;
+  box-shadow: 0 0 0 2px rgba(45, 90, 160, 0.1);
+}
+
+.manager-appointments-filter-input::placeholder {
+  color: #8b949e;
+}
+
+.manager-appointments-clear-filters {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #d0d7de;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.manager-appointments-clear-filters:hover {
+  background: #e5e5e5;
+  border-color: #b0b7be;
+  color: #333;
+}
+
+/* Week Grid */
+.manager-appointments-week-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.manager-appointments-day-column {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Day Header */
+.manager-appointments-day-header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5aa0 100%);
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+.manager-appointments-day-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.manager-appointments-day-date {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Day Content */
+.manager-appointments-day-content {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manager-appointments-no-appointments {
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+}
+
+/* Appointment Cards */
+.manager-appointments-appointment-card {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 12px;
+  border-left: 4px solid;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.manager-appointments-appointment-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.manager-appointments-appointment-card.apk {
+  border-left-color: #2196f3;
+}
+
+.manager-appointments-appointment-card.repair {
+  border-left-color: #ff9800;
+}
+
+/* Appointment Header */
+.manager-appointments-appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.manager-appointments-appointment-type {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.2;
+}
+
+.manager-appointments-appointment-time {
+  font-size: 11px;
+  color: #666;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* Appointment Status */
+.manager-appointments-appointment-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.manager-appointments-status-badge {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.manager-appointments-status-badge.bezet {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.manager-appointments-status-badge.beschikbaar {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.manager-appointments-status-badge.afgerond {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+}
+
+.manager-appointments-status-badge.geannuleerd {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.manager-appointments-appointment-code {
+  font-size: 11px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+/* Vehicle Info */
+.manager-appointments-appointment-vehicle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.manager-appointments-car-icon {
+  font-size: 14px;
+}
+
+.manager-appointments-vehicle-name {
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+  background-color: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Mechanic Info */
+.manager-appointments-appointment-mechanic {
+  font-size: 11px;
+  color: #666;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 6px;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .manager-appointments-week-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .manager-appointments-filters-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .manager-appointments-week-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .manager-appointments-day-column {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .manager-appointments-main-content {
+    padding: 16px;
+  }
+  
+  .manager-appointments-header {
+    padding: 12px 16px;
+  }
+  
+  .manager-appointments-filters {
+    padding: 16px;
+  }
+  
+  .manager-appointments-filters-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .manager-appointments-clear-filters {
+    justify-self: start;
+  }
+  
+  .manager-appointments-user-name {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .manager-appointments-appointment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .manager-appointments-appointment-time {
+    margin-left: 0;
+  }
+  
+  .manager-appointments-appointment-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .manager-appointments-day-header {
+    padding: 12px;
+  }
+  
+  .manager-appointments-day-content {
+    padding: 12px;
+  }
+}

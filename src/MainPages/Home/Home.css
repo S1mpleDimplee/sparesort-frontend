@@ -1,0 +1,283 @@
+.hero-section {
+  position: relative;
+  height: 500px;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url('../../media/homeimg.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.filter-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.filter-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.filter-rating {
+  min-width: 150px;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #1a1a1a;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.stars {
+  color: #fbbf24;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.dropdown-arrow {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.bedrooms-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #f3f4f6;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.bedroom-icon {
+  font-size: 1rem;
+}
+
+.filter-button {
+  padding: 0.75rem 2.5rem;
+  background: #d97706;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.filter-button:hover {
+  background: #b45309;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+.lodges-section {
+  padding: 4rem 0;
+  background: #F6F6F6;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.lodges-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.lodge-card {
+  display: flex;
+  background: #282828;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.lodge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.lodge-image-wrapper {
+  padding: 1rem;
+  align-self: center;
+
+  flex: 0 0 320px;
+  height: 280px;
+  overflow: hidden;
+}
+
+.lodge-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.5s ease;
+}
+
+.lodge-card:hover .lodge-image {
+  transform: scale(1.1);
+}
+
+.lodge-info {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+.lodge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.lodge-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  flex: 1;
+}
+
+.lodge-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.price-period {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.lodge-features {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  padding: 1rem;
+  width: 200px;
+  height: 50px;
+  background-color: #232323;
+  align-items: center !important;
+  border-radius: 12px;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+}
+
+.feature-text {
+  font-size: 0.95rem;
+  color: #d1d5db;
+}
+
+.lodge-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #404040;
+}
+
+.lodge-description {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  max-width: 60%;
+}
+
+.book-button {
+  padding: 0.75rem 2rem;
+  background: #d97706;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.book-button:hover {
+  background: #b45309;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+}

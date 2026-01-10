@@ -1,0 +1,373 @@
+/* RepairsModal.css */
+
+.repairs-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.repairs-modal-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.repairs-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.repairs-modal-close:hover {
+    color: #374151;
+}
+
+.repairs-modal-title {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0;
+}
+
+.repairs-modal-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.repairs-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.repairs-type-select {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.repairs-select {
+    width: 30%;
+    padding: 0.5rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.choose-mechanic-select {
+    width: 100%;
+}
+
+.repairs-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.repairs-car-select {
+    margin-bottom: 1rem;
+    margin-left: 10px;
+    border-radius: 4px;
+    border-color: #9ca3af;
+    padding: 0.5rem 0.9rem;
+}
+
+.repairs-add-btn {
+    background: none;
+    border: none;
+    color: #828282;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+}
+
+.repairs-add-btn:hover {
+    color: #1d4ed8;
+}
+
+.repairs-table-container {
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.repairs-table {
+    width: 95%;
+    justify-self: center;
+    border-collapse: collapse;
+}
+
+.repairs-table thead {
+    background-color: #f9fafb;
+}
+
+.repairs-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.repairs-table tbody tr {
+    border-top: 1px solid #c0c0c0;
+}
+
+.repairs-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+.repairs-table td {
+    padding: 0.75rem 1rem;
+}
+
+.repairs-input {
+    width: 100%;
+    padding: 0.375rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.repairs-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.repairs-price {
+    color: #374151;
+    font-weight: 500;
+}
+
+.repairs-remove-btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.repairs-remove-btn:hover:not(:disabled) {
+    color: #ef4444;
+}
+
+.repairs-remove-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.repairs-labor-row {
+    background-color: #f9fafb;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.repairs-note {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+.repairs-total {
+    text-align: right;
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-top: 1rem;
+}
+
+/* Right side - Sidebar */
+.repairs-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.repairs-car-info {
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #f9fafb;
+}
+
+.repairs-car-title {
+    font-weight: bold;
+    font-size: 1.125rem;
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.repairs-car-title span {
+    color: #6b7280;
+    font-weight: normal;
+}
+
+.repairs-car-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.repairs-detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+}
+
+.repairs-detail-row span {
+    color: #6b7280;
+}
+
+.repairs-detail-row strong {
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.repairs-appointment {
+    border: 1px solid #c0c0c0;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.repairs-appointment-title {
+    font-weight: bold;
+    font-size: 1.125rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.repairs-appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.repairs-date-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+
+.repairs-date-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.repairs-time-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.repairs-time-input span {
+    font-size: 1.25rem;
+}
+
+.repairs-hour-input,
+.repairs-minute-input {
+    width: 4rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.repairs-hour-input:focus,
+.repairs-minute-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.repairs-mechanic-select label {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.repairs-mechanic-select label span {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.repairs-submit-btn {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 0.5rem;
+}
+
+.repairs-submit-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .repairs-modal-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .repairs-modal-overlay {
+        padding: 0;
+    }
+
+    .repairs-modal-container {
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .repairs-table-container {
+        overflow-x: auto;
+    }
+
+    .repairs-table {
+        font-size: 0.75rem;
+    }
+
+    .repairs-table th,
+    .repairs-table td {
+        padding: 0.5rem;
+    }
+}

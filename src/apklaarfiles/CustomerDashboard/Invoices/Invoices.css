@@ -1,0 +1,192 @@
+/* Main Container */
+.customer-invoices-main-content {
+    flex: 1;
+}
+
+.customer-invoices-content-area {
+    padding: 0;
+}
+
+
+/* Search Bar */
+.customer-invoices-search-bar {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+
+    margin: 1rem 1rem;
+}
+
+.customer-invoices-search-input-wrapper {
+    flex: 1;
+}
+
+.customer-invoices-search-input {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    outline: none;
+}
+
+.customer-invoices-search-input:focus {
+    border-color: #0891b2;
+}
+
+.customer-invoices-status-filter-wrapper {
+    min-width: 150px;
+}
+
+.customer-invoices-status-filter {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.customer-invoices-status-filter:focus {
+    border-color: #0891b2;
+}
+
+/* Table Container */
+.customer-invoices-table-container {
+    background-color: white;
+    margin: 1.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+}
+
+.customer-invoices-no-results {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 20px;
+    color: #6b7280;
+}
+
+.customer-invoices-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table Header */
+.customer-invoices-table-header-row {
+    background-color: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.customer-invoices-table-header {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Table Rows */
+.customer-invoices-table-row {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.15s;
+}
+
+.customer-invoices-table-row:hover {
+    background-color: #f9fafb;
+}
+
+.customer-invoices-table-cell {
+    padding: 1rem 1.5rem;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+/* Status Badges */
+.customer-invoices-status-paid {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: #047857;
+    background-color: #d1fae5;
+    border-radius: 4px;
+}
+
+.customer-invoices-status-unpaid {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: #dc2626;
+    background-color: #fee2e2;
+    border-radius: 4px;
+}
+
+/* Action Buttons */
+.customer-invoices-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.customer-invoices-btn-inzien {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    background-color: #0891b2;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.customer-invoices-btn-inzien:hover {
+    background-color: #0e7490;
+}
+
+.customer-invoices-btn-betalen {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    background-color: #0c5273;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.customer-invoices-btn-betalen:hover {
+    background-color: #094461;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .customer-invoices-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .customer-invoices-search-bar {
+        flex-direction: column;
+    }
+
+    .customer-invoices-status-filter-wrapper {
+        width: 100%;
+    }
+
+    .customer-invoices-table-container {
+        overflow-x: auto;
+    }
+
+    .customer-invoices-action-buttons {
+        flex-direction: column;
+    }
+}

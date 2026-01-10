@@ -1,0 +1,347 @@
+/* Appointments Scroll Container */
+.appointments-scroll-container {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.appointments-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.appointments-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.appointments-scroll-container::-webkit-scrollbar-thumb {
+  background: #2196f3;
+  border-radius: 10px;
+}
+
+.appointments-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #1976d2;
+}
+
+/* Appointment Card */
+.appointment-card {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #2196f3;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.appointment-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.appointment-card:last-child {
+  margin-bottom: 0;
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.appointment-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.appointment-brand {
+  font-size: 12px;
+  color: #666;
+  background: #e3f2fd;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.appointment-datetime {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.appointment-datetime svg {
+  color: #2196f3;
+}
+
+.appointment-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.appointment-status {
+  font-size: 12px;
+  color: #4caf50;
+  background: #e8f5e9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.appointment-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Rest of your existing CSS... */
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid;
+}
+
+.stat-card.blue {
+  border-left-color: #2196f3;
+}
+
+.stat-card.green {
+  border-left-color: #4caf50;
+}
+
+.stat-card.yellow {
+  border-left-color: #ff9800;
+}
+
+.stat-card.dark-blue {
+  border-left-color: #1976d2;
+}
+
+.stat-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.stat-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+  min-height: 72vh;
+}
+
+.content-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-section h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-left: 15px;
+  padding-bottom: 12px;
+}
+
+.appointment-edit {
+  background-color: #229d03;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.appointment-cancel {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+
+.dashboard-link {
+  color: #2196f3;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dashboard-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.plan-apk-button {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.dashboard-notification-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #a6c3f3;
+  min-width: 100%;
+  border-left: 4px solid #4a90e2;
+  margin-bottom: 12px;
+}
+
+.dashboard-notification-content {
+  width: 100%;
+}
+
+.plan-apk-text {
+  color: #2196f3;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+  justify-self: start;
+}
+
+.dashboard-notification-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.dashboard-notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.dashboard-notification-timestamp {
+  font-size: 12px;
+  color: #999;
+}
+
+.dashboard-notification-message {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.dashboard-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+  background-color: #e5e5e5;
+}
+
+.dashboard-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.notification-item:last-child {
+  margin-bottom: 0;
+}
+
+.notification-content h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.notification-content p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.empty-content {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #999;
+  font-style: italic;
+}
+
+.empty-content div {
+  margin-top: 20vh;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

@@ -1,0 +1,48 @@
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F6F6F6;
+}
+
+.dashboard-main-content {
+  background-color: #F6F6F6;
+}
+
+
+/* Content Wrapper - holds sidebar and main content */
+.content-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Dashboard Main Content - when sidebar is present */
+
+
+/* Footer */
+.footer {
+  width: 100%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .dashboard-main-content {
+    min-height: auto;
+  }
+}
