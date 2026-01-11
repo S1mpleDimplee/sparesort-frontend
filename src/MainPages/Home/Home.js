@@ -53,7 +53,6 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
