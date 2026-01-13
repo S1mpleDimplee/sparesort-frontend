@@ -1,0 +1,436 @@
+.balie-dash-dashboard-page {
+  padding: 2rem;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* Stats Cards Section */
+.balie-dash-stats-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.balie-dash-stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balie-dash-stat-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.balie-dash-stat-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.balie-dash-clock-circle,
+.balie-dash-icon-circle {
+  width: 60px;
+  height: 60px;
+  background: #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balie-dash-clock-symbol {
+  font-size: 24px;
+  color: white;
+}
+
+.balie-dash-arrow-icon {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.balie-dash-time-info,
+.balie-dash-stat-info {
+  flex: 1;
+}
+
+.balie-dash-date {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.balie-dash-time {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #666;
+  margin: 0;
+}
+
+.balie-dash-stat-number {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.balie-dash-stat-description {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.balie-dash-stat-footer {
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+}
+
+.balie-dash-timezone {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Lists Section */
+.balie-dash-lists-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.balie-dash-check-list {
+  background: #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.balie-dash-list-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #444;
+}
+
+.balie-dash-list-icon {
+  font-size: 1.2rem;
+}
+
+.balie-dash-list-header h3 {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.balie-dash-check-item {
+  background: #3a3a3a;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #d97706;
+}
+
+.balie-dash-check-info {
+  margin-bottom: 1rem;
+}
+
+.balie-dash-guest-name {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.balie-dash-lodge-name {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.balie-dash-check-details {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto 1fr auto;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.balie-dash-check-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.balie-dash-check-date,
+.balie-dash-check-time {
+  color: #ccc;
+}
+
+.balie-dash-check-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.balie-dash-status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.balie-dash-status-badge.balie-dash-checked-in {
+  background: #22c55e;
+  color: white;
+}
+
+.balie-dash-status-badge.balie-dash-not-checked {
+  background: #ef4444;
+  color: white;
+}
+
+.balie-dash-action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.balie-dash-inzien-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.balie-dash-inzien-btn:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+}
+
+.balie-dash-checkin-btn {
+  background: #d97706;
+  color: white;
+}
+
+.balie-dash-checkin-btn:hover {
+  background: #b45309;
+  transform: translateY(-1px);
+}
+
+.balie-dash-list-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #444;
+}
+
+.balie-dash-view-all-btn {
+  background: none;
+  border: none;
+  color: #d97706;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Search Section */
+.balie-dash-search-section {
+  background: #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.balie-dash-search-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.balie-dash-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.balie-dash-filter-group label {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.balie-dash-search-input {
+  padding: 0.75rem;
+  background: #4a4a4a;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.balie-dash-search-input::placeholder {
+  color: #aaa;
+}
+
+.balie-dash-date-input-wrapper {
+  position: relative;
+}
+
+.balie-dash-calendar-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.balie-dash-date-input {
+  padding-left: 2.5rem;
+}
+
+.balie-dash-lodge-input {
+  background: #555;
+}
+
+/* Booking Section */
+.balie-dash-booking-section {
+  background: #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.balie-dash-section-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #444;
+}
+
+.balie-dash-section-header h3 {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.balie-dash-booking-result {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 1.5rem;
+  align-items: center;
+  background: #3a3a3a;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.balie-dash-booking-image {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.balie-dash-booking-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.balie-dash-booking-info {
+  flex: 1;
+}
+
+.balie-dash-booking-guest-name {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.balie-dash-booking-lodge-name {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+}
+
+.balie-dash-booking-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.balie-dash-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.balie-dash-feature-icon {
+  font-size: 1rem;
+}
+
+.balie-dash-booking-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.balie-dash-date-section h5 {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.balie-dash-date-value {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.balie-dash-time-value {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.balie-dash-booking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .balie-dash-stats-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .balie-dash-lists-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .balie-dash-search-filters {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .balie-dash-booking-result {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}

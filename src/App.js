@@ -15,7 +15,10 @@ import Footer from "./Footer/Footer";
 import Register from "./Register/register/register";
 import Login from "./Register/login/login";
 import Verify from "./Register/emailverify/verify";
-import NavbarHome from "./NavbarHome/Navbarhome";
+import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
+import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
+import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
+import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -28,12 +31,13 @@ function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isDashboard, setIsDashboard] = useState(false);
-  const [currentRole, setCurrentRole] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentRole, setCurrentRole] = useState(2);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // Define dashboard URLs for all roles
   const dashboardUrls = [
     "/dashboard",
+    "/dashboard/lodges",
   ];
 
   const nonLoggedInUrls = [
@@ -50,8 +54,9 @@ function AppContent() {
 
   useEffect(() => {
     // Check if user is logged in and get their role
-    checkUserLoginStatus();
+    // checkUserLoginStatus();
     setIsDashboard(dashboardUrls.includes(location.pathname));
+    setCurrentRole(2); // Temporarie
   }, [location.pathname]);
 
   const checkUserLoginStatus = () => {
@@ -108,7 +113,7 @@ function AppContent() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
       </head>
-      {!isDashboard && <NavbarHome />}
+      {!isDashboard ? <NavbarHome /> : <NavbarDashboard />}
 
       <div className="content-wrapper">
         {isLoggedIn && isDashboard && (
@@ -132,6 +137,7 @@ function AppContent() {
             <Route path="/registreren" element={<Register />} />
             <Route path="/inloggen" element={<Login />} />
             <Route path="/verificatie" element={<Verify />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
 
             {isLoggedIn && (
               <>
@@ -145,6 +151,8 @@ function AppContent() {
                 {/* Balimedewerker Dashboard routes (role 2) */}
                 {currentRole === 2 && (
                   <>
+                 <Route path="/dashboard" element={<BalieDashboard />} />
+                <Route path="/dashboard/lodges" element={<BalieLodges />} />
                     {/* <Route path="/dashboard" element={<MechanicDashboard />} /> */}
                   </>
                 )}
