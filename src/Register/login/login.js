@@ -80,7 +80,7 @@ const Login = () => {
                 className="forgot-password-link"
                 onClick={() => navigate("/registreren")}
               >
-                Ik heb heb nog geen accountc
+                Ik heb heb nog geen account
               </button>
             </div>
           </div>

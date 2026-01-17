@@ -4,7 +4,7 @@ import logo from '../../media/logo.png'
 import { useNavigate } from 'react-router-dom';
 const NavbarDashboard = () => {
 
-  const [role, setRole] = useState(2);
+  const [role, setRole] = useState(4);
 
   useEffect(() => {
     // setRole(localStorage.getItem('userRole'));
@@ -95,11 +95,24 @@ const NavbarDashboard = () => {
         description: "Bedrijfsoverzicht",
       },
       {
+        id: "lodges",
+        label: "Lodges",
+        path: "/dashboard/lodges",
+        description: "Lodge beheer",
+      },
+      {
+        id: "gebruikers",
+        label: "Gebruikers",
+        path: "/dashboard/users",
+        description: "Personeel beheer",
+      },
+      {
         id: "afspraken",
         label: "Afspraken",
         path: "/dashboard/rooster",
         description: "Alle afspraken beheren",
       },
+
     ]
   };
 

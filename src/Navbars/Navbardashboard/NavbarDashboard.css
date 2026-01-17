@@ -5,9 +5,8 @@
 }
 
 .navbar-dash-container {
-  padding: 0vh 20vh;
   display: flex;
-  justify-content: space-between;
+  margin: 1vh 4vw;
 }
 
 .navbar-dash-logo {
@@ -15,7 +14,6 @@
 }
 
 .logo-image {
-  margin-top: -6vh;
   width: 140px;
   height: 140px;
   object-fit: contain;
@@ -23,9 +21,7 @@
 }
 
 .navbar-dash-nav {
-  margin-top: -8vh !important;
   display: flex;
-  margin-left: 20vh !important;
   align-items: center !important;
   justify-self: center !important;
   gap: 4rem;
@@ -39,7 +35,6 @@
   color: #ffffff !important;
   text-decoration: none;
   font-size: 1.1rem;
-  margin-top: 4vh;
   font-weight: 500;
   padding: 0.5rem 0;
   cursor: pointer;
@@ -54,13 +49,10 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #ff8c00;
+  background: #ffffff;
   transition: width 0.3s ease;
 }
 
-.nav-dash-link:hover {
-  color: #ff8c00;
-}
 
 .nav-dash-link:hover::after,
 .nav-dash-link.active::after {

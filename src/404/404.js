@@ -1,17 +1,34 @@
-import React, { use } from "react";
-import "./404.css";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './404.css';
 
 const NotFound = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-    return (
-        <div className="not-found-container">
-            <h1 className="not-found-title">404</h1>
-            <p className="not-found-message">Pagina niet gevonden!</p>
-            <a onClick={() => navigate(-1)} className="not-found-link">Terug</a>
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  return (
+    <div className="notfound-container">
+      <div className="notfound-overlay">
+        <div className="notfound-content">
+          <h1 className="notfound-title">404</h1>
+          <div className="notfound-underline"></div>
+          <p className="notfound-text">Deze pagina bestaat niet!</p>
+          <p className="notfound-text">
+            Komt dit vaker voor? mail ons via{' '}
+            <a href="mailto:email@email.com" className="notfound-email">
+              email@email.com
+            </a>
+          </p>
+          <button className="notfound-button" onClick={handleGoBack}>
+            Ga terug
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default NotFound;
