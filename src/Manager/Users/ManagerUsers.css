@@ -1,22 +1,38 @@
 .manager-users-page {
   padding: 2rem;
-  background: #f6f6f6;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
   min-height: 100vh;
+  position: relative;
+}
+
+.manager-users-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 30% 50%, rgba(255, 159, 16, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 159, 16, 0.03) 0%, transparent 40%);
+  pointer-events: none;
 }
 
 /* Header Section */
 .manager-users-header {
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .manager-users-search-section {
-  background: #333;
+  background: rgba(31, 31, 31, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 159, 16, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .manager-users-search-wrapper {
@@ -27,12 +43,13 @@
 .manager-users-search-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: #4a4a4a;
-  border: 1px solid #555;
+  background: rgba(74, 74, 74, 0.6);
+  border: 1px solid rgba(255, 159, 16, 0.2);
   border-radius: 8px;
   color: white;
   font-size: 0.95rem;
   outline: none;
+  transition: all 0.3s ease;
 }
 
 .manager-users-search-input::placeholder {
@@ -40,8 +57,9 @@
 }
 
 .manager-users-search-input:focus {
-  border-color: #d97706;
-  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+  border-color: #FF9F10;
+  background: rgba(74, 74, 74, 0.8);
+  box-shadow: 0 0 0 3px rgba(255, 159, 16, 0.15);
 }
 
 .manager-users-header-actions {
@@ -51,7 +69,7 @@
 }
 
 .manager-users-view-toggle {
-  background: #4a4a4a;
+  background: rgba(74, 74, 74, 0.6);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
 }
@@ -63,12 +81,12 @@
 }
 
 .manager-users-view-option.active {
-  color: #d97706;
+  color: #FF9F10;
 }
 
 .manager-users-create-btn {
-  background: #d97706;
-  color: white;
+  background: #FF9F10;
+  color: #1f2937;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -77,21 +95,26 @@
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(255, 159, 16, 0.3);
 }
 
 .manager-users-create-btn:hover {
-  background: #b45309;
+  background: #f59e0b;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 159, 16, 0.4);
 }
 
 /* Table Section */
 .manager-users-table-section {
-  background: #282828;
+  background: rgba(40, 40, 40, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 159, 16, 0.1);
   border-radius: 16px;
   padding: 0;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1  );
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 .manager-users-table-wrapper {
@@ -104,7 +127,7 @@
 }
 
 .manager-users-table-header {
-  background: #3a3a3a;
+  background: rgba(40, 40, 40, 0.95);
 }
 
 .manager-users-header-cell {
@@ -115,16 +138,16 @@
   color: #ccc;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid #444;
+  border-bottom: 2px solid rgba(255, 159, 16, 0.2);
 }
 
 .manager-users-table-row {
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid rgba(68, 68, 68, 0.5);
   transition: background-color 0.2s ease;
 }
 
 .manager-users-table-row:hover {
-  background: #3a3a3a;
+  background: rgba(58, 58, 58, 0.7);
 }
 
 .manager-users-table-row:last-child {
@@ -146,12 +169,13 @@
 .manager-users-user-avatar {
   width: 40px;
   height: 40px;
-  background: #666;
+  background: linear-gradient(135deg, #666, #888);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 2px solid rgba(255, 159, 16, 0.2);
 }
 
 .manager-users-avatar-text {
@@ -189,21 +213,25 @@
 .manager-users-role-manager {
   background: #dc2626;
   color: white;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
 }
 
 .manager-users-role-maintenance {
-  background: #f59e0b;
-  color: white;
+  background: #FF9F10;
+  color: #1f2937;
+  box-shadow: 0 2px 8px rgba(255, 159, 16, 0.3);
 }
 
 .manager-users-role-guest {
   background: #10b981;
   color: white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .manager-users-role-default {
   background: #6b7280;
   color: white;
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
 }
 
 /* Status Badge */
@@ -218,6 +246,7 @@
 .manager-users-status-active {
   background: #22c55e;
   color: white;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
 }
 
 /* Actions */
@@ -240,29 +269,33 @@
 .manager-users-deactivate-btn {
   background: #ef4444;
   color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
 .manager-users-deactivate-btn:hover {
   background: #dc2626;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
 .manager-users-view-btn {
   background: #6b7280;
   color: white;
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
 }
 
 .manager-users-view-btn:hover {
   background: #4b5563;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
 }
 
 /* Table Footer */
 .manager-users-table-footer {
   padding: 1.5rem;
   text-align: center;
-  border-top: 1px solid #444;
-  background: #333;
+  border-top: 1px solid rgba(68, 68, 68, 0.5);
+  background: rgba(51, 51, 51, 0.8);
 }
 
 .manager-users-end-message {
@@ -278,7 +311,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,18 +320,20 @@
 }
 
 .manager-users-modal {
-  background: white;
+  background: #1f1f1f;
+  border: 1px solid rgba(255, 159, 16, 0.2);
   border-radius: 12px;
   padding: 0;
   max-width: 500px;
   width: 90%;
   max-height: 80vh;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .manager-users-modal-header {
-  background: #333;
+  background: rgba(51, 51, 51, 0.95);
+  border-bottom: 1px solid rgba(255, 159, 16, 0.2);
   color: white;
   padding: 1.5rem;
   display: flex;
@@ -328,11 +364,13 @@
 }
 
 .manager-users-modal-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 159, 16, 0.2);
 }
 
 .manager-users-modal-content {
   padding: 2rem;
+  background: #1f1f1f;
+  color: white;
 }
 
 /* Responsive Design */
