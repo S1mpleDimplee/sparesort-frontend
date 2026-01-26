@@ -130,7 +130,6 @@
 
 .lodges-section {
   padding: 4rem 0;
-  background: #F6F6F6;
 }
 
 .section-title {
@@ -157,7 +156,6 @@
 }
 
 .lodge-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 

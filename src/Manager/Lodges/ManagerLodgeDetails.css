@@ -1,0 +1,566 @@
+.manager-lodge-details-page {
+  padding: 2rem;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* Main Container */
+.manager-lodge-details-container {
+  background: #333;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  color: white;
+}
+
+/* Left Section - Image and Basic Info */
+.manager-lodge-details-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manager-lodge-details-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manager-lodge-details-image-wrapper {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.manager-lodge-details-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.manager-lodge-details-basic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manager-lodge-details-name-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manager-lodge-details-label {
+  font-size: 0.85rem;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.manager-lodge-details-lodge-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.manager-lodge-details-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manager-lodge-details-price-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.manager-lodge-details-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.manager-lodge-details-season {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.manager-lodge-details-image-controls {
+  margin-top: 1rem;
+}
+
+.manager-lodge-details-image-btn {
+  background: #4a4a4a;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.manager-lodge-details-image-btn:hover {
+  background: #555;
+}
+
+/* Middle Section - Status */
+.manager-lodge-details-middle {
+  display: flex;
+  flex-direction: column;
+}
+
+.manager-lodge-details-status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.manager-lodge-details-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 1rem 0;
+  border-bottom: 2px solid #d97706;
+  padding-bottom: 0.5rem;
+}
+
+.manager-lodge-details-status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.manager-lodge-details-status-label {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Toggle Switch */
+.manager-lodge-details-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.manager-lodge-details-toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.manager-lodge-details-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.manager-lodge-details-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4a4a4a;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.manager-lodge-details-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.manager-lodge-details-toggle input:checked + .manager-lodge-details-toggle-slider {
+  background-color: #22c55e;
+}
+
+.manager-lodge-details-toggle input:checked + .manager-lodge-details-toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* Status Badge */
+.manager-lodge-details-status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.manager-lodge-details-status-available {
+  background: #22c55e;
+  color: white;
+}
+
+.manager-lodge-details-status-progress {
+  background: #f59e0b;
+  color: white;
+}
+
+/* Capacity Section */
+.manager-lodge-details-capacity-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.manager-lodge-details-capacity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manager-lodge-details-capacity-label {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.manager-lodge-details-capacity-value {
+  background: #4a4a4a;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  min-width: 60px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Right Section - Description */
+.manager-lodge-details-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.manager-lodge-details-description-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.manager-lodge-details-description-box {
+  flex: 1;
+  border: 2px solid #d97706;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #4a4a4a;
+}
+
+.manager-lodge-details-description-textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+}
+
+.manager-lodge-details-description-textarea::placeholder {
+  color: #aaa;
+}
+
+/* Amenities Section */
+.manager-lodge-details-amenities-section {
+  background: #333;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.manager-lodge-details-amenities-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 2rem 0;
+}
+
+.manager-lodge-details-amenities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.manager-lodge-details-amenities-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manager-lodge-details-extra-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d97706;
+  margin: 0 0 1rem 0;
+}
+
+.manager-lodge-details-amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #4a4a4a;
+  border-radius: 8px;
+}
+
+.manager-lodge-details-amenity-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.manager-lodge-details-amenity-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: white;
+}
+
+/* Custom Checkbox */
+.manager-lodge-details-checkbox {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.manager-lodge-details-checkbox input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.manager-lodge-details-checkmark {
+  height: 18px;
+  width: 18px;
+  background-color: transparent;
+  border: 2px solid #666;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.manager-lodge-details-checkbox input:checked ~ .manager-lodge-details-checkmark {
+  background-color: #22c55e;
+  border-color: #22c55e;
+}
+
+.manager-lodge-details-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.manager-lodge-details-checkbox input:checked ~ .manager-lodge-details-checkmark:after {
+  display: block;
+}
+
+.manager-lodge-details-remove-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.manager-lodge-details-remove-btn:hover {
+  background: #dc2626;
+}
+
+.manager-lodge-details-add-amenity {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.manager-lodge-details-add-input {
+  flex: 1;
+  padding: 0.5rem;
+  background: #4a4a4a;
+  border: 1px solid #666;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.manager-lodge-details-add-input::placeholder {
+  color: #aaa;
+}
+
+.manager-lodge-details-add-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.manager-lodge-details-add-btn:hover {
+  background: #16a34a;
+}
+
+/* Maintenance Section */
+.manager-lodge-details-maintenance-section {
+  background: #333;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.manager-lodge-details-maintenance-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 1.5rem 0;
+}
+
+.manager-lodge-details-maintenance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4a4a4a;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.manager-lodge-details-maintenance-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manager-lodge-details-maintenance-task {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.manager-lodge-details-maintenance-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.manager-lodge-details-maintenance-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.manager-lodge-details-maintenance-btn:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+}
+
+/* Action Buttons */
+.manager-lodge-details-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.manager-lodge-details-action-btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.manager-lodge-details-delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.manager-lodge-details-delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+.manager-lodge-details-save-btn {
+  background: #d97706;
+  color: white;
+}
+
+.manager-lodge-details-save-btn:hover {
+  background: #b45309;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .manager-lodge-details-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .manager-lodge-details-right {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .manager-lodge-details-page {
+    padding: 1rem;
+  }
+  
+  .manager-lodge-details-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .manager-lodge-details-amenities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .manager-lodge-details-actions {
+    flex-direction: column;
+  }
+}

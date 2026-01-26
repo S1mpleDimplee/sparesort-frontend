@@ -1,0 +1,426 @@
+.manager-users-page {
+  padding: 2rem;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.manager-users-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 30% 50%, rgba(255, 159, 16, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 159, 16, 0.03) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Header Section */
+.manager-users-header {
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.manager-users-search-section {
+  background: rgba(31, 31, 31, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 159, 16, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.manager-users-search-wrapper {
+  flex: 1;
+  max-width: 400px;
+}
+
+.manager-users-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(74, 74, 74, 0.6);
+  border: 1px solid rgba(255, 159, 16, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.manager-users-search-input::placeholder {
+  color: #aaa;
+}
+
+.manager-users-search-input:focus {
+  border-color: #FF9F10;
+  background: rgba(74, 74, 74, 0.8);
+  box-shadow: 0 0 0 3px rgba(255, 159, 16, 0.15);
+}
+
+.manager-users-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.manager-users-view-toggle {
+  background: rgba(74, 74, 74, 0.6);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.manager-users-view-option {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.manager-users-view-option.active {
+  color: #FF9F10;
+}
+
+.manager-users-create-btn {
+  background: #FF9F10;
+  color: #1f2937;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(255, 159, 16, 0.3);
+}
+
+.manager-users-create-btn:hover {
+  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 159, 16, 0.4);
+}
+
+/* Table Section */
+.manager-users-table-section {
+  background: rgba(40, 40, 40, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 159, 16, 0.1);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.manager-users-table-wrapper {
+  overflow-x: auto;
+}
+
+.manager-users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.manager-users-table-header {
+  background: rgba(40, 40, 40, 0.95);
+}
+
+.manager-users-header-cell {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 159, 16, 0.2);
+}
+
+.manager-users-table-row {
+  border-bottom: 1px solid rgba(68, 68, 68, 0.5);
+  transition: background-color 0.2s ease;
+}
+
+.manager-users-table-row:hover {
+  background: rgba(58, 58, 58, 0.7);
+}
+
+.manager-users-table-row:last-child {
+  border-bottom: none;
+}
+
+.manager-users-table-cell {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+}
+
+/* User Info */
+.manager-users-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.manager-users-user-avatar {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #666, #888);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 159, 16, 0.2);
+}
+
+.manager-users-avatar-text {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.manager-users-user-name {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.manager-users-email {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.manager-users-date {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Role Badges */
+.manager-users-role-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.manager-users-role-manager {
+  background: #dc2626;
+  color: white;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+.manager-users-role-maintenance {
+  background: #FF9F10;
+  color: #1f2937;
+  box-shadow: 0 2px 8px rgba(255, 159, 16, 0.3);
+}
+
+.manager-users-role-guest {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.manager-users-role-default {
+  background: #6b7280;
+  color: white;
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+/* Status Badge */
+.manager-users-status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.manager-users-status-active {
+  background: #22c55e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+/* Actions */
+.manager-users-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.manager-users-action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.manager-users-deactivate-btn {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.manager-users-deactivate-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.manager-users-view-btn {
+  background: #6b7280;
+  color: white;
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+.manager-users-view-btn:hover {
+  background: #4b5563;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
+}
+
+/* Table Footer */
+.manager-users-table-footer {
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(68, 68, 68, 0.5);
+  background: rgba(51, 51, 51, 0.8);
+}
+
+.manager-users-end-message {
+  color: #888;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Modal */
+.manager-users-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.manager-users-modal {
+  background: #1f1f1f;
+  border: 1px solid rgba(255, 159, 16, 0.2);
+  border-radius: 12px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.manager-users-modal-header {
+  background: rgba(51, 51, 51, 0.95);
+  border-bottom: 1px solid rgba(255, 159, 16, 0.2);
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manager-users-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.manager-users-modal-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.manager-users-modal-close:hover {
+  background: rgba(255, 159, 16, 0.2);
+}
+
+.manager-users-modal-content {
+  padding: 2rem;
+  background: #1f1f1f;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .manager-users-search-section {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .manager-users-search-wrapper {
+    max-width: none;
+  }
+  
+  .manager-users-header-actions {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .manager-users-page {
+    padding: 1rem;
+  }
+  
+  .manager-users-table-wrapper {
+    font-size: 0.85rem;
+  }
+  
+  .manager-users-header-cell,
+  .manager-users-table-cell {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .manager-users-actions {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .manager-users-user-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .manager-users-user-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .manager-users-avatar-text {
+    font-size: 0.75rem;
+  }
+}
