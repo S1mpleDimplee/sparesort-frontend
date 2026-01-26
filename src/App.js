@@ -12,9 +12,9 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
-import Register from "./Register/register/register";
-import Login from "./Register/login/login";
-import Verify from "./Register/emailverify/verify";
+import Register from "./authentication/register/register";
+import Login from "./authentication/login/login";
+import Verify from "./authentication/emailverify/verify";
 import NavbarHome from "./NavbarHome/Navbarhome";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
