@@ -12,9 +12,9 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
-import Register from "./Register/register/register";
-import Login from "./Register/login/login";
-import Verify from "./Register/emailverify/verify";
+import Register from "./Authentication/register/register";
+import Login from "./Authentication/login/login";
+import Verify from "./Authentication/emailverify/verify";
 import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
 import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
