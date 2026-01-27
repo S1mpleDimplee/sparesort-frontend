@@ -12,10 +12,17 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
-import Register from "./authentication/register/register";
-import Login from "./authentication/login/login";
-import Verify from "./authentication/emailverify/verify";
-import NavbarHome from "./NavbarHome/Navbarhome";
+import Register from "./Authentication/register/register";
+import Login from "./Authentication/login/login";
+import Verify from "./Authentication/emailverify/verify";
+import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
+import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
+import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
+import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
+import ManagerDashboard from "./Manager/Dashboard/Dashboard";
+import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
+import ManagerUsers from "./Manager/Users/ManagerUsers";
+import NotFound from "./404/404";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
