@@ -1,90 +1,72 @@
-.navbar-dash {
-  background: linear-gradient(#0000001a, rgba(0, 0, 0, 0.4)),
-    url("../../media/homeimg.png") center/cover no-repeat;
-  max-height: 14vh;
-}
-
-.navbar-dash-container {
-  display: flex;
-  margin: 1vh 4vw;
-}
-
-.navbar-dash-logo {
-  flex-shrink: 0;
-}
-
-.logo-image {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
-  cursor: pointer;
-}
-
-.navbar-dash-nav {
-  display: flex;
-  align-items: center !important;
-  justify-self: center !important;
-  gap: 4rem;
-  flex-direction: row !important;
-  flex: 1 !important;
-  justify-content: center !important;
-  margin: 0 2rem;
-}
-
-.nav-dash-link {
-  color: #ffffff !important;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 0.5rem 0;
-  cursor: pointer;
+.nav-dropdown {
   position: relative;
-  transition: all 0.3s ease;
+  display: inline-block;
 }
 
-.nav-dash-link::after {
-  content: "";
+.nav-link .nav-arrow {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+}
+
+.nav-link .nav-arrow.open {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #ffffff;
-  transition: width 0.3s ease;
+  top: calc(100% + 1rem); /* Positioned below the nav link */
+  left: 50%;
+  transform: translateX(-50%); /* Center align under the link */
+  background: var(--lightcard, #2C2C2E);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  z-index: 1001;
+  min-width: 200px;
+  animation: dropdownFadeIn 0.3s ease-out;
+  /* Remove any margin that could affect layout */
+  margin: 0;
+  /* Ensure it doesn't affect document flow */
+  width: max-content;
 }
 
-
-.nav-dash-link:hover::after,
-.nav-dash-link.active::after {
-  width: 100%;
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
-.nav-dash-link.active {
-  color: #ffffff;
-}
-
-.navbar-dash-login-btn {
-  padding: 0.4rem 1.5rem;
-  background: transparent;
-  color: white;
-  margin-top: 1.5vh !important;
-  border: 2px solid #ff9f10;
-  border-radius: 30px;
-  font-size: 1rem;
-  margin-left: 19vw;
-  font-weight: 600;
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  white-space: nowrap;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
-.navbar-dash-login-btn:hover {
-  background: white;
-  color: #2b2b2b;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+.nav-dropdown-item:hover {
+  background: rgba(255, 159, 16, 0.1);
+  color: #FF9F10;
 }
 
-.navbar-dash-login-btn:active {
-  transform: translateY(0);
+.nav-dropdown-item:first-child {
+  border-top: none;
+}
+
+/* Ensure the dropdown doesn't interfere with navbar layout */
+.navbar-nav {
+  position: relative; /* Ensure proper stacking context */
 }
