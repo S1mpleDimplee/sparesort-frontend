@@ -23,7 +23,7 @@ function openToast(message, setToasts) {
     // Automatically close the toast after 5 seconds
     setTimeout(() => {
         setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== newToast.id));
-    }, 5000);
+    }, 8000);
 }
 
 function closeToast(id, setToasts) {

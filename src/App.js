@@ -12,10 +12,17 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
-import Register from "./authentication/register/register";
-import Login from "./authentication/login/login";
-import Verify from "./authentication/emailverify/verify";
-import NavbarHome from "./NavbarHome/Navbarhome";
+import Register from "./Authentication/register/register";
+import Login from "./Authentication/login/login";
+import Verify from "./Authentication/emailverify/verify";
+import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
+import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
+import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
+import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
+import ManagerDashboard from "./Manager/Dashboard/Dashboard";
+import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
+import ManagerUsers from "./Manager/Users/ManagerUsers";
+import NotFound from "./404/404";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -28,12 +35,16 @@ function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isDashboard, setIsDashboard] = useState(false);
-  const [currentRole, setCurrentRole] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentRole, setCurrentRole] = useState(4);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   // Define dashboard URLs for all roles
   const dashboardUrls = [
     "/dashboard",
+    "/dashboard/lodges",
+    "/dashboard/lodges/:id",
+    "/dashboard/users",
+
   ];
 
   const nonLoggedInUrls = [
@@ -50,8 +61,9 @@ function AppContent() {
 
   useEffect(() => {
     // Check if user is logged in and get their role
-    checkUserLoginStatus();
+    // checkUserLoginStatus();
     setIsDashboard(dashboardUrls.includes(location.pathname));
+    setCurrentRole(4); // Temporarie
   }, [location.pathname]);
 
   const checkUserLoginStatus = () => {
@@ -101,6 +113,13 @@ function AppContent() {
     navigate(path);
   };
 
+  // Determine if the current page is the NotFound page
+  const isNotFoundPage = location.pathname !== "/" &&
+    location.pathname !== "/registreren" &&
+    location.pathname !== "/inloggen" &&
+    location.pathname !== "/verificatie" &&
+    !dashboardUrls.includes(location.pathname);
+
   return (
     <div className="app-container">
       <head>
@@ -108,19 +127,15 @@ function AppContent() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
       </head>
-      {!isDashboard && <NavbarHome />}
+      {!isNotFoundPage &&
+        (!isDashboard || !location.pathname.includes("dashboard")
+          ? <NavbarHome />
+          : <NavbarDashboard />
+        )
+      }
 
       <div className="content-wrapper">
-        {isLoggedIn && isDashboard && (
-          <></>
-          // <Sidebar
-          //   userRole={currentRole}
-          //   onNavigate={handleSidebarNavigation}
-          //   currentPath={location.pathname}
-          // />
-        )}
-
-        {/* Main content area with dashboard navbar inside */}
+          {/* Main content area with dashboard navbar inside */}
         <main
           className={`main-content ${isLoggedIn && isDashboard ? "dashboard-main-content" : ""
             }`}
@@ -132,6 +147,7 @@ function AppContent() {
             <Route path="/registreren" element={<Register />} />
             <Route path="/inloggen" element={<Login />} />
             <Route path="/verificatie" element={<Verify />} />
+            <Route path="*" element={<NotFound />} />
 
             {isLoggedIn && (
               <>
@@ -145,6 +161,8 @@ function AppContent() {
                 {/* Balimedewerker Dashboard routes (role 2) */}
                 {currentRole === 2 && (
                   <>
+                    <Route path="/dashboard" element={<BalieDashboard />} />
+                    <Route path="/dashboard/lodges" element={<BalieLodges />} />
                     {/* <Route path="/dashboard" element={<MechanicDashboard />} /> */}
                   </>
                 )}
@@ -158,7 +176,10 @@ function AppContent() {
                 {/* Manager Dashboard routes (role 4) */}
                 {currentRole === 4 && (
                   <>
-                    {/* <Route path="/dashboard" element={<ManagerDashboard />} /> */}
+                    <Route path="/dashboard" element={<ManagerDashboard />} />
+                    <Route path="/dashboard/lodges" element={<ManagerLodgeDetails />} />
+                    <Route path="/dashboard/lodges/:id" element={<ManagerLodgeDetails />} />
+                    <Route path="/dashboard/users" element={<ManagerUsers />} />
                   </>
                 )}
               </>

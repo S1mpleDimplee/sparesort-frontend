@@ -1,10 +1,12 @@
 import React from 'react';
 import './Navbarhome.css';
-import logo from '../media/logo.png'
+import logo from '../../media/logo.png'
 import { useNavigate } from 'react-router-dom';
 const NavbarHome = () => {
 
   const navigate = useNavigate();
+
+  const currentPage = window.location.pathname;
 
   return (
     <header className="navbar">
@@ -14,9 +16,9 @@ const NavbarHome = () => {
         </div>
 
         <nav className="navbar-nav">
-          <a className="nav-link active">Home</a>
-          <a className="nav-link">Lodge's</a>
-          <a className="nav-link">Openingsdagen</a>
+          <a className={`nav-link ${currentPage === "/" ? "active" : ""}`} onClick={() => navigate("/")}>Home</a>
+          <a className={`nav-link ${currentPage === "/lodges" ? "active" : ""}`} onClick={() => navigate("/lodges")}>Lodge's</a>
+          <a className={`nav-link ${currentPage === "/openingsdagen" ? "active" : ""}`} onClick={() => navigate("/openingsdagen")}>Openingsdagen</a>
         </nav>
 
         <div className="navbar-actions">

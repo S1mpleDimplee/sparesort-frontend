@@ -8,35 +8,30 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #F6F6F6;
+  background-color: var(--background);
 }
 
 .dashboard-main-content {
-  background-color: #F6F6F6;
+  background-color: var(--background);
 }
 
 
-/* Content Wrapper - holds sidebar and main content */
 .content-wrapper {
   display: flex;
   flex: 1;
 }
 
-/* Main Content Area */
 .main-content {
   flex: 1;
   width: 100%;
 }
 
-/* Dashboard Main Content - when sidebar is present */
 
 
-/* Footer */
 .footer {
   width: 100%;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
@@ -46,3 +41,22 @@ body {
     min-height: auto;
   }
 }
+
+:root {
+  --background: #24252A;
+  --text: #ffffff;
+  --card: #1F1F1F;
+  --lightcard: #2C2C2E;
+  --orange: #FF9F10;
+  --orange-dark: #D97706;
+  
+  --shadow: rgba(0, 0, 0, 0.2);
+  --inputtext: #ffffff;
+  --inputborder: #CCCCCC;
+  --inputbackground: #413e3e;
+
+  --red: #FF4C4C;
+  --green: #4CAF50;
+  --blue: #2196F3;
+  --grey: #888888;
+};
