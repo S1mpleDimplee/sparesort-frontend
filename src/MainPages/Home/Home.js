@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import './Home.css';
+import React, { useState } from "react";
+import "./Home.css";
 
 const Home = () => {
   const [filters, setFilters] = useState({
-    priceFrom: '0.00€',
-    priceTo: '0.00€',
+    priceFrom: "0.00€",
+    priceTo: "0.00€",
     rating: 5,
-    bedrooms: 1
+    bedrooms: 1,
   });
 
   const lodgeData = [
@@ -14,41 +14,44 @@ const Home = () => {
       id: 1,
       name: "Tropical beach resort lodge",
       price: 521,
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
       rating: 5,
       features: {
         wifi: true,
         pool: true,
-        bedrooms: 3
+        bedrooms: 3,
       },
-      description: "Meer informatie over de lodge? Klik op de knop"
+      description: "Meer informatie over de lodge? Klik op de knop",
     },
     {
       id: 2,
       name: "Tropical beach resort lodge",
       price: 521,
-      image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
       rating: 5,
       features: {
         wifi: true,
         pool: true,
-        bedrooms: 3
+        bedrooms: 3,
       },
-      description: "Meer informatie over de lodge? Klik op de knop"
+      description: "Meer informatie over de lodge? Klik op de knop",
     },
     {
       id: 3,
       name: "Tropical beach resort lodge",
       price: 521,
-      image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80",
       rating: 5,
       features: {
         wifi: true,
         pool: true,
-        bedrooms: 3
+        bedrooms: 3,
       },
-      description: "Meer informatie over de lodge? Klik op de knop"
-    }
+      description: "Meer informatie over de lodge? Klik op de knop",
+    },
   ];
 
   return (
@@ -57,9 +60,10 @@ const Home = () => {
         <div className="hero-overlay">
           <div className="hero-content">
             <h1 className="hero-title">Vind jou droom lodge</h1>
-            <p className="hero-subtitle">Kies uit een van onze 15 luxe lodges in de wonders van bali</p>
+            <p className="hero-subtitle">
+              Kies uit een van onze 15 luxe lodges in de wonders van bali
+            </p>
 
-            {/* Filter Bar */}
             <div className="filter-bar">
               <div className="filter-group">
                 <label>Van</label>
@@ -95,8 +99,9 @@ const Home = () => {
                   <span>{filters.bedrooms}</span>
                 </div>
               </div>
-
-              <button className="filter-button">Filteren</button>
+              <div className="filter-group">
+                <button className="filter-button">Filteren</button>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +116,11 @@ const Home = () => {
             {lodgeData.map((lodge) => (
               <div key={lodge.id} className="lodge-card">
                 <div className="lodge-image-wrapper">
-                  <img src={lodge.image} alt={lodge.name} className="lodge-image" />
+                  <img
+                    src={lodge.image}
+                    alt={lodge.name}
+                    className="lodge-image"
+                  />
                 </div>
 
                 <div className="lodge-info">
@@ -141,7 +150,9 @@ const Home = () => {
                     </div>
                     <div className="feature-item">
                       <span className="feature-icon">🛏️</span>
-                      <span className="feature-text">{lodge.features.bedrooms} slaapkamers</span>
+                      <span className="feature-text">
+                        {lodge.features.bedrooms} slaapkamers
+                      </span>
                     </div>
                   </div>
 

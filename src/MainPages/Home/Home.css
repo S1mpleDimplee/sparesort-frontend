@@ -39,11 +39,14 @@
 
 .filter-bar {
   display: flex;
+  position: absolute;
   align-items: flex-end;
   justify-content: center;
+  justify-self: center;
   gap: 1rem;
   background: white;
   padding: 1.5rem;
+  width: 80%;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   flex-wrap: wrap;
@@ -130,12 +133,13 @@
 
 .lodges-section {
   padding: 4rem 0;
+  background-color: var(--background);
 }
 
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text);
   margin-bottom: 3rem;
   text-align: left;
 }
