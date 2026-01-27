@@ -40,6 +40,9 @@ const apiCall = async (usedFunction, dataSend) => {
             currentpath = secondpath;
             return apiCall(usedFunction, dataSend);
         }
+        else if (currentpath === secondpath) {
+            currentpath = firstpath;
+        }
         return {
             isSuccess: false,
             message: error.message,

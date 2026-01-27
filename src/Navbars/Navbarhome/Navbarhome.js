@@ -12,7 +12,7 @@ const NavbarHome = () => {
     <header className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <img src={logo} alt="Logo" className="logo-image" />
+          <img src={logo} alt="Logo" className="logo-image" onClick={() => navigate("/")} />
         </div>
 
         <nav className="navbar-nav">

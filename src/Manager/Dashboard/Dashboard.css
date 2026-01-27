@@ -49,6 +49,7 @@
 
 .manager-dash-icon-symbol {
   font-size: 24px;
+  width: 50px;
   color: white;
 }
 
@@ -94,6 +95,7 @@
   align-items: flex-end;
   justify-content: center;
   gap: 1rem;
+  width: 70%;
   flex-wrap: wrap;
 }
 

@@ -4,17 +4,19 @@
   flex-direction: column;
   min-height: 100vh;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background);
 }
 
 .dashboard-main-content {
   background-color: var(--background);
 }
-
 
 .content-wrapper {
   display: flex;
@@ -25,8 +27,6 @@ body {
   flex: 1;
   width: 100%;
 }
-
-
 
 .footer {
   width: 100%;
@@ -43,20 +43,279 @@ body {
 }
 
 :root {
-  --background: #24252A;
+  --background: #24252a;
   --text: #ffffff;
-  --card: #1F1F1F;
-  --lightcard: #2C2C2E;
-  --orange: #FF9F10;
-  --orange-dark: #D97706;
-  
+  --card: #1f1f1f;
+  --lightcard: #2c2c2e;
+  --orange: #d97706;
+  --orangelight: #ff9f10;
+  --red: #ff4c4c;
+  --darkred: #e04343;
+  --green: #4caf50;
+  --blue: #2196f3;
+  --cyan: #4a4e4c;
   --shadow: rgba(0, 0, 0, 0.2);
   --inputtext: #ffffff;
-  --inputborder: #CCCCCC;
+  --inputborder: #cccccc;
   --inputbackground: #413e3e;
+}
 
-  --red: #FF4C4C;
-  --green: #4CAF50;
-  --blue: #2196F3;
-  --grey: #888888;
-};
+.fade-in-from-up {
+  animation: fadeInFromUp 0.6s ease forwards;
+}
+
+@keyframes fadeInFromUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ANIMATION PRESETS */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.fade-in-slow {
+  animation: fadeIn 1s ease-out;
+}
+
+.fade-in-delayed {
+  animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.slide-down {
+  animation: slideDown 0.6s ease-out;
+}
+
+.slide-left {
+  animation: slideLeft 0.6s ease-out;
+}
+
+.slide-right {
+  animation: slideRight 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease-out;
+}
+
+.scale-in-bounce {
+  animation: scaleInBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleInBounce {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Card-Specific Animations */
+.card-entrance {
+  animation: cardEntrance 0.8s ease-out;
+}
+
+.card-entrance-delayed {
+  animation: cardEntrance 0.8s ease-out 0.2s both;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.fade-slide-up {
+  animation: fadeSlideUp 0.7s ease-out;
+}
+
+.fade-slide-up-delayed {
+  animation: fadeSlideUp 0.7s ease-out 0.3s both;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover-lift {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(255, 159, 16, 0.3);
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.page-enter {
+  animation: pageEnter 0.8s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

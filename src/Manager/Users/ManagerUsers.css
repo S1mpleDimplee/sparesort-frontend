@@ -65,8 +65,8 @@
 }
 
 .manager-users-create-btn {
-  background: #FF9F10;
-  color: #1f2937;
+  background: var(--orange);
+  color: var(--text);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -79,7 +79,7 @@
 }
 
 .manager-users-create-btn:hover {
-  background: #f59e0b;
+  background: var(--orangelight);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 159, 16, 0.4);
 }
@@ -149,7 +149,7 @@
 .manager-users-user-avatar {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #666, #888);
+  background: var(--orange);;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -190,20 +190,26 @@
   display: inline-block;
 }
 
+.manager-users-role-service {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
 .manager-users-role-manager {
-  background: #dc2626;
+  background: var(--red);
   color: white;
   box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
 }
 
 .manager-users-role-maintenance {
-  background: #FF9F10;
-  color: #1f2937;
+  background: var(--orange);
+  color: var(--text);
   box-shadow: 0 2px 8px rgba(255, 159, 16, 0.3);
 }
 
 .manager-users-role-guest {
-  background: #10b981;
+  background: var(--green);
   color: white;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
@@ -245,13 +251,13 @@
 }
 
 .manager-users-deactivate-btn {
-  background: #ef4444;
+  background: var(--red);
   color: white;
   box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
 .manager-users-deactivate-btn:hover {
-  background: #dc2626;
+  background: var(--darkred);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
