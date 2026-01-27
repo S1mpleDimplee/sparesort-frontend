@@ -1,39 +1,101 @@
-.not-found-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: #333;
+.notfound-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../media/login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.not-found-title {
-    font-size: 6rem;
-    font-weight: bold;
-    color: #157979;
-    margin: 0;
+.notfound-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.not-found-message {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    color: #e7e7e7;
+.notfound-content {
+  text-align: center;
+  background-color: #191919;
+    border-radius: 12px;
+    opacity: 0.95;
+  color: white;
+  z-index: 1;
+  padding: 2rem;
 }
 
-.not-found-link {
-    font-size: 1.2rem;
-    color: #eaebec;
-    background-color: #007bff;
-    text-decoration: none;
-    padding: 0.7rem 1.2rem;
-    margin-top: 2vh;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+.notfound-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
 }
 
-.not-found-link:hover {
-    background-color: #002144;
-    color: #fff;
+.notfound-underline {
+  width: 200px;
+  height: 3px;
+  background-color: #f59e0b;
+  margin: 0 auto 2rem;
+}
+
+.notfound-text {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.notfound-email {
+  color: #f59e0b;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.notfound-email:hover {
+  text-decoration: underline;
+}
+
+.notfound-button {
+  margin-top: 2rem;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+  background-color: transparent;
+  border: 2px solid #f59e0b;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notfound-button:hover {
+  background-color: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.notfound-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .notfound-title {
+    font-size: 2rem;
+  }
+  
+  .notfound-text {
+    font-size: 1rem;
+  }
+  
+  .notfound-underline {
+    width: 150px;
+  }
 }

@@ -1,0 +1,398 @@
+.balie-lodges-page {
+  padding: 2rem;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* Stats Section */
+.balie-lodges-stats-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.balie-lodges-stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balie-lodges-stat-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.balie-lodges-stat-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.balie-lodges-stat-icon {
+  flex-shrink: 0;
+}
+
+.balie-lodges-icon-circle {
+  width: 60px;
+  height: 60px;
+  background: #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balie-lodges-icon-symbol {
+  font-size: 24px;
+  color: white;
+}
+
+.balie-lodges-stat-info {
+  flex: 1;
+}
+
+.balie-lodges-stat-description,
+.balie-lodges-stat-main {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.balie-lodges-stat-sub {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.4;
+}
+
+.balie-lodges-stat-footer {
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+}
+
+.balie-lodges-timezone {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Filter Section */
+.balie-lodges-filter-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.balie-lodges-status-filter .balie-lodges-status-btn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.balie-lodges-bedrooms-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.balie-lodges-filter-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.balie-lodges-bedrooms-badge {
+  background: #f3f4f6;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balie-lodges-bedroom-number {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.balie-lodges-amenities-filters {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.balie-lodges-amenity-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.balie-lodges-amenity-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.balie-lodges-amenity-check {
+  font-size: 1rem;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.balie-lodges-amenity-filter.balie-lodges-unchecked .balie-lodges-amenity-check {
+  color: #d1d5db;
+}
+
+/* Lodges Grid */
+.balie-lodges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.balie-lodges-card {
+  background: #333;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.balie-lodges-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.balie-lodges-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.balie-lodges-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.balie-lodges-card:hover .balie-lodges-card-image img {
+  transform: scale(1.1);
+}
+
+.balie-lodges-status-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.balie-lodges-status-green {
+  background: #22c55e;
+  color: white;
+}
+
+.balie-lodges-status-blue {
+  background: #3b82f6;
+  color: white;
+}
+
+.balie-lodges-status-red {
+  background: #ef4444;
+  color: white;
+}
+
+.balie-lodges-card-content {
+  padding: 1.5rem;
+  color: white;
+}
+
+.balie-lodges-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.balie-lodges-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.balie-lodges-card-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.balie-lodges-price-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.balie-lodges-price-period {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.balie-lodges-card-features {
+  margin-bottom: 1.5rem;
+}
+
+.balie-lodges-feature-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.balie-lodges-feature-row:last-child {
+  margin-bottom: 0;
+}
+
+.balie-lodges-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d1d5db;
+  font-size: 0.85rem;
+  flex: 1;
+}
+
+.balie-lodges-feature-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.balie-lodges-feature-text {
+  line-height: 1.2;
+}
+
+.balie-lodges-card-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid #404040;
+}
+
+.balie-lodges-action-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.balie-lodges-primary-btn {
+  background: #d97706;
+  color: white;
+}
+
+.balie-lodges-primary-btn:hover {
+  background: #b45309;
+  transform: translateY(-2px);
+}
+
+.balie-lodges-secondary-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.balie-lodges-secondary-btn:hover {
+  background: #4b5563;
+  transform: translateY(-2px);
+}
+
+.balie-lodges-view-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.balie-lodges-view-btn:hover {
+  background: #4b5563;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .balie-lodges-stats-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .balie-lodges-filter-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .balie-lodges-amenities-filters {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .balie-lodges-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .balie-lodges-page {
+    padding: 1rem;
+  }
+  
+  .balie-lodges-card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .balie-lodges-card-title {
+    padding-right: 0;
+  }
+  
+  .balie-lodges-card-actions {
+    flex-direction: column;
+  }
+  
+  .balie-lodges-feature-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
