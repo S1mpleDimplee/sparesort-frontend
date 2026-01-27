@@ -1,8 +1,12 @@
 
+const firstpath = "http://localhost/sparesort-api/router/router.php";
+const secondpath = "http://localhost/phpopdrachten/derde_jaar/sparesort-api/router/router.php";
+let currentpath = firstpath;
+
 const apiCall = async (usedFunction, dataSend) => {
     try {
         const response = await fetch(
-            "http://localhost/sparesort-api/router/router.php",
+            currentpath,
             {
                 method: "POST",
                 credentials: "include", // dit zorgt voor dat cookies meegestuurd worden (voor sessions blijkbaar)
@@ -32,11 +36,16 @@ const apiCall = async (usedFunction, dataSend) => {
             };
         }
     } catch (error) {
+        if (currentpath === firstpath) {
+            currentpath = secondpath;
+            return apiCall(usedFunction, dataSend);
+        }
         return {
             isSuccess: false,
             message: error.message,
-            data: null
+            data: null,
         };
+        
     }
 };
 
