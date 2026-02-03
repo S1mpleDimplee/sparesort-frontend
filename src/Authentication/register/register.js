@@ -63,8 +63,8 @@ const Register = () => {
   return (
     <div className="register-page">
       <div className="register-container">
-        <div className="register-card">
-          <h2 className="register-title">Registreren</h2>
+        <div className="register-card slide-up">
+          <h2 className="register-title ">Registreren</h2>
           <div className="register-title-underline"></div>
 
           <div className="register-form">

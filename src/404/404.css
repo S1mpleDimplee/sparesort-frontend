@@ -28,7 +28,7 @@
   background-color: #191919;
     border-radius: 12px;
     opacity: 0.95;
-  color: white;
+  color: var(--text);
   z-index: 1;
   padding: 2rem;
 }
@@ -37,24 +37,24 @@
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: white;
+  color: var(--text);
 }
 
 .notfound-underline {
   width: 200px;
   height: 3px;
-  background-color: #f59e0b;
+  background-color: var(--orange);
   margin: 0 auto 2rem;
 }
 
 .notfound-text {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text);
 }
 
 .notfound-email {
-  color: #f59e0b;
+  color: var(--orangelight);
   text-decoration: none;
   font-weight: 500;
 }
