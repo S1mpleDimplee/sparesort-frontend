@@ -44,7 +44,7 @@
   justify-content: center;
   justify-self: center;
   gap: 1rem;
-  background: white;
+  background: var(--lightcard);
   padding: 1.5rem;
   width: 80%;
   border-radius: 12px;
@@ -62,7 +62,7 @@
 .filter-group label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #333;
+  color: var(--text);
 }
 
 .filter-input {
@@ -71,6 +71,12 @@
   border-radius: 6px;
   font-size: 0.95rem;
   width: 100%;
+}
+
+.filter-input:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+  transform: translateY(-1px);
 }
 
 .filter-rating {
@@ -160,13 +166,13 @@
 }
 
 .lodge-card:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 40px rgba(172, 112, 0, 0.2);
+  transform: translateY(-5px);
 }
 
 .lodge-image-wrapper {
   padding: 1rem;
   align-self: center;
-
   flex: 0 0 320px;
   height: 280px;
   overflow: hidden;
@@ -178,10 +184,6 @@
   object-fit: cover;
   border-radius: 16px;
   transition: transform 0.5s ease;
-}
-
-.lodge-card:hover .lodge-image {
-  transform: scale(1.1);
 }
 
 .lodge-info {
@@ -283,3 +285,4 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
 }
+

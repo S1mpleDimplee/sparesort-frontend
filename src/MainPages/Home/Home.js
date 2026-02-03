@@ -56,15 +56,15 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <section className="hero-section">
+      <section className="hero-section fade-slide">
         <div className="hero-overlay">
           <div className="hero-content">
-            <h1 className="hero-title">Vind jou droom lodge</h1>
-            <p className="hero-subtitle">
+            <h1 className="hero-title fade-in">Vind jou droom lodge</h1>
+            <p className="hero-subtitle fade-in">
               Kies uit een van onze 15 luxe lodges in de wonders van bali
             </p>
 
-            <div className="filter-bar">
+            <div className="filter-bar fade-in">
               <div className="filter-group">
                 <label>Van</label>
                 <input
@@ -110,11 +110,11 @@ const Home = () => {
       {/* Lodges Section */}
       <section className="lodges-section">
         <div className="container">
-          <h2 className="section-title">Ontdek onze luxe lodges</h2>
+          <h2 className="section-title fade-slide-up">Ontdek onze luxe lodges</h2>
 
           <div className="lodges-grid">
             {lodgeData.map((lodge) => (
-              <div key={lodge.id} className="lodge-card">
+              <div key={lodge.id} className="lodge-card slide-up">
                 <div className="lodge-image-wrapper">
                   <img
                     src={lodge.image}
