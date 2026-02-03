@@ -118,7 +118,7 @@
 
 .phone-select:focus {
   outline: none;
-  border-color: #fbbf24;
+  background-color: #191919;
   box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.1);
 }
 

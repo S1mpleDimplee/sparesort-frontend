@@ -34,7 +34,7 @@ const ManagerUsers = () => {
       id: 4,
       naam: 'Bregje de bergje',
       email: 'bregjedebergje@gmail.com',
-      role: 'Gast',
+      role: 'balimedewerker',
       aangemaakt: '19 Februarie 2025',
       status: 'Actief'
     },
@@ -51,6 +51,7 @@ const ManagerUsers = () => {
   const getRoleColor = (role) => {
     switch(role.toLowerCase()) {
       case 'manager': return 'manager-users-role-manager';
+      case 'balimedewerker': return 'manager-users-role-service';
       case 'onderhouds monteur': return 'manager-users-role-maintenance';
       case 'gast': return 'manager-users-role-guest';
       default: return 'manager-users-role-default';
@@ -80,7 +81,6 @@ const ManagerUsers = () => {
           
           <div className="manager-users-header-actions">
             <div className="manager-users-view-toggle">
-              <span className="manager-users-view-option active">w/</span>
             </div>
             <button 
               className="manager-users-create-btn"

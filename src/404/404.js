@@ -12,7 +12,7 @@ const NotFound = () => {
   return (
     <div className="notfound-container">
       <div className="notfound-overlay">
-        <div className="notfound-content">
+        <div className="notfound-content slide-up">
           <h1 className="notfound-title">404</h1>
           <div className="notfound-underline"></div>
           <p className="notfound-text">Deze pagina bestaat niet!</p>

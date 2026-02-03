@@ -25,7 +25,7 @@ const Footer = () => {
                   Home
                 </a>
               </li>
-              <li>h
+              <li>
                 <a href="#" className="footer-link">
                   Over Ons
                 </a>

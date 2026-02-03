@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import './Dashboard.css';
+import * as icons from '../../Icons/Icons';
 
 const ManagerDashboard = () => {
   const [filters, setFilters] = useState({
@@ -14,18 +15,18 @@ const ManagerDashboard = () => {
     vandaag: {
       title: 'Vandaag',
       description: 'Vandaag zijn 10/15 lodges geboekt',
-      icon: '🏠'
+      icon: icons.dashboardHouse
     },
     morgen: {
       title: 'Morgen',
       description: 'Morgen zijn 10/15 lodges geboekt',
-      icon: '📅'
+      icon: icons.dashboardCalendar
     },
     werkzaam: {
       title: 'Werkzaam heden',
       mainText: 'Momenteel zijn er 1 lodge(s) in onderhoud',
       subText: 'Er zijn er 1 lodge(s) gepland voor onderhoud',
-      icon: '🔧'
+      icon: icons.dashboardMainenance
     }
   };
 
@@ -73,13 +74,13 @@ const ManagerDashboard = () => {
       {/* Stats Section */}
       <div className="manager-dash-stats-section">
         <div className="manager-dash-stat-card">
-          <div className="manager-dash-stat-header">
+          <div className="manager-dash-stat-header fade-in-from-up">
             <h3>{statsData.vandaag.title}</h3>
           </div>
           <div className="manager-dash-stat-content">
             <div className="manager-dash-stat-icon">
               <div className="manager-dash-icon-circle">
-                <span className="manager-dash-icon-symbol">{statsData.vandaag.icon}</span>
+                <img className="manager-dash-icon-symbol" src={statsData.vandaag.icon} alt="House Icon" />
               </div>
             </div>
             <div className="manager-dash-stat-info">
@@ -98,7 +99,7 @@ const ManagerDashboard = () => {
           <div className="manager-dash-stat-content">
             <div className="manager-dash-stat-icon">
               <div className="manager-dash-icon-circle">
-                <span className="manager-dash-icon-symbol">{statsData.morgen.icon}</span>
+                <img className="manager-dash-icon-symbol" src={statsData.morgen.icon} alt="Calendar Icon" />
               </div>
             </div>
             <div className="manager-dash-stat-info">
@@ -117,7 +118,7 @@ const ManagerDashboard = () => {
           <div className="manager-dash-stat-content">
             <div className="manager-dash-stat-icon">
               <div className="manager-dash-icon-circle">
-                <span className="manager-dash-icon-symbol">{statsData.werkzaam.icon}</span>
+                <img className="manager-dash-icon-symbol" src={statsData.werkzaam.icon} alt="Maintenance Icon" />
               </div>
             </div>
             <div className="manager-dash-stat-info">
