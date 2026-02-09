@@ -285,6 +285,59 @@
   margin-bottom: 1.5rem;
 }
 
+.dashboard-progress-section {
+  margin-top: 2rem;
+}
+
+.progress-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.progress-metric-card {
+  background: linear-gradient(135deg, var(--card) 0%, var(--lightcard) 100%);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 16px var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.progress-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.progress-metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.progress-metric-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.progress-metric-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.progress-metric-info {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 /* Responsive Design */
 @media (max-width: 1400px) {
   .dashboard-charts-row {

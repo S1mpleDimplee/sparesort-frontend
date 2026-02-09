@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ManagerDashboard.css";
 import PieChart from "../../components/PieChart/PieChart";
 import BarChart from "../../components/BarChart/BarChart";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 const ManagerDashboard = () => {
   // State management for dashboard data
@@ -19,6 +20,7 @@ const ManagerDashboard = () => {
   const [bookingStatusData, setBookingStatusData] = useState([]);
   const [monthlyBookingsData, setMonthlyBookingsData] = useState([]);
   const [latestBookings, setLatestBookings] = useState([]);
+  const [progressMetrics, setProgressMetrics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch dashboard data on component mount
@@ -69,6 +71,40 @@ const ManagerDashboard = () => {
             date: "26 april 2026",
             initials: "JA"
           }
+        ],
+        progressMetrics: [
+          {
+            id: 1,
+            label: "Lodge Bezetting",
+            value: 75,
+            max: 100,
+            color: "#4caf50",
+            info: "75 van 100 lodges bezet"
+          },
+          {
+            id: 2,
+            label: "Klanttevredenheid",
+            value: 92,
+            max: 100,
+            color: "#2196f3",
+            info: "Gemiddelde score: 4.6/5"
+          },
+          {
+            id: 3,
+            label: "Maandelijkse Target",
+            value: 68,
+            max: 100,
+            color: "#ff9800",
+            info: "€68.000 van €100.000"
+          },
+          {
+            id: 4,
+            label: "Onderhoud Compleet",
+            value: 45,
+            max: 100,
+            color: "#f44336",
+            info: "9 van 20 taken voltooid"
+          }
         ]
       };
 
@@ -86,6 +122,7 @@ const ManagerDashboard = () => {
       setBookingStatusData(mockData.bookingStatus);
       setMonthlyBookingsData(mockData.monthlyBookings);
       setLatestBookings(mockData.latestBookings);
+      setProgressMetrics(mockData.progressMetrics);
 
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -114,18 +151,18 @@ const ManagerDashboard = () => {
   }
 
   return (
-    <div className="manager-dashboard fade-in">
+    <div className="manager-dashboard page-enter">
       {/* Stats Cards Row */}
       <div className="dashboard-stats-row">
         {/* Boekingen vandaag */}
-        <div className="stat-card card-entrance">
+        <div className="stat-card card-entrance hover-lift">
           <div className="stat-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 2v3M16 2v3M3.5 9.09h17M21 8.5V17c0 3-1.5 5-5 5H8c-3.5 0-5-2-5-5V8.5c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <div className="stat-content">
-            <div className="stat-value">{dashboardData.bookingsToday}</div>
+            <div className="stat-value scale-in">{dashboardData.bookingsToday}</div>
             <div className="stat-label">Boekingen vandaag</div>
             <div className="stat-sublabel">
               Ingechecked als: <span className="stat-highlight">{dashboardData.bookingsLastMonth}</span>
@@ -134,7 +171,7 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Geregistreerde accounts */}
-        <div className="stat-card card-entrance-delayed">
+        <div className="stat-card card-entrance-delayed hover-lift">
           <div className="stat-icon stat-icon-green">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 7.16C17.94 7.15 17.87 7.15 17.81 7.16C16.43 7.11 15.33 5.98 15.33 4.58C15.33 3.15 16.48 2 17.91 2C19.34 2 20.49 3.16 20.49 4.58C20.48 5.98 19.38 7.11 18 7.16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -146,7 +183,7 @@ const ManagerDashboard = () => {
             </svg>
           </div>
           <div className="stat-content">
-            <div className="stat-value">{dashboardData.registeredAccounts}</div>
+            <div className="stat-value scale-in-bounce">{dashboardData.registeredAccounts}</div>
             <div className="stat-label">Geregistreerde accounts</div>
             <div className="stat-sublabel">
               +{dashboardData.accountsGrowth} in de afgelopen 2 maanden
@@ -155,15 +192,15 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Reparaties gepland */}
-        <div className="stat-card card-entrance" style={{ animationDelay: "0.2s" }}>
-          <div className="stat-icon stat-icon-orange">
+        <div className="stat-card card-entrance hover-lift" style={{ animationDelay: "0.4s" }}>
+          <div className="stat-icon stat-icon-orange shimmer">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.5 10.65L9.5 7.35v6.6l5-3.3z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M22 15V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7h6c5 0 7-2 7-7z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <div className="stat-content">
-            <div className="stat-value">{dashboardData.plannedRepairs}</div>
+            <div className="stat-value scale-in">{dashboardData.plannedRepairs}</div>
             <div className="stat-label">Reparaties gepland</div>
             <div className="stat-sublabel">
               Reparaties in gang als: <span className="stat-highlight-orange">{dashboardData.ongoingRepairs}</span>
@@ -172,15 +209,15 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Omzet deze maand */}
-        <div className="stat-card card-entrance-delayed" style={{ animationDelay: "0.3s" }}>
-          <div className="stat-icon stat-icon-currency">
+        <div className="stat-card card-entrance-delayed hover-lift hover-glow" style={{ animationDelay: "0.6s" }}>
+          <div className="stat-icon stat-icon-currency pulse">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"/>
               <path d="M10.5 15.5h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3c-1.1 0-2-.9-2-2s.9-2 2-2h3M12 7.5v1M12 15.5v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <div className="stat-content">
-            <div className="stat-value">{formatCurrency(dashboardData.revenue)}</div>
+            <div className="stat-value scale-in-bounce">{formatCurrency(dashboardData.revenue)}</div>
             <div className="stat-label">Omzet deze maand</div>
             <div className="stat-sublabel stat-revenue">
               <span className="revenue-icon">€</span>
@@ -194,9 +231,9 @@ const ManagerDashboard = () => {
       {/* Charts and Latest Bookings Row */}
       <div className="dashboard-charts-row">
         {/* Pie Chart - Booking Status */}
-        <div className="chart-card fade-slide-up">
+        <div className="chart-card slide-up hover-lift">
           <div className="chart-header">
-            <div className="legend-inline">
+            <div className="legend-inline fade-in-delayed">
               {bookingStatusData.map((item, index) => (
                 <div key={index} className="legend-item">
                   <span className="legend-dot" style={{ backgroundColor: item.color }}></span>
@@ -215,13 +252,13 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Latest Bookings */}
-        <div className="latest-bookings-card fade-slide-up" style={{ animationDelay: "0.1s" }}>
-          <h3 className="card-title">Laatste boekigen</h3>
+        <div className="latest-bookings-card slide-up hover-lift" style={{ animationDelay: "0.2s" }}>
+          <h3 className="card-title fade-in-delayed">Laatste boekigen</h3>
           <div className="bookings-list">
             {latestBookings.length > 0 ? (
-              latestBookings.map((booking) => (
-                <div key={booking.id} className="booking-item">
-                  <div className="booking-avatar">{booking.initials}</div>
+              latestBookings.map((booking, index) => (
+                <div key={booking.id} className="booking-item slide-right" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
+                  <div className="booking-avatar hover-scale">{booking.initials}</div>
                   <div className="booking-details">
                     <div className="booking-name">{booking.guestName}</div>
                     <div className="booking-status">{booking.status}</div>
@@ -237,12 +274,42 @@ const ManagerDashboard = () => {
       </div>
 
       {/* Bar Chart - Monthly Bookings */}
-      <div className="dashboard-bar-chart fade-slide-up" style={{ animationDelay: "0.2s" }}>
-        <h3 className="chart-section-title">Boekingen 12 maand overzicht</h3>
+      <div className="dashboard-bar-chart slide-up hover-lift" style={{ animationDelay: "0.4s" }}>
+        <h3 className="chart-section-title fade-in-delayed">Boekingen 12 maand overzicht</h3>
         <BarChart 
           data={monthlyBookingsData} 
           height="350px"
         />
+      </div>
+
+      {/* Progress Metrics Section */}
+      <div className="dashboard-progress-section slide-up" style={{ animationDelay: "0.6s" }}>
+        <h3 className="chart-section-title fade-in-delayed">Performance Metrics</h3>
+        <div className="progress-metrics-grid">
+          {progressMetrics.map((metric, index) => (
+            <div
+              key={metric.id}
+              className="progress-metric-card card-entrance hover-lift"
+              style={{ animationDelay: `${0.7 + index * 0.1}s` }}
+            >
+              <div className="progress-metric-header">
+                <h4 className="progress-metric-title">{metric.label}</h4>
+                <span className="progress-metric-value">{metric.value}%</span>
+              </div>
+              <ProgressBar
+                value={metric.value}
+                max={metric.max}
+                height="10px"
+                color={metric.color}
+                animated={true}
+                rounded={true}
+                gradient={true}
+                showPercentage={false}
+              />
+              <p className="progress-metric-info">{metric.info}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
