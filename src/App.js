@@ -63,7 +63,7 @@ function AppContent() {
     // Check if user is logged in and get their role
     // checkUserLoginStatus();
     setIsDashboard(dashboardUrls.includes(location.pathname));
-    setCurrentRole(4); // Temporarie
+    setCurrentRole(localStorage.getItem("userdata").role);
   }, [location.pathname]);
 
   const checkUserLoginStatus = () => {
