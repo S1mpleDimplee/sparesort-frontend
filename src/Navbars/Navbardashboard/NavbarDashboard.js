@@ -186,10 +186,10 @@ const NavbarDashboard = () => {
                         className="nav-dropdown-item"
                         onClick={() => handleSubitemClick(subitem.path)}
                       >
-                        <div className="nav-dropdown-content">
-                          <span className="nav-dropdown-label">{subitem.label}</span>
+                        <div className="nav-dash-dropdown-content">
+                          <span className="nav-dash-dropdown-label">{subitem.label}</span>
                           {subitem.description && (
-                            <span className="nav-dropdown-description">{subitem.description}</span>
+                            <span className="nav-dash-dropdown-description">{subitem.description}</span>
                           )}
                         </div>
                       </div>
