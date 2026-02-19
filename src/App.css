@@ -45,6 +45,7 @@ body {
   --background: #24252a;
   --text: #ffffff;
   --card: #1f1f1f;
+  --cardborder: #333333;
   --lightcard: #2c2c2e;
   --orange: #d97706;
   --orangelight: #ff9f10;
@@ -57,6 +58,14 @@ body {
   --inputtext: #ffffff;
   --inputborder: #cccccc;
   --inputbackground: #413e3e;
+}
+
+.card {
+  background-color: var(--card) !important;
+  color: var(--text) !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--cardborder) !important;
+  box-shadow: 0 2px 4px var(--shadow) !important;
 }
 
 .fade-in-from-up {

@@ -1,67 +1,50 @@
-import React, { useState } from 'react';
-import './ManagerUsers.css';
+import React, { useEffect, useState } from "react";
+import "./ManagerUsers.css";
+import { useToast } from "../../toastmessage/toastmessage";
+import apiCall from "../../Calls/calls";
 
 const ManagerUsers = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [users, setUsers] = useState([]);
 
-  const usersData = [
-    {
-      id: 1,
-      naam: 'Jaylano van der veen',
-      email: 'Jaylahovanderveen@gmail.com',
-      role: 'Manager',
-      aangemaakt: '19 Februarie 2025',
-      status: 'Actief'
-    },
-    {
-      id: 2,
-      naam: 'Johan derksen',
-      email: 'johanderksen@gmail.com',
-      role: 'Onderhouds monteur',
-      aangemaakt: '19 Februarie 2025',
-      status: 'Actief'
-    },
-    {
-      id: 3,
-      naam: 'Simon kapper',
-      email: 'simonkapper@gmail.com',
-      role: 'Gast',
-      aangemaakt: '19 Februarie 2025',
-      status: 'Actief'
-    },
-    {
-      id: 4,
-      naam: 'Bregje de bergje',
-      email: 'bregjedebergje@gmail.com',
-      role: 'balimedewerker',
-      aangemaakt: '19 Februarie 2025',
-      status: 'Actief'
-    },
-    {
-      id: 5,
-      naam: 'Jaylano van der veen',
-      email: 'Jaylahovanderveen@gmail.com',
-      role: 'Gast',
-      aangemaakt: '19 Februarie 2025',
-      status: 'Actief'
-    }
-  ];
+  const { openToast } = useToast();
 
-  const getRoleColor = (role) => {
-    switch(role.toLowerCase()) {
-      case 'manager': return 'manager-users-role-manager';
-      case 'balimedewerker': return 'manager-users-role-service';
-      case 'onderhouds monteur': return 'manager-users-role-maintenance';
-      case 'gast': return 'manager-users-role-guest';
-      default: return 'manager-users-role-default';
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    const response = await apiCall("getallusers", {});
+
+    if (response.isSuccess) {
+      setUsers(response.data);
+      console.log("Fetched users:", response.data);
+    } else {
+      openToast("Fout bij het ophalen van gebruikers: " + response.message);
     }
   };
 
-  const filteredUsers = usersData.filter(user =>
-    user.naam.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.role.toLowerCase().includes(searchTerm.toLowerCase())
+  const getRoleColor = (role) => {
+    switch (role.toLowerCase()) {
+      case "1":
+        return "manager-users-role-service";
+      case "2":
+        return "manager-users-role-maintenance";
+      case "3":
+        return "manager-users-role-manager";
+      case "0":
+        return "manager-users-role-guest";
+      default:
+        return "manager-users-role-default";
+    }
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user?.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user?.role?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -78,11 +61,24 @@ const ManagerUsers = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
+
+          <select className="manager-users-filter-select">
+            <option value="">Alle rollen</option>
+            <option value="0">Gast</option>
+            <option value="1">Balimedewerker</option>
+            <option value="2">Monteur</option>
+            <option value="3">Manager</option>
+          </select>
+
+          <select className="manager-users-filter-select">
+            <option value="">Alle statussen</option>
+            <option value="active">Actief</option>
+            <option value="inactive">Inactief</option>
+          </select>
+
           <div className="manager-users-header-actions">
-            <div className="manager-users-view-toggle">
-            </div>
-            <button 
+            <div className="manager-users-view-toggle"></div>
+            <button
               className="manager-users-create-btn"
               onClick={() => setShowCreateModal(true)}
             >
@@ -91,8 +87,6 @@ const ManagerUsers = () => {
           </div>
         </div>
       </div>
-
-      {/* Users Table */}
       <div className="manager-users-table-section">
         <div className="manager-users-table-wrapper">
           <table className="manager-users-table">
@@ -113,26 +107,44 @@ const ManagerUsers = () => {
                     <div className="manager-users-user-info">
                       <div className="manager-users-user-avatar">
                         <span className="manager-users-avatar-text">
-                          {user.naam.split(' ').map(n => n[0]).join('').toUpperCase()}
+                          {user.name
+                            ? user.name
+                                ?.split(" ")
+                                .map((n) => n[0])
+                                .join("")
+                                .toUpperCase()
+                            : user.email?.charAt(0).toUpperCase() +
+                              user.email?.charAt(1).toUpperCase()}
                         </span>
                       </div>
-                      <span className="manager-users-user-name">{user.naam}</span>
+                      <span className="manager-users-user-name">
+                        {user.name}
+                      </span>
                     </div>
                   </td>
                   <td className="manager-users-table-cell">
                     <span className="manager-users-email">{user.email}</span>
                   </td>
                   <td className="manager-users-table-cell">
-                    <span className={`manager-users-role-badge ${getRoleColor(user.role)}`}>
-                      {user.role}
+                    <span
+                      className={`manager-users-role-badge ${getRoleColor(user.role)}`}
+                    >
+                      {user.role === "0" && "Gast"}
+                      {user.role === "1" && "Balimedewerker"}
+                      {user.role === "2" && "Monteur"}
+                      {user.role === "3" && "Manager"}
                     </span>
                   </td>
                   <td className="manager-users-table-cell">
-                    <span className="manager-users-date">{user.aangemaakt}</span>
+                    <span className="manager-users-date">
+                      {user.created_at}
+                    </span>
                   </td>
                   <td className="manager-users-table-cell">
-                    <span className="manager-users-status-badge manager-users-status-active">
-                      {user.status}
+                    <span
+                      className={`manager-users-status-badge ${user.email_verified ? "manager-users-status-active" : "manager-users-status-inactive"}`}
+                    >
+                      {user.email_verified ? "Actief" : "Inactief"}
                     </span>
                   </td>
                   <td className="manager-users-table-cell">
@@ -148,21 +160,28 @@ const ManagerUsers = () => {
                 </tr>
               ))}
             </tbody>
+            
+            <td className="manager-users-table-footer">
+              <span className="manager-users-end-message">
+                Einde van de lijst
+              </span>
+            </td>
           </table>
         </div>
-        
-        <div className="manager-users-table-footer">
-          <span className="manager-users-end-message">Einde van de lijst</span>
-        </div>
       </div>
-
       {/* Create Account Modal (placeholder) */}
       {showCreateModal && (
-        <div className="manager-users-modal-overlay" onClick={() => setShowCreateModal(false)}>
-          <div className="manager-users-modal" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="manager-users-modal-overlay"
+          onClick={() => setShowCreateModal(false)}
+        >
+          <div
+            className="manager-users-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="manager-users-modal-header">
               <h3>Account aanmaken</h3>
-              <button 
+              <button
                 className="manager-users-modal-close"
                 onClick={() => setShowCreateModal(false)}
               >

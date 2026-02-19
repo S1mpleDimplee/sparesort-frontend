@@ -23,6 +23,7 @@ import ManagerDashboard from "./Manager/Dashboard/Dashboard";
 import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
 import ManagerUsers from "./Manager/Users/ManagerUsers";
 import NotFound from "./404/404";
+import AccountOverview from "./Manager/Users/AccountOverview/AccountOverview";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -43,7 +44,8 @@ function AppContent() {
     "/dashboard",
     "/dashboard/lodges",
     "/dashboard/lodges/:id",
-    "/dashboard/users",
+    "/dashboard/gebruikers",
+    "/dashboard/gebruikeroverzicht",
 
   ];
 
@@ -150,15 +152,15 @@ function AppContent() {
 
             {isLoggedIn && (
               <>
-                {/* Gast Dashboard routes (role 1) */}
-                {currentRole === 1 && (
+                {/* Gast Dashboard routes (role 0) */}
+                {currentRole === 0 && (
                   <>
                     {/* <Route path="/mijnboekingen" element={<DashboardKlant />} /> */}
                   </>
                 )}
 
-                {/* Balimedewerker Dashboard routes (role 2) */}
-                {currentRole === 2 && (
+                {/* Balimedewerker Dashboard routes (role 1) */}
+                {currentRole === 1 && (
                   <>
                     <Route path="/dashboard" element={<BalieDashboard />} />
                     <Route path="/dashboard/lodges" element={<BalieLodges />} />
@@ -166,19 +168,20 @@ function AppContent() {
                   </>
                 )}
 
-                {/* Monteur Dashboard routes (role 3) */}
-                {currentRole === 3 && (
+                {/* Monteur Dashboard routes (role 2) */}
+                {currentRole === 2 && (
                   <>
                     {/* <Route path="/dashboard" element={<ManagerDashboard />} /> */}
                   </>
                 )}
-                {/* Manager Dashboard routes (role 4) */}
-                {currentRole === 4 && (
+                {/* Manager Dashboard routes (role 3) */}
+                {currentRole === 3 && (
                   <>
                     <Route path="/dashboard" element={<ManagerDashboard />} />
                     <Route path="/dashboard/lodges" element={<ManagerLodgeDetails />} />
                     <Route path="/dashboard/lodges/:id" element={<ManagerLodgeDetails />} />
-                    <Route path="/dashboard/users" element={<ManagerUsers />} />
+                    <Route path="/dashboard/gebruikers" element={<ManagerUsers />} />
+                    <Route path="/dashboard/gebruikeroverzicht" element={<AccountOverview />} />
                   </>
                 )}
               </>

@@ -42,8 +42,9 @@ const ManagerDashboard = () => {
         revenue: 2391.21,
         revenueLastMonth: 2391.21,
         bookingStatus: [
-          { label: "Geannuleerde boekingen", amount: 150, color: "#ef4444" },
-          { label: "Succesvolle boekingen", amount: 50, color: "#10b981" }
+          { label: "Geplande boekingen", amount: 57, color: "#d9ff72" },
+          { label: "Geannuleerde boekingen", amount: 41, color: "#ff7272" },
+          { label: "Succesvolle boekingen", amount: 181, color: "#40f1b6" }
         ],
         monthlyBookings: [
           { label: "Jan 2025", value: 45, color: "#3b82f6" },
@@ -151,6 +152,7 @@ const ManagerDashboard = () => {
         {/* Boekingen vandaag */}
         <div className="stat-card card-entrance hover-lift">
           <div className="stat-icon">
+            <img src={Icons.managerCalendar} alt="Boekingen vandaag" width="32" height="32" />
           </div>
           <div className="stat-content">
             <div className="stat-value scale-in">{dashboardData.bookingsToday}</div>
@@ -171,6 +173,7 @@ const ManagerDashboard = () => {
         {/* Geregistreerde accounts */}
         <div className="stat-card card-entrance-delayed hover-lift">
           <div className="stat-icon stat-icon-green">
+            <img src={Icons.managerUser} alt="Geregistreerde accounts" width="32" height="32" />
           </div>
           <div className="stat-content">
             <div className="stat-value scale-in-bounce">{dashboardData.registeredAccounts}</div>
@@ -189,29 +192,30 @@ const ManagerDashboard = () => {
         </div>
 
         {/* Reparaties gepland */}
-        <div className="stat-card card-entrance-delayed hover-lift" style={{ animationDelay: "0.4s" }}>
-          <div className="stat-icon stat-icon-orange shimmer">
-            <img src={Icons.dashboardMainenance} alt="Reparaties" width="24" height="24" />
-          </div>
-          <div className="stat-content">
-            <div className="stat-value scale-in">{dashboardData.plannedRepairs}</div>
-            <div className="stat-label">Reparaties gepland</div>
-              <ProgressBar
-                value={dashboardData.ongoingRepairs}
-                max={dashboardData.plannedRepairs}
-                height="10px"
-                color={"#ff9800"}
-                secondColor={"#ffb74d"}
-              />
-            <div className="stat-sublabel">
-              Reparaties in gang als: <span className="stat-highlight-orange">{dashboardData.ongoingRepairs}</span>
+          <div className="stat-card card-entrance-delayed hover-lift" style={{ animationDelay: "0.4s" }}>
+            <div className="stat-icon stat-icon-orange shimmer">
+              <img src={Icons.managerWrench} alt="Reparaties" width="32" height="32" />
+            </div>
+            <div className="stat-content">
+              <div className="stat-value scale-in">{dashboardData.plannedRepairs}</div>
+              <div className="stat-label">Reparaties gepland</div>
+                <ProgressBar
+            value={dashboardData.ongoingRepairs}
+            max={dashboardData.plannedRepairs}
+            height="10px"
+            color={"#ff9800"}
+            secondColor={"#ffb74d"}
+                />
+              <div className="stat-sublabel">
+                Reparaties in gang als: <span className="stat-highlight-orange">{dashboardData.ongoingRepairs}</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Omzet deze maand */}
+          {/* Omzet deze maand */}
         <div className="stat-card card-entrance-delayed hover-lift hover-glow" style={{ animationDelay: "0.6s" }}>
           <div className="stat-icon stat-icon-currency pulse">
+            <img src={Icons.managerEuro} alt="Omzet" width="32" height="32" />
           </div>
           <div className="stat-content">
             <div className="stat-value scale-in-bounce">{formatCurrency(dashboardData.revenue)}</div>

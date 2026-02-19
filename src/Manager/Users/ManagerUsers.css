@@ -1,6 +1,5 @@
 .manager-users-page {
   padding: 2rem;
-  min-height: 100vh;
   position: relative;
 }
 
@@ -12,9 +11,8 @@
 }
 
 .manager-users-search-section {
-  background: var(--lightcard);
+  background: var(--card);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 159, 16, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;
@@ -52,6 +50,17 @@
   background: rgba(74, 74, 74, 0.6);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
+}
+
+.manager-users-filter-select {
+  background: var(--inputbackground);
+  border: var(--inputborder);
+  border-radius: 8px;
+  color: var(--inputtext);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 .manager-users-view-option {
@@ -98,6 +107,7 @@
 }
 
 .manager-users-table-wrapper {
+  max-height: 56vh !important;
   overflow-x: auto;
 }
 
@@ -107,7 +117,7 @@
 }
 
 .manager-users-table-header {
-  background: rgba(40, 40, 40, 0.95);
+  background: var(--card);
 }
 
 .manager-users-header-cell {
@@ -115,10 +125,11 @@
   text-align: left;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #ccc;
+  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid rgba(255, 159, 16, 0.2);
+  background-color: var(--card);
+  border-bottom: 2px solid rgba(160, 159, 156, 0.2);
 }
 
 .manager-users-table-row {
@@ -234,6 +245,12 @@
   box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
 }
 
+.manager-users-status-inactive {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
 .manager-users-actions {
   display: flex;
   gap: 0.5rem;
@@ -278,7 +295,7 @@
   padding: 1.5rem;
   text-align: center;
   border-top: 1px solid rgba(68, 68, 68, 0.5);
-  background: rgba(51, 51, 51, 0.8);
+  background: var(--lightcard);
 }
 
 .manager-users-end-message {
