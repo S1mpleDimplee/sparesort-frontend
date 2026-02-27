@@ -23,7 +23,8 @@ import ManagerDashboard from "./Manager/Dashboard/Dashboard";
 import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
 import ManagerUsers from "./Manager/Users/ManagerUsers";
 import NotFound from "./404/404";
-import AccountOverview from "./Manager/Users/AccountOverview/AccountOverview";
+import AccountOverview from "./Manager/Users/Userinfo/AccountOverview";
+import BookingCalendar from "./Manager/Users/BookingCalendar/BookingCalendar";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -45,8 +46,9 @@ function AppContent() {
     "/dashboard/lodges",
     "/dashboard/lodges/:id",
     "/dashboard/gebruikers",
-    "/dashboard/gebruikeroverzicht",
-
+    "/dashboard/gebruikers/",
+    "/dashboard/",
+    "/dashboard/boekingen"
   ];
 
   const nonLoggedInUrls = [
@@ -181,7 +183,8 @@ function AppContent() {
                     <Route path="/dashboard/lodges" element={<ManagerLodgeDetails />} />
                     <Route path="/dashboard/lodges/:id" element={<ManagerLodgeDetails />} />
                     <Route path="/dashboard/gebruikers" element={<ManagerUsers />} />
-                    <Route path="/dashboard/gebruikeroverzicht" element={<AccountOverview />} />
+                    <Route path="/dashboard/gebruikers/:id" element={<AccountOverview />} />
+                    <Route path="/dashboard/boekingen" element={<BookingCalendar />} />
                   </>
                 )}
               </>

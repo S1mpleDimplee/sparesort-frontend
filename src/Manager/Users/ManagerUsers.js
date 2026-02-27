@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./ManagerUsers.css";
 import { useToast } from "../../toastmessage/toastmessage";
 import apiCall from "../../Calls/calls";
+import { useNavigate } from "react-router-dom";
 
 const ManagerUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   const { openToast } = useToast();
 
@@ -152,7 +154,8 @@ const ManagerUsers = () => {
                       <button className="manager-users-action-btn manager-users-deactivate-btn">
                         Deactiveren
                       </button>
-                      <button className="manager-users-action-btn manager-users-view-btn">
+                      <button className="manager-users-action-btn manager-users-view-btn" 
+                      onClick={() => navigate(`/dashboard/gebruikers/${user.id}`)}>
                         Inzien
                       </button>
                     </div>
