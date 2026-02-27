@@ -63,7 +63,7 @@ const ManagerDashboard = () => {
         latestBookings: [
           {
         id: 1,
-        guestName: "Jaylene van der veen",
+        guestName: "Jayleno van der veen",
         status: "Terugbetaling gestart",
         date: "26 april 2026",
         initials: "JA"

@@ -1,43 +1,59 @@
 import React, { useState, useEffect } from "react";
 import "./AccountOverview.css";
+import apiCall from "../../../Calls/calls";
+import { useToast } from "../../../toastmessage/toastmessage";
 
 const AccountOverview = () => {
-  const [userData, setUserData] = useState({
-    email: "Jaylanavanderveen@gmail.com",
-    isVerified: true,
-    voornaam: "",
-    tussenvoegsel: "",
-    achternaam: "",
-    land: "",
-    websiteTaal: "",
-    stad: "",
-    postcode: "",
-    straatnaam: "",
-    huisnummer: "",
-    toevoeging: "",
-    registrationDates: [
-      "19-11-2007",
-      "19-11-2007",
-      "19-11-2007",
-      "19-11-2007",
-      "19-11-2007",
-    ],
-  });
-
   const [isLoading, setIsLoading] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
+  const [userData, setUserData] = useState({
+    email: "",
+    isVerified: false,
+    firstname: "",
+    addition: "",
+    lastname: "",
+    country: "",
+    websiteLanguage: "",
+    city: "",
+    postalcode: "",
+    streetname: "",
+    housenumber: "",
+    housenumberAddition: "",
+    registrationDates: ["1 januari 2023", "15 maart 2024"],
+  });
+  const [editedUserData, setEditedUserData] = useState({ ...userData });
+
+  const { openToast } = useToast();
+
+    
 
   useEffect(() => {
-    const loggedInData = JSON.parse(localStorage.getItem("userdata"));
-    if (loggedInData) {
-      setUserData((prevData) => ({
-        ...prevData,
-        email: loggedInData.email || prevData.email,
-        voornaam: loggedInData.firstName || "",
-        achternaam: loggedInData.lastName || "",
-      }));
-    }
+    fetchUserData();
   }, []);
+
+  const fetchUserData = async () => {
+    setIsLoading(true);
+    const userid = JSON.parse(localStorage.getItem("selectedUserId")) || 1;
+    try {
+      const response = await apiCall("getuserdata", { userid });
+
+      if (response.isSuccess) {
+        const data = response.data;
+        setUserData({ ...data, registrationDates: ["1 januari 2023", "15 maart 2024"] });
+        setEditedUserData({ ...data, registrationDates: ["1 januari 2023", "15 maart 2024"] });
+        console.log("Fetched user data:", data);
+      } else {
+        openToast(response.message);
+      }
+
+      
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      openToast("Fout bij het ophalen van gebruikersgegevens. Probeer het later opnieuw.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleInputChange = (field, value) => {
     setUserData((prev) => ({
@@ -130,9 +146,9 @@ const AccountOverview = () => {
                     <label>Voornaam</label>
                     <input
                       type="text"
-                      value={userData.voornaam}
+                      value={userData.firstname}
                       onChange={(e) =>
-                        handleInputChange("voornaam", e.target.value)
+                        handleInputChange("firstname", e.target.value)
                       }
                       className="manage-account-form-input"
                     />
@@ -142,9 +158,9 @@ const AccountOverview = () => {
                     <label>Tussenvoegsel</label>
                     <input
                       type="text"
-                      value={userData.tussenvoegsel}
+                      value={userData.addition}
                       onChange={(e) =>
-                        handleInputChange("tussenvoegsel", e.target.value)
+                        handleInputChange("addition", e.target.value)
                       }
                       className="manage-account-form-input"
                     />
@@ -154,7 +170,7 @@ const AccountOverview = () => {
                     <label>Achternaam</label>
                     <input
                       type="text"
-                      value={userData.achternaam}
+                      value={userData.lastname}
                       onChange={(e) =>
                         handleInputChange("achternaam", e.target.value)
                       }
@@ -172,9 +188,9 @@ const AccountOverview = () => {
                       <label>Land</label>
                       <input
                         type="text"
-                        value={userData.land}
+                        value={userData.country}
                         onChange={(e) =>
-                          handleInputChange("land", e.target.value)
+                          handleInputChange("country", e.target.value)
                         }
                         className="manage-account-form-input"
                       />
@@ -183,9 +199,9 @@ const AccountOverview = () => {
                       <label>Website Taal</label>
                       <input
                         type="text"
-                        value={userData.websiteTaal}
+                        value={userData.websiteLanguage}
                         onChange={(e) =>
-                          handleInputChange("websiteTaal", e.target.value)
+                          handleInputChange("websiteLanguage", e.target.value)
                         }
                         className="manage-account-form-input"
                       />
@@ -196,7 +212,7 @@ const AccountOverview = () => {
                     <label>Stad</label>
                     <input
                       type="text"
-                      value={userData.stad}
+                      value={userData.city}
                       onChange={(e) =>
                         handleInputChange("stad", e.target.value)
                       }
@@ -208,9 +224,9 @@ const AccountOverview = () => {
                     <label>Postcode</label>
                     <input
                       type="text"
-                      value={userData.postcode}
+                      value={userData.postalcode}
                       onChange={(e) =>
-                        handleInputChange("postcode", e.target.value)
+                        handleInputChange("postalcode", e.target.value)
                       }
                       className="manage-account-form-input"
                     />
@@ -220,9 +236,9 @@ const AccountOverview = () => {
                     <label>Straatnaam</label>
                     <input
                       type="text"
-                      value={userData.straatnaam}
+                      value={userData.streetname}
                       onChange={(e) =>
-                        handleInputChange("straatnaam", e.target.value)
+                        handleInputChange("streetname", e.target.value)
                       }
                       className="manage-account-form-input"
                     />
@@ -233,9 +249,9 @@ const AccountOverview = () => {
                       <label>Housenummer</label>
                       <input
                         type="text"
-                        value={userData.huisnummer}
+                        value={userData.housenumber}
                         onChange={(e) =>
-                          handleInputChange("huisnummer", e.target.value)
+                          handleInputChange("housenumber", e.target.value)
                         }
                         className="manage-account-form-input"
                       />
@@ -244,9 +260,9 @@ const AccountOverview = () => {
                       <label>Toevoeging</label>
                       <input
                         type="text"
-                        value={userData.toevoeging}
+                        value={userData.housenumberAddition}
                         onChange={(e) =>
-                          handleInputChange("toevoeging", e.target.value)
+                          handleInputChange("housenumberAddition", e.target.value)
                         }
                         className="manage-account-form-input"
                       />

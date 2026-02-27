@@ -3,6 +3,9 @@
   position: relative;
 }
 
+.manage-account-container {
+  width: 100%;
+}
 
 .manager-users-header {
   margin-bottom: 2rem;

@@ -155,7 +155,10 @@ const ManagerUsers = () => {
                         Deactiveren
                       </button>
                       <button className="manager-users-action-btn manager-users-view-btn" 
-                      onClick={() => navigate(`/dashboard/gebruikers/${user.id}`)}>
+                      onClick={() => {
+                        localStorage.setItem("selectedUserId", JSON.stringify(user.id));
+                        navigate(`/dashboard/gebruikers/${user.id}`);
+                      }}>
                         Inzien
                       </button>
                     </div>
