@@ -61,9 +61,8 @@ function AppContent() {
 
   useEffect(() => {
     // Check if user is logged in and get their role
-    // checkUserLoginStatus();
+    checkUserLoginStatus();
     setIsDashboard(dashboardUrls.includes(location.pathname));
-    setCurrentRole(localStorage.getItem("userdata").role);
   }, [location.pathname]);
 
   const checkUserLoginStatus = () => {

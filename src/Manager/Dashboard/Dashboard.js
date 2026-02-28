@@ -1,237 +1,279 @@
-
-import React, { useState } from 'react';
-import './Dashboard.css';
-import * as icons from '../../Icons/Icons';
+import React, { useState, useEffect } from "react";
+import "./Dashboard.css";
+import ProgressBar from "../../HouseStyle/ProgressBar/ProgressBar";
+import BarChart from "../../HouseStyle/BarChart/BarChart";
+import PieChart from "../../HouseStyle/PieChart/PieChart";
+import * as Icons from "../../Icons/Icons";
 
 const ManagerDashboard = () => {
-  const [filters, setFilters] = useState({
-    priceFrom: '0.00€',
-    priceTo: '0.00€',
-    rating: 5,
-    bedrooms: 1
+  const [dashboardData, setDashboardData] = useState({
+    bookingsToday: 0,
+    bookingsLastMonth: 0,
+    registeredAccounts: 0,
+    accountsGrowth: 0,
+    plannedRepairs: 0,
+    ongoingRepairs: 0,
+    revenue: 0,
+    revenueLastMonth: 0,
   });
 
-  const statsData = {
-    vandaag: {
-      title: 'Vandaag',
-      description: 'Vandaag zijn 10/15 lodges geboekt',
-      icon: icons.dashboardHouse
-    },
-    morgen: {
-      title: 'Morgen',
-      description: 'Morgen zijn 10/15 lodges geboekt',
-      icon: icons.dashboardCalendar
-    },
-    werkzaam: {
-      title: 'Werkzaam heden',
-      mainText: 'Momenteel zijn er 1 lodge(s) in onderhoud',
-      subText: 'Er zijn er 1 lodge(s) gepland voor onderhoud',
-      icon: icons.dashboardMainenance
+  const [bookingStatusData, setBookingStatusData] = useState([]);
+  const [monthlyBookingsData, setMonthlyBookingsData] = useState([]);
+  const [latestBookings, setLatestBookings] = useState([]);
+  const [progressMetrics, setProgressMetrics] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch dashboard data on component mount
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  // API call to fetch all dashboard data
+  const fetchDashboardData = async () => {
+    setIsLoading(true);
+    try {
+      const mockData = {
+        bookingsToday: 31,
+        bookingsLastMonth: 18,
+        registeredAccounts: 2000,
+        accountsGrowth: 101,
+        plannedRepairs: 10,
+        ongoingRepairs: 18,
+        revenue: 2391.21,
+        revenueLastMonth: 2391.21,
+        bookingStatus: [
+          { label: "Geannuleerde boekingen", amount: 150, color: "#ef4444" },
+          { label: "Succesvolle boekingen", amount: 50, color: "#10b981" }
+        ],
+        monthlyBookings: [
+          { label: "Jan 2025", value: 45, color: "#3b82f6" },
+          { label: "Feb 2025", value: 32, color: "#3b82f6" },
+          { label: "Mar 2025", value: 68, color: "#3b82f6" },
+          { label: "Apr 2025", value: 95, color: "#3b82f6" },
+          { label: "Mei 2025", value: 52, color: "#3b82f6" },
+          { label: "Jun 2025", value: 0, color: "#3b82f6" },
+          { label: "Jul 2025", value: 0, color: "#3b82f6" },
+          { label: "Aug 2025", value: 0, color: "#3b82f6" },
+          { label: "Sep 2025", value: 0, color: "#3b82f6" },
+          { label: "Okt 2025", value: 0, color: "#3b82f6" },
+          { label: "Nov 2025", value: 0, color: "#3b82f6" },
+          { label: "Dec 2025", value: 0, color: "#3b82f6" }
+        ],
+        latestBookings: [
+          {
+        id: 1,
+        guestName: "Jaylene van der veen",
+        status: "Terugbetaling gestart",
+        date: "26 april 2026",
+        initials: "JA"
+          }
+        ],
+        progressMetrics: [
+          {
+        id: 1,
+        label: "Lodge Bezetting",
+        value: 75,
+        max: 100,
+        color: "#10b981",
+        info: "75 van 100 lodges bezet"
+          },
+          {
+        id: 2,
+        label: "Klanttevredenheid",
+        value: 92,
+        max: 100,
+        color: "#3b82f6",
+        info: "Gemiddelde score: 4.6/5"
+          },
+          {
+        id: 3,
+        label: "Maandelijkse Target",
+        value: 68,
+        max: 100,
+        color: "#f59e0b",
+        info: "€68.000 van €100.000"
+          },
+          {
+        id: 4,
+        label: "Onderhoud Compleet",
+        value: 45,
+        max: 100,
+        color: "#ec4899",
+        info: "9 van 20 taken voltooid"
+          }
+        ]
+      };
+
+      setDashboardData({
+        bookingsToday: mockData.bookingsToday,
+        bookingsLastMonth: mockData.bookingsLastMonth,
+        registeredAccounts: mockData.registeredAccounts,
+        accountsGrowth: mockData.accountsGrowth,
+        plannedRepairs: mockData.plannedRepairs,
+        ongoingRepairs: mockData.ongoingRepairs,
+        revenue: mockData.revenue,
+        revenueLastMonth: mockData.revenueLastMonth,
+      });
+
+      setBookingStatusData(mockData.bookingStatus);
+      setMonthlyBookingsData(mockData.monthlyBookings);
+      setLatestBookings(mockData.latestBookings);
+      setProgressMetrics(mockData.progressMetrics);
+
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const lodgesData = [
-    {
-      id: 1,
-      name: 'Tropical beach resort lodge',
-      price: 525,
-      image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=80',
-      features: {
-        wifi: true,
-        sauna: true,
-        priveZwembad: true,
-        slaapkamers: 3
-      },
-      description: 'Meer informatie over de lodge? Klik op de knop'
-    },
-    {
-      id: 2,
-      name: 'Sunny Bay Treat',
-      price: 491,
-      image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&q=80',
-      features: {
-        wifi: true,
-        priveZwembad: true,
-        slaapkamers: 3
-      },
-      description: 'Meer informatie over de lodge? Klik op de knop'
-    },
-    {
-      id: 3,
-      name: 'Near Cliff Lodge',
-      price: 229,
-      image: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&q=80',
-      features: {
-        wifi: true,
-        slaapkamers: 1
-      },
-      description: 'Meer informatie over de lodge? Klik op de knop'
-    }
-  ];
+  const formatCurrency = (amount) => {
+    return `€${amount.toFixed(2)}`;
+  };
+
+  const calculateGrowth = (current, previous) => {
+    if (previous === 0) return 0;
+    return ((current - previous) / previous * 100).toFixed(0);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="manager-dashboard">
+        <div className="dashboard-loading">Loading dashboard...</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="manager-dash-page">
-      {/* Stats Section */}
-      <div className="manager-dash-stats-section">
-        <div className="manager-dash-stat-card">
-          <div className="manager-dash-stat-header fade-in-from-up">
-            <h3>{statsData.vandaag.title}</h3>
+    <div className="manager-dashboard page-enter">
+      {/* Stats Cards Row */}
+      <div className="dashboard-stats-row">
+        {/* Boekingen vandaag */}
+        <div className="stat-card card-entrance hover-lift">
+          <div className="stat-icon">
           </div>
-          <div className="manager-dash-stat-content">
-            <div className="manager-dash-stat-icon">
-              <div className="manager-dash-icon-circle">
-                <img className="manager-dash-icon-symbol" src={statsData.vandaag.icon} alt="House Icon" />
-              </div>
+          <div className="stat-content">
+            <div className="stat-value scale-in">{dashboardData.bookingsToday}</div>
+            <div className="stat-label">Boekingen vandaag</div>
+            <ProgressBar
+                value={dashboardData.bookingsLastMonth}
+                max={dashboardData.bookingsToday}
+                height="10px"
+                color={"#2a4bb9"}
+                secondColor={"#7f97c9"}
+              />
+            <div className="stat-sublabel">
+              Ingecheckte boekingen: <span className="stat-highlight">{dashboardData.bookingsLastMonth}</span>
             </div>
-            <div className="manager-dash-stat-info">
-              <p className="manager-dash-stat-description">{statsData.vandaag.description}</p>
-            </div>
-          </div>
-          <div className="manager-dash-stat-footer">
-            <span className="manager-dash-timezone">West-Europe Bali</span>
           </div>
         </div>
 
-        <div className="manager-dash-stat-card">
-          <div className="manager-dash-stat-header">
-            <h3>{statsData.morgen.title}</h3>
+        {/* Geregistreerde accounts */}
+        <div className="stat-card card-entrance-delayed hover-lift">
+          <div className="stat-icon stat-icon-green">
           </div>
-          <div className="manager-dash-stat-content">
-            <div className="manager-dash-stat-icon">
-              <div className="manager-dash-icon-circle">
-                <img className="manager-dash-icon-symbol" src={statsData.morgen.icon} alt="Calendar Icon" />
-              </div>
+          <div className="stat-content">
+            <div className="stat-value scale-in-bounce">{dashboardData.registeredAccounts}</div>
+            <div className="stat-label">Geregistreerde accounts</div>
+              <ProgressBar
+                value={dashboardData.accountsGrowth}
+                max={dashboardData.registeredAccounts}
+                height="10px"
+                color={"#4caf50"}
+                secondColor={"#81c784"}
+              />
+            <div className="stat-sublabel">
+              +{dashboardData.accountsGrowth} in de afgelopen 2 maanden
             </div>
-            <div className="manager-dash-stat-info">
-              <p className="manager-dash-stat-description">{statsData.morgen.description}</p>
-            </div>
-          </div>
-          <div className="manager-dash-stat-footer">
-            <span className="manager-dash-timezone">West-Europe Bali</span>
           </div>
         </div>
 
-        <div className="manager-dash-stat-card">
-          <div className="manager-dash-stat-header">
-            <h3>{statsData.werkzaam.title}</h3>
+        {/* Reparaties gepland */}
+        <div className="stat-card card-entrance-delayed hover-lift" style={{ animationDelay: "0.4s" }}>
+          <div className="stat-icon stat-icon-orange shimmer">
+            <img src={Icons.dashboardMainenance} alt="Reparaties" width="24" height="24" />
           </div>
-          <div className="manager-dash-stat-content">
-            <div className="manager-dash-stat-icon">
-              <div className="manager-dash-icon-circle">
-                <img className="manager-dash-icon-symbol" src={statsData.werkzaam.icon} alt="Maintenance Icon" />
-              </div>
-            </div>
-            <div className="manager-dash-stat-info">
-              <p className="manager-dash-stat-main">{statsData.werkzaam.mainText}</p>
-              <p className="manager-dash-stat-sub">{statsData.werkzaam.subText}</p>
+          <div className="stat-content">
+            <div className="stat-value scale-in">{dashboardData.plannedRepairs}</div>
+            <div className="stat-label">Reparaties gepland</div>
+              <ProgressBar
+                value={dashboardData.ongoingRepairs}
+                max={dashboardData.plannedRepairs}
+                height="10px"
+                color={"#ff9800"}
+                secondColor={"#ffb74d"}
+              />
+            <div className="stat-sublabel">
+              Reparaties in gang als: <span className="stat-highlight-orange">{dashboardData.ongoingRepairs}</span>
             </div>
           </div>
-          <div className="manager-dash-stat-footer">
-            <span className="manager-dash-timezone">West-Europe Bali</span>
+        </div>
+
+        {/* Omzet deze maand */}
+        <div className="stat-card card-entrance-delayed hover-lift hover-glow" style={{ animationDelay: "0.6s" }}>
+          <div className="stat-icon stat-icon-currency pulse">
+          </div>
+          <div className="stat-content">
+            <div className="stat-value scale-in-bounce">{formatCurrency(dashboardData.revenue)}</div>
+            <div className="stat-label">Omzet deze maand</div>
+            <div className="stat-sublabel stat-revenue">
+              <span className="revenue-icon">€</span>
+              <span>Omzet vorige maand</span>
+              <span className="revenue-amount">{formatCurrency(dashboardData.revenueLastMonth)}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Piechart part */}
+      <div className="dashboard-charts-row">
+        <div className="chart-card hover-lift">
+          <div className="chart-header">
+            <div className="legend-inline fade-in-delayed">
+              {bookingStatusData.map((item, index) => (
+                <div key={index} className="legend-item">
+                  <span className="legend-dot" style={{ backgroundColor: item.color }}></span>
+                  <span className="legend-label">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="chart-content">
+            <PieChart
+              items={bookingStatusData} 
+              size={280} 
+              legendpos="none"
+            />
+          </div>
+        </div>
+
+        <div className="latest-bookings-card hover-lift" style={{ animationDelay: "0.2s" }}>
+          <h3 className="card-title  mb-2">Laatste boekigen</h3>
+          <div className="bookings-list">
+            {latestBookings.length > 0 ? (
+              latestBookings.map((booking, index) => (
+                <div key={booking.id} className="booking-item slide-right" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
+                  <div className="booking-avatar hover-scale">{booking.initials}</div>
+                  <div className="booking-details">
+                    <div className="booking-name">{booking.guestName}</div>
+                    <div className="booking-status">{booking.status}</div>
+                  </div>
+                  <div className="booking-date">{booking.date}</div>
+                </div>
+              ))
+            ) : (
+              <div className="no-bookings">Geen recente boekingen</div>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Filter Section */}
-      <div className="manager-dash-filter-section">
-        <div className="manager-dash-filter-bar">
-          <div className="manager-dash-filter-group">
-            <label>Van</label>
-            <input
-              type="text"
-              value={filters.priceFrom}
-              className="manager-dash-filter-input"
-              placeholder="0.00€"
-              onChange={(e) => setFilters({...filters, priceFrom: e.target.value})}
-            />
-          </div>
-
-          <div className="manager-dash-filter-group">
-            <label>Tot</label>
-            <input
-              type="text"
-              value={filters.priceTo}
-              className="manager-dash-filter-input"
-              placeholder="0.00€"
-              onChange={(e) => setFilters({...filters, priceTo: e.target.value})}
-            />
-          </div>
-
-          <div className="manager-dash-filter-group manager-dash-filter-rating">
-            <div className="manager-dash-rating-display">
-              <span className="manager-dash-stars">★★★★★</span>
-              <span className="manager-dash-dropdown-arrow">▼</span>
-            </div>
-          </div>
-
-          <div className="manager-dash-filter-group">
-            <label>Slaapkamers</label>
-            <div className="manager-dash-bedrooms-badge">
-              <span className="manager-dash-bedroom-number">{filters.bedrooms}</span>
-            </div>
-          </div>
-
-          <button className="manager-dash-filter-button">Filteren</button>
-        </div>
-      </div>
-
-      {/* Lodges Section */}
-      <div className="manager-dash-lodges-section">
-        <h2 className="manager-dash-section-title">Ontdek onze luxe lodges</h2>
-
-        <div className="manager-dash-lodges-list">
-          {lodgesData.map((lodge) => (
-            <div key={lodge.id} className="manager-dash-lodge-card">
-              <div className="manager-dash-lodge-image-wrapper">
-                <img src={lodge.image} alt={lodge.name} className="manager-dash-lodge-image" />
-              </div>
-
-              <div className="manager-dash-lodge-info">
-                <div className="manager-dash-lodge-header">
-                  <h3 className="manager-dash-lodge-name">{lodge.name}</h3>
-                  <div className="manager-dash-lodge-price">
-                    <span className="manager-dash-price-amount">€{lodge.price}</span>
-                    <span className="manager-dash-price-period">/nacht</span>
-                  </div>
-                </div>
-
-                <div className="manager-dash-lodge-features">
-                  <div className="manager-dash-feature-row">
-                    {lodge.features.wifi && (
-                      <div className="manager-dash-feature-item">
-                        <span className="manager-dash-feature-icon">📶</span>
-                        <span className="manager-dash-feature-text">Gratis wifi</span>
-                      </div>
-                    )}
-                    {lodge.features.sauna && (
-                      <div className="manager-dash-feature-item">
-                        <span className="manager-dash-feature-icon">🧖</span>
-                        <span className="manager-dash-feature-text">Sauna</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="manager-dash-feature-row">
-                    {lodge.features.priveZwembad && (
-                      <div className="manager-dash-feature-item">
-                        <span className="manager-dash-feature-icon">🏊</span>
-                        <span className="manager-dash-feature-text">Privé zwembad</span>
-                      </div>
-                    )}
-                    <div className="manager-dash-feature-item">
-                      <span className="manager-dash-feature-icon">🛏️</span>
-                      <span className="manager-dash-feature-text">{lodge.features.slaapkamers} Slaapkamer{lodge.features.slaapkamers !== 1 ? 's' : ''}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="manager-dash-lodge-footer">
-                  <p className="manager-dash-lodge-description">{lodge.description}</p>
-                  <button className="manager-dash-update-button">Bijwerken</button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="dashboard-bar-chart hover-lift">
+        <h3 className="chart-section-title fade-in-delayed">Boekingen 12 maand overzicht</h3>
+        <BarChart
+          data={monthlyBookingsData} 
+          height="350px"
+        />
       </div>
     </div>
   );
