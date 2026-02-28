@@ -11,8 +11,11 @@ const Verify = () => {
 
   const navigate = useNavigate();
 
+  const params = new URLSearchParams(window.location.search);
 
-  const email = JSON.parse(localStorage.getItem('verificationinfo')).email;
+  const verificationcode = params.get("verificationcode");
+  const email = params.get("email");
+
   const userid = JSON.parse(localStorage.getItem('userdata')).userid;
   const name = JSON.parse(localStorage.getItem('verificationinfo')).name;
 
