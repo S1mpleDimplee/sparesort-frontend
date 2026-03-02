@@ -63,7 +63,7 @@ const BarChart = ({ data = [], maxValue = null, title = "", height = "250px"}) =
           {hoveredItem && (
             <div className="barchart-tooltip">
               <div className="barchart-tooltip-label">{hoveredItem.label}</div>
-              <div className="barchart-tooltip-value">€{hoveredItem.value}</div>
+              <div className="barchart-tooltip-value">{hoveredItem.value}</div>
             </div>
           )}
         </div>
