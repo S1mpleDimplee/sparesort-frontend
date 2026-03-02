@@ -32,97 +32,59 @@ const ManagerDashboard = () => {
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
-      // Replace with your actual API endpoints
-      // const response = await postCall("getDashboardData");
-      
-      // Temporary mock data - replace with actual API response
-      const mockData = {
-        bookingsToday: 31,
-        bookingsLastMonth: 18,
-        registeredAccounts: 2000,
-        accountsGrowth: 101,
-        plannedRepairs: 10,
-        ongoingRepairs: 18,
-        revenue: 2391.21,
-        revenueLastMonth: 2391.21,
-        bookingStatus: [
-          { label: "Geannuleerde boekingen", amount: 150, color: "#ff4c4c" },
-          { label: "Succesvolle boekingen", amount: 50, color: "#4caf50" }
-        ],
-        monthlyBookings: [
-          { label: "Jan 2025", value: 45, color: "#2196f3" },
-          { label: "Feb 2025", value: 32, color: "#2196f3" },
-          { label: "Mar 2025", value: 68, color: "#2196f3" },
-          { label: "Apr 2025", value: 95, color: "#2196f3" },
-          { label: "Mei 2025", value: 52, color: "#2196f3" },
-          { label: "Jun 2025", value: 0, color: "#2196f3" },
-          { label: "Jul 2025", value: 0, color: "#2196f3" },
-          { label: "Aug 2025", value: 0, color: "#2196f3" },
-          { label: "Sep 2025", value: 0, color: "#2196f3" },
-          { label: "Okt 2025", value: 0, color: "#2196f3" },
-          { label: "Nov 2025", value: 0, color: "#2196f3" },
-          { label: "Dec 2025", value: 0, color: "#2196f3" }
-        ],
-        latestBookings: [
-          {
-            id: 1,
-            guestName: "Jaylene van der veen",
-            status: "Terugbetaling gestart",
-            date: "26 april 2026",
-            initials: "JA"
-          }
-        ],
-        progressMetrics: [
-          {
-            id: 1,
-            label: "Lodge Bezetting",
-            value: 75,
-            max: 100,
-            color: "#4caf50",
-            info: "75 van 100 lodges bezet"
-          },
-          {
-            id: 2,
-            label: "Klanttevredenheid",
-            value: 92,
-            max: 100,
-            color: "#2196f3",
-            info: "Gemiddelde score: 4.6/5"
-          },
-          {
-            id: 3,
-            label: "Maandelijkse Target",
-            value: 68,
-            max: 100,
-            color: "#ff9800",
-            info: "€68.000 van €100.000"
-          },
-          {
-            id: 4,
-            label: "Onderhoud Compleet",
-            value: 45,
-            max: 100,
-            color: "#f44336",
-            info: "9 van 20 taken voltooid"
-          }
-        ]
-      };
+      const response = await apiCall("getmanagerdashboardinfo", {});
+
+      if (!response.isSuccess) return;
+
+      const d = response.data;
 
       setDashboardData({
-        bookingsToday: mockData.bookingsToday,
-        bookingsLastMonth: mockData.bookingsLastMonth,
-        registeredAccounts: mockData.registeredAccounts,
-        accountsGrowth: mockData.accountsGrowth,
-        plannedRepairs: mockData.plannedRepairs,
-        ongoingRepairs: mockData.ongoingRepairs,
-        revenue: mockData.revenue,
-        revenueLastMonth: mockData.revenueLastMonth,
+        bookingsToday: d.bookingsToday,
+        bookingsLastMonth: d.bookingsLastMonth,
+        registeredAccounts: d.registeredAccounts,
+        accountsGrowth: d.accountsGrowth,
+        plannedRepairs: 0,   // add repairs table later
+        ongoingRepairs: 0,
+        revenue: d.revenue,
+        revenueLastMonth: d.revenueLastMonth,
       });
 
-      setBookingStatusData(mockData.bookingStatus);
-      setMonthlyBookingsData(mockData.monthlyBookings);
-      setLatestBookings(mockData.latestBookings);
-      setProgressMetrics(mockData.progressMetrics);
+      // Map booking status to pie chart format
+      const statusColors = { geannuleerd: "#ff4c4c", bevestigd: "#4caf50", pending: "#ff9800" };
+      setBookingStatusData(
+        d.bookingStatus.map(s => ({
+          label: s.status,
+          amount: parseInt(s.total),
+          color: statusColors[s.status] ?? "#2196f3"
+        }))
+      );
+
+      setMonthlyBookingsData(d.monthlyBookings);
+      setLatestBookings(d.latestBookings);
+
+      setProgressMetrics([
+        {
+          id: 1, label: "Lodge Bezetting",
+          value: d.lodgeOccupancy, max: 100, color: "#4caf50",
+          info: `${d.occupiedLodges} van ${d.totalLodges} lodges bezet`
+        },
+        {
+          id: 2, label: "Klanttevredenheid",
+          value: 92, max: 100, color: "#2196f3",
+          info: "Gemiddelde score: 4.6/5"
+        },
+        {
+          id: 3, label: "Maandelijkse Target",
+          value: Math.min(Math.round((d.revenue / 100000) * 100), 100),
+          max: 100, color: "#ff9800",
+          info: `€${d.revenue.toFixed(0)} van €100.000`
+        },
+        {
+          id: 4, label: "Account Groei",
+          value: Math.min(d.accountsGrowth, 100), max: 100, color: "#f44336",
+          info: `+${d.accountsGrowth} nieuwe accounts`
+        }
+      ]);
 
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -158,7 +120,7 @@ const ManagerDashboard = () => {
         <div className="stat-card card-entrance hover-lift">
           <div className="stat-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 2v3M16 2v3M3.5 9.09h17M21 8.5V17c0 3-1.5 5-5 5H8c-3.5 0-5-2-5-5V8.5c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8 2v3M16 2v3M3.5 9.09h17M21 8.5V17c0 3-1.5 5-5 5H8c-3.5 0-5-2-5-5V8.5c0-3 1.5-5 5-5h8c3.5 0 5 2 5 5z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div className="stat-content">
@@ -174,12 +136,12 @@ const ManagerDashboard = () => {
         <div className="stat-card card-entrance-delayed hover-lift">
           <div className="stat-icon stat-icon-green">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 7.16C17.94 7.15 17.87 7.15 17.81 7.16C16.43 7.11 15.33 5.98 15.33 4.58C15.33 3.15 16.48 2 17.91 2C19.34 2 20.49 3.16 20.49 4.58C20.48 5.98 19.38 7.11 18 7.16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M16.97 14.44C18.34 14.67 19.85 14.43 20.91 13.72C22.32 12.78 22.32 11.24 20.91 10.3C19.84 9.59 18.31 9.35 16.94 9.59" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M5.97 7.16C6.03 7.15 6.1 7.15 6.16 7.16C7.54 7.11 8.64 5.98 8.64 4.58C8.64 3.15 7.49 2 6.06 2C4.63 2 3.48 3.16 3.48 4.58C3.49 5.98 4.59 7.11 5.97 7.16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M7 14.44C5.63 14.67 4.12 14.43 3.06 13.72C1.65 12.78 1.65 11.24 3.06 10.3C4.13 9.59 5.66 9.35 7.03 9.59" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 14.63C11.94 14.62 11.87 14.62 11.81 14.63C10.43 14.58 9.33 13.45 9.33 12.05C9.33 10.62 10.48 9.47 11.91 9.47C13.34 9.47 14.49 10.63 14.49 12.05C14.48 13.45 13.38 14.59 12 14.63Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M9.09 17.78C7.68 18.72 7.68 20.26 9.09 21.2C10.69 22.27 13.31 22.27 14.91 21.2C16.32 20.26 16.32 18.72 14.91 17.78C13.32 16.72 10.69 16.72 9.09 17.78Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M18 7.16C17.94 7.15 17.87 7.15 17.81 7.16C16.43 7.11 15.33 5.98 15.33 4.58C15.33 3.15 16.48 2 17.91 2C19.34 2 20.49 3.16 20.49 4.58C20.48 5.98 19.38 7.11 18 7.16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M16.97 14.44C18.34 14.67 19.85 14.43 20.91 13.72C22.32 12.78 22.32 11.24 20.91 10.3C19.84 9.59 18.31 9.35 16.94 9.59" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5.97 7.16C6.03 7.15 6.1 7.15 6.16 7.16C7.54 7.11 8.64 5.98 8.64 4.58C8.64 3.15 7.49 2 6.06 2C4.63 2 3.48 3.16 3.48 4.58C3.49 5.98 4.59 7.11 5.97 7.16Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M7 14.44C5.63 14.67 4.12 14.43 3.06 13.72C1.65 12.78 1.65 11.24 3.06 10.3C4.13 9.59 5.66 9.35 7.03 9.59" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M12 14.63C11.94 14.62 11.87 14.62 11.81 14.63C10.43 14.58 9.33 13.45 9.33 12.05C9.33 10.62 10.48 9.47 11.91 9.47C13.34 9.47 14.49 10.63 14.49 12.05C14.48 13.45 13.38 14.59 12 14.63Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M9.09 17.78C7.68 18.72 7.68 20.26 9.09 21.2C10.69 22.27 13.31 22.27 14.91 21.2C16.32 20.26 16.32 18.72 14.91 17.78C13.32 16.72 10.69 16.72 9.09 17.78Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div className="stat-content">
@@ -195,8 +157,8 @@ const ManagerDashboard = () => {
         <div className="stat-card card-entrance hover-lift" style={{ animationDelay: "0.4s" }}>
           <div className="stat-icon stat-icon-orange shimmer">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.5 10.65L9.5 7.35v6.6l5-3.3z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M22 15V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7h6c5 0 7-2 7-7z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14.5 10.65L9.5 7.35v6.6l5-3.3z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M22 15V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7h6c5 0 7-2 7-7z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div className="stat-content">
@@ -212,8 +174,8 @@ const ManagerDashboard = () => {
         <div className="stat-card card-entrance-delayed hover-lift hover-glow" style={{ animationDelay: "0.6s" }}>
           <div className="stat-icon stat-icon-currency pulse">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10"/>
-              <path d="M10.5 15.5h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3c-1.1 0-2-.9-2-2s.9-2 2-2h3M12 7.5v1M12 15.5v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" strokeWidth="1.5" strokeMiterlimit="10" />
+              <path d="M10.5 15.5h3c1.1 0 2-.9 2-2s-.9-2-2-2h-3c-1.1 0-2-.9-2-2s.9-2 2-2h3M12 7.5v1M12 15.5v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <div className="stat-content">
@@ -243,9 +205,9 @@ const ManagerDashboard = () => {
             </div>
           </div>
           <div className="chart-content">
-            <PieChart 
-              items={bookingStatusData} 
-              size={280} 
+            <PieChart
+              items={bookingStatusData}
+              size={280}
               legendpos="none"
             />
           </div>
@@ -276,8 +238,8 @@ const ManagerDashboard = () => {
       {/* Bar Chart - Monthly Bookings */}
       <div className="dashboard-bar-chart slide-up hover-lift" style={{ animationDelay: "0.4s" }}>
         <h3 className="chart-section-title fade-in-delayed">Boekingen 12 maand overzicht</h3>
-        <BarChart 
-          data={monthlyBookingsData} 
+        <BarChart
+          data={monthlyBookingsData}
           height="350px"
         />
       </div>

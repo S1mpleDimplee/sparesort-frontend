@@ -4,6 +4,7 @@ import ProgressBar from "../../HouseStyle/ProgressBar/ProgressBar";
 import BarChart from "../../HouseStyle/BarChart/BarChart";
 import PieChart from "../../HouseStyle/PieChart/PieChart";
 import * as Icons from "../../Icons/Icons";
+import apiCall from "../../Calls/calls";
 
 const ManagerDashboard = () => {
   const [dashboardData, setDashboardData] = useState({
@@ -15,6 +16,8 @@ const ManagerDashboard = () => {
     ongoingRepairs: 0,
     revenue: 0,
     revenueLastMonth: 0,
+    Repairs: 0,
+    totalLodges: 0,
   });
 
   const [bookingStatusData, setBookingStatusData] = useState([]);
@@ -23,103 +26,67 @@ const ManagerDashboard = () => {
   const [progressMetrics, setProgressMetrics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch dashboard data on component mount
   useEffect(() => {
     fetchDashboardData();
   }, []);
 
-  // API call to fetch all dashboard data
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
-      const mockData = {
-        bookingsToday: 31,
-        bookingsLastMonth: 18,
-        registeredAccounts: 2000,
-        accountsGrowth: 101,
-        plannedRepairs: 10,
-        ongoingRepairs: 18,
-        revenue: 2391.21,
-        revenueLastMonth: 2391.21,
-        bookingStatus: [
-          { label: "Geplande boekingen", amount: 57, color: "#d9ff72" },
-          { label: "Geannuleerde boekingen", amount: 41, color: "#ff7272" },
-          { label: "Succesvolle boekingen", amount: 181, color: "#40f1b6" }
-        ],
-        monthlyBookings: [
-          { label: "Jan 2025", value: 45, color: "#3b82f6" },
-          { label: "Feb 2025", value: 32, color: "#3b82f6" },
-          { label: "Mar 2025", value: 68, color: "#3b82f6" },
-          { label: "Apr 2025", value: 95, color: "#3b82f6" },
-          { label: "Mei 2025", value: 52, color: "#3b82f6" },
-          { label: "Jun 2025", value: 0, color: "#3b82f6" },
-          { label: "Jul 2025", value: 0, color: "#3b82f6" },
-          { label: "Aug 2025", value: 0, color: "#3b82f6" },
-          { label: "Sep 2025", value: 0, color: "#3b82f6" },
-          { label: "Okt 2025", value: 0, color: "#3b82f6" },
-          { label: "Nov 2025", value: 0, color: "#3b82f6" },
-          { label: "Dec 2025", value: 0, color: "#3b82f6" }
-        ],
-        latestBookings: [
-          {
-        id: 1,
-        guestName: "Jayleno van der veen",
-        status: "Terugbetaling gestart",
-        date: "26 april 2026",
-        initials: "JA"
-          }
-        ],
-        progressMetrics: [
-          {
-        id: 1,
-        label: "Lodge Bezetting",
-        value: 75,
-        max: 100,
-        color: "#10b981",
-        info: "75 van 100 lodges bezet"
-          },
-          {
-        id: 2,
-        label: "Klanttevredenheid",
-        value: 92,
-        max: 100,
-        color: "#3b82f6",
-        info: "Gemiddelde score: 4.6/5"
-          },
-          {
-        id: 3,
-        label: "Maandelijkse Target",
-        value: 68,
-        max: 100,
-        color: "#f59e0b",
-        info: "€68.000 van €100.000"
-          },
-          {
-        id: 4,
-        label: "Onderhoud Compleet",
-        value: 45,
-        max: 100,
-        color: "#ec4899",
-        info: "9 van 20 taken voltooid"
-          }
-        ]
-      };
+      const response = await apiCall("getmanagerdashboardinfo", {});
+
+      if (!response.isSuccess) return;
+
+      const data = response.data;
 
       setDashboardData({
-        bookingsToday: mockData.bookingsToday,
-        bookingsLastMonth: mockData.bookingsLastMonth,
-        registeredAccounts: mockData.registeredAccounts,
-        accountsGrowth: mockData.accountsGrowth,
-        plannedRepairs: mockData.plannedRepairs,
-        ongoingRepairs: mockData.ongoingRepairs,
-        revenue: mockData.revenue,
-        revenueLastMonth: mockData.revenueLastMonth,
+        bookingsToday: data.bookingsToday,
+        bookingsLastMonth: data.bookingsLastMonth,
+        registeredAccounts: data.registeredAccounts,
+        accountsGrowth: data.accountsGrowth,
+        plannedRepairs: 0,
+        ongoingRepairs: 0,
+        revenue: data.revenue,
+        revenueLastMonth: data.revenueLastMonth,
+        Repairs: data.Repairs,
+        totalLodges: data.totalLodges,
       });
 
-      setBookingStatusData(mockData.bookingStatus);
-      setMonthlyBookingsData(mockData.monthlyBookings);
-      setLatestBookings(mockData.latestBookings);
-      setProgressMetrics(mockData.progressMetrics);
+      const statusColors = { geannuleerd: "#ff7272", bevestigd: "#40f1b6", gepland: "#d9ff72" };
+      setBookingStatusData(
+        data.bookingStatus.map(s => ({
+          label: s.status,
+          amount: parseInt(s.total),
+          color: statusColors[s.status] ?? "#3b82f6"
+        }))
+      );
+
+      setMonthlyBookingsData(data.monthlyBookings);
+      setLatestBookings(data.latestBookings);
+
+      setProgressMetrics([
+        {
+          id: 1, label: "Lodge Bezetting",
+          value: data.lodgeOccupancy, max: 100, color: "#10b981",
+          info: `${data.occupiedLodges} van ${data.totalLodges} lodges bezet`
+        },
+        {
+          id: 2, label: "Klanttevredenheid",
+          value: 92, max: 100, color: "#3b82f6",
+          info: "Gemiddelde score: 4.6/5"
+        },
+        {
+          id: 3, label: "Maandelijkse Target",
+          value: Math.min(Math.round((data.revenue / 100000) * 100), 100),
+          max: 100, color: "#f59e0b",
+          info: `€${data.revenue.toFixed(0)} van €100.000`
+        },
+        {
+          id: 4, label: "Onderhoud Compleet",
+          value: 45, max: 100, color: "#ec4899",
+          info: "9 van 20 taken voltooid"
+        }
+      ]);
 
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
@@ -147,10 +114,8 @@ const ManagerDashboard = () => {
 
   return (
     <div className="manager-dashboard page-enter">
-      {/* Stats Cards Row */}
       <div className="dashboard-stats-row">
-        {/* Boekingen vandaag */}
-        <div className="stat-card card-entrance hover-lift">
+        <div className="stat-card card-entrance hover-glow">
           <div className="stat-icon">
             <img src={Icons.managerCalendar} alt="Boekingen vandaag" width="32" height="32" />
           </div>
@@ -158,62 +123,59 @@ const ManagerDashboard = () => {
             <div className="stat-value scale-in">{dashboardData.bookingsToday}</div>
             <div className="stat-label">Boekingen vandaag</div>
             <ProgressBar
-                value={dashboardData.bookingsLastMonth}
-                max={dashboardData.bookingsToday}
-                height="10px"
-                color={"#2a4bb9"}
-                secondColor={"#7f97c9"}
-              />
+              value={dashboardData.bookingsLastMonth}
+              max={dashboardData.bookingsToday}
+              height="10px"
+              color={"#2a4bb9"}
+              secondColor={"#7f97c9"}
+            />
             <div className="stat-sublabel">
               Ingecheckte boekingen: <span className="stat-highlight">{dashboardData.bookingsLastMonth}</span>
             </div>
           </div>
         </div>
 
-        {/* Geregistreerde accounts */}
-        <div className="stat-card card-entrance-delayed hover-lift">
+        <div className="stat-card card-entrance-delayed hover-glow">
           <div className="stat-icon stat-icon-green">
             <img src={Icons.managerUser} alt="Geregistreerde accounts" width="32" height="32" />
           </div>
           <div className="stat-content">
             <div className="stat-value scale-in-bounce">{dashboardData.registeredAccounts}</div>
             <div className="stat-label">Geregistreerde accounts</div>
-              <ProgressBar
-                value={dashboardData.accountsGrowth}
-                max={dashboardData.registeredAccounts}
-                height="10px"
-                color={"#4caf50"}
-                secondColor={"#81c784"}
-              />
+            <ProgressBar
+              value={dashboardData.accountsGrowth}
+              max={dashboardData.registeredAccounts}
+              height="10px"
+              color={"#4caf50"}
+              secondColor={"#81c784"}
+            />
             <div className="stat-sublabel">
               +{dashboardData.accountsGrowth} in de afgelopen 2 maanden
             </div>
           </div>
         </div>
 
-        {/* Reparaties gepland */}
-          <div className="stat-card card-entrance-delayed hover-lift" style={{ animationDelay: "0.4s" }}>
-            <div className="stat-icon stat-icon-orange shimmer">
-              <img src={Icons.managerWrench} alt="Reparaties" width="32" height="32" />
-            </div>
-            <div className="stat-content">
-              <div className="stat-value scale-in">{dashboardData.plannedRepairs}</div>
-              <div className="stat-label">Reparaties gepland</div>
-                <ProgressBar
-            value={dashboardData.ongoingRepairs}
-            max={dashboardData.plannedRepairs}
-            height="10px"
-            color={"#ff9800"}
-            secondColor={"#ffb74d"}
-                />
-              <div className="stat-sublabel">
-                Reparaties in gang als: <span className="stat-highlight-orange">{dashboardData.ongoingRepairs}</span>
-              </div>
+        <div className="stat-card card-entrance-delayed hover-glow" style={{ animationDelay: "0.4s" }}>
+          <div className="stat-icon stat-icon-orange shimmer">
+            <img src={Icons.managerWrench} alt="Reparaties" width="32" height="32" />
+          </div>
+          <div className="stat-content">
+            <div className="stat-value scale-in">{dashboardData.Repairs}</div>
+            <div className="stat-label">Reparaties gepland</div>
+            <ProgressBar
+              value={dashboardData.Repairs}
+              max={dashboardData.totalLodges}
+              height="10px"
+              color={"#ff9800"}
+              secondColor={"#ffb74d"}
+            />
+            <div className="stat-sublabel">
+              Van totale  <span className="stat-highlight-orange">{dashboardData.totalLodges}</span> lodges
             </div>
           </div>
+        </div>
 
-          {/* Omzet deze maand */}
-        <div className="stat-card card-entrance-delayed hover-lift hover-glow" style={{ animationDelay: "0.6s" }}>
+        <div className="stat-card card-entrance-delayed hover-glow hover-glow" style={{ animationDelay: "0.6s" }}>
           <div className="stat-icon stat-icon-currency pulse">
             <img src={Icons.managerEuro} alt="Omzet" width="32" height="32" />
           </div>
@@ -229,9 +191,8 @@ const ManagerDashboard = () => {
         </div>
       </div>
 
-      {/* Piechart part */}
       <div className="dashboard-charts-row">
-        <div className="chart-card hover-lift">
+        <div className="chart-card hover-glow">
           <div className="chart-header">
             <div className="legend-inline fade-in-delayed">
               {bookingStatusData.map((item, index) => (
@@ -244,14 +205,14 @@ const ManagerDashboard = () => {
           </div>
           <div className="chart-content">
             <PieChart
-              items={bookingStatusData} 
-              size={280} 
+              items={bookingStatusData}
+              size={280}
               legendpos="none"
             />
           </div>
         </div>
 
-        <div className="latest-bookings-card hover-lift" style={{ animationDelay: "0.2s" }}>
+        <div className="latest-bookings-card hover-glow" style={{ animationDelay: "0.2s" }}>
           <h3 className="card-title  mb-2">Laatste boekigen</h3>
           <div className="bookings-list">
             {latestBookings.length > 0 ? (
@@ -272,10 +233,10 @@ const ManagerDashboard = () => {
         </div>
       </div>
 
-      <div className="dashboard-bar-chart hover-lift">
+      <div className="dashboard-bar-chart hover-glow">
         <h3 className="chart-section-title fade-in-delayed">Boekingen 12 maand overzicht</h3>
         <BarChart
-          data={monthlyBookingsData} 
+          data={monthlyBookingsData}
           height="350px"
         />
       </div>

@@ -32,7 +32,7 @@
 }
 
 .nav-dash-link {
-  color: #ffffff !important;
+  color: #ffffff;
   text-decoration: none;
   font-size: 1.1rem;
   font-weight: 500;
@@ -61,6 +61,15 @@
 
 .nav-dash-link.active {
   color: #ffffff;
+}
+
+.nav-dash-selected {
+  color: #ffffff !important;
+  width: 100%;
+}
+
+.nav-dash-selected::after {
+  width: 100%;
 }
 
 .navbar-dash-login-btn {
@@ -138,11 +147,13 @@
   font-weight: 500;
   transition: background 0.3s ease, color 0.3s ease;
   border-bottom: #575757 1px solid;
+  
 }
 
 .nav-dropdown-item:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
+  
 }
 @keyframes dropdownFadeIn {
   from {
@@ -168,4 +179,6 @@
 
 .navbar-nav {
   position: relative; 
+  
 }
+
