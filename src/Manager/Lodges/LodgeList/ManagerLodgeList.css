@@ -1,0 +1,300 @@
+.lodge-list-page {
+  padding: 2rem;
+  background-color: var(--background);
+  min-height: 100vh;
+  color: var(--text);
+  animation: pageEnter 0.6s ease both;
+}
+
+.lodge-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.lodge-list-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+.lodge-list-subtitle {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.25rem;
+}
+
+.lodge-list-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.lodge-list-create-btn:hover {
+  background-color: #b45309;
+  transform: translateY(-2px);
+}
+
+.lodge-list-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.lodge-list-search {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--inputborder);
+  background-color: var(--inputbackground);
+  color: var(--inputtext);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lodge-list-search:focus {
+  border-color: var(--orange);
+}
+
+.lodge-list-filter-select {
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--inputborder);
+  background-color: var(--inputbackground);
+  color: var(--inputtext);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.lodge-list-filter-select:focus {
+  border-color: var(--orange);
+}
+
+.lodge-list-count {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 1.25rem;
+}
+
+.lodge-list-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.lodge-card {
+  background-color: var(--card);
+  border-radius: 16px;
+  border: 1px solid var(--cardborder);
+  box-shadow: 0 4px 16px var(--shadow);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: fadeSlideUp 0.5s ease both;
+  display: flex;
+  flex-direction: column;
+}
+
+.lodge-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.lodge-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+.lodge-card-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: var(--lightcard);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.lodge-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.lodge-card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.lodge-card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.lodge-status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+}
+
+.lodge-status-badge.beschikbaar {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.lodge-status-badge.bezet {
+  background-color: rgba(255, 76, 76, 0.15);
+  color: var(--red);
+  border: 1px solid rgba(255, 76, 76, 0.3);
+}
+
+.lodge-status-badge.onderhoud {
+  background-color: rgba(217, 119, 6, 0.15);
+  color: var(--orange);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.lodge-card-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 1rem;
+}
+
+.lodge-card-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--orangelight);
+  margin-bottom: 1rem;
+}
+
+.lodge-card-price-sub {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+  margin-left: 0.25rem;
+}
+
+.lodge-card-visibility {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.lodge-visibility-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.lodge-visibility-dot.visible {
+  background-color: var(--green);
+}
+
+.lodge-visibility-dot.hidden {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.lodge-card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.lodge-card-edit-btn {
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: 10px;
+  border: 1px solid var(--orange);
+  background-color: transparent;
+  color: var(--orange);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.lodge-card-edit-btn:hover {
+  background-color: var(--orange);
+  color: #fff;
+}
+
+.lodge-card-view-btn {
+  flex: 1;
+  padding: 0.65rem;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--orange);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lodge-card-view-btn:hover {
+  background-color: #b45309;
+}
+
+.lodge-list-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.lodge-list-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1100px) {
+  .lodge-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .lodge-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .lodge-list-grid {
+    grid-template-columns: 1fr;
+  }
+}

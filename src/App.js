@@ -20,11 +20,12 @@ import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
 import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 import ManagerDashboard from "./Manager/Dashboard/Dashboard";
-import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
 import ManagerUsers from "./Manager/Users/ManagerUsers";
 import NotFound from "./404/404";
 import AccountOverview from "./Manager/Users/Userinfo/AccountOverview";
 import BookingCalendar from "./Manager/Users/BookingCalendar/BookingCalendar";
+import ManagerLodgeList from "./Manager/Lodges/LodgeList/ManagerLodgeList";
+import ManagerLodgeOverview from "./Manager/Lodges/LodgeOverview/ManagerLodgeOverview";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -44,7 +45,7 @@ function AppContent() {
   const dashboardUrls = [
     "/dashboard",
     "/dashboard/lodges",
-    "/dashboard/lodges/:id",
+    "/dashboard/lodges/nieuw",
     "/dashboard/gebruikers",
     "/dashboard/gebruikers/",
     "/dashboard/",
@@ -138,7 +139,7 @@ function AppContent() {
       }
 
       <div className="content-wrapper">
-          {/* Main content area with dashboard navbar inside */}
+        {/* Main content area with dashboard navbar inside */}
         <main
           className={`main-content ${isLoggedIn && isDashboard ? "dashboard-main-content" : ""
             }`}
@@ -180,8 +181,9 @@ function AppContent() {
                 {currentRole === 3 && (
                   <>
                     <Route path="/dashboard" element={<ManagerDashboard />} />
-                    <Route path="/dashboard/lodges" element={<ManagerLodgeDetails />} />
-                    <Route path="/dashboard/lodges/:id" element={<ManagerLodgeDetails />} />
+                    <Route path="/dashboard/lodges" element={<ManagerLodgeList />} />   
+                    <Route path="/dashboard/lodges/nieuw" element={<ManagerLodgeOverview />} />  
+                    <Route path="/dashboard/lodges/:id" element={<ManagerLodgeOverview />} />
                     <Route path="/dashboard/gebruikers" element={<ManagerUsers />} />
                     <Route path="/dashboard/gebruikers/:id" element={<AccountOverview />} />
                     <Route path="/dashboard/boekingen" element={<BookingCalendar />} />
