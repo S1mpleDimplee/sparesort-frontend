@@ -1,0 +1,157 @@
+.place-booking-page {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.place-booking-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.place-booking-card {
+  background: var(--card);
+  border: 1px solid var(--cardborder);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.place-booking-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.place-booking-group label {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.place-booking-input {
+  background: var(--inputbackground);
+  border: 1px solid var(--cardborder);
+  border-radius: 8px;
+  color: var(--inputtext);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.place-booking-input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.place-booking-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.place-booking-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.place-booking-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--lightcard);
+  border: 1px solid var(--cardborder);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.place-booking-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.place-booking-btn {
+  background: var(--orange);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.place-booking-btn:hover {
+  background: var(--orangelight);
+}
+
+.place-booking-user-search {
+  position: relative;
+}
+
+.place-booking-user-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--cardborder);
+  border-radius: 8px;
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.place-booking-user-option {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.place-booking-user-option:hover {
+  background: var(--lightcard);
+}
+
+.place-booking-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.place-booking-user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.place-booking-user-email {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.place-booking-selected-user {
+  color: var(--green);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
