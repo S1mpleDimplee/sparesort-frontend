@@ -20,9 +20,12 @@ import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
 import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 import ManagerDashboard from "./Manager/Dashboard/Dashboard";
-import ManagerLodgeDetails from "./Manager/Lodges/ManagerLodgeDetails";
 import ManagerUsers from "./Manager/Users/ManagerUsers";
 import NotFound from "./404/404";
+import AccountOverview from "./Manager/Users/Userinfo/AccountOverview";
+import BookingCalendar from "./Manager/Users/BookingCalendar/BookingCalendar";
+import ManagerLodgeList from "./Manager/Lodges/LodgeList/ManagerLodgeList";
+import ManagerLodgeOverview from "./Manager/Lodges/LodgeOverview/ManagerLodgeOverview";
 
 // import DashboardKlant from "./apklaarfiles/CustomerDashboard/Dashboard/Dashboard";
 // import MechanicDashboard from "./apklaarfiles/MechanicDashboard/Dashboard/Dashboard";
@@ -42,9 +45,11 @@ function AppContent() {
   const dashboardUrls = [
     "/dashboard",
     "/dashboard/lodges",
-    "/dashboard/lodges/:id",
-    "/dashboard/users",
-
+    "/dashboard/lodges/nieuw",
+    "/dashboard/gebruikers",
+    "/dashboard/gebruikers/",
+    "/dashboard/",
+    "/dashboard/boekingen"
   ];
 
   const nonLoggedInUrls = [
@@ -134,7 +139,7 @@ function AppContent() {
       }
 
       <div className="content-wrapper">
-          {/* Main content area with dashboard navbar inside */}
+        {/* Main content area with dashboard navbar inside */}
         <main
           className={`main-content ${isLoggedIn && isDashboard ? "dashboard-main-content" : ""
             }`}
@@ -150,15 +155,15 @@ function AppContent() {
 
             {isLoggedIn && (
               <>
-                {/* Gast Dashboard routes (role 1) */}
-                {currentRole === 1 && (
+                {/* Gast Dashboard routes (role 0) */}
+                {currentRole === 0 && (
                   <>
                     {/* <Route path="/mijnboekingen" element={<DashboardKlant />} /> */}
                   </>
                 )}
 
-                {/* Balimedewerker Dashboard routes (role 2) */}
-                {currentRole === 2 && (
+                {/* Balimedewerker Dashboard routes (role 1) */}
+                {currentRole === 1 && (
                   <>
                     <Route path="/dashboard" element={<BalieDashboard />} />
                     <Route path="/dashboard/lodges" element={<BalieLodges />} />
@@ -166,19 +171,22 @@ function AppContent() {
                   </>
                 )}
 
-                {/* Monteur Dashboard routes (role 3) */}
-                {currentRole === 3 && (
+                {/* Monteur Dashboard routes (role 2) */}
+                {currentRole === 2 && (
                   <>
                     {/* <Route path="/dashboard" element={<ManagerDashboard />} /> */}
                   </>
                 )}
-                {/* Manager Dashboard routes (role 4) */}
-                {currentRole === 4 && (
+                {/* Manager Dashboard routes (role 3) */}
+                {currentRole === 3 && (
                   <>
                     <Route path="/dashboard" element={<ManagerDashboard />} />
-                    <Route path="/dashboard/lodges" element={<ManagerLodgeDetails />} />
-                    <Route path="/dashboard/lodges/:id" element={<ManagerLodgeDetails />} />
-                    <Route path="/dashboard/users" element={<ManagerUsers />} />
+                    <Route path="/dashboard/lodges" element={<ManagerLodgeList />} />   
+                    <Route path="/dashboard/lodges/nieuw" element={<ManagerLodgeOverview />} />  
+                    <Route path="/dashboard/lodges/:id" element={<ManagerLodgeOverview />} />
+                    <Route path="/dashboard/gebruikers" element={<ManagerUsers />} />
+                    <Route path="/dashboard/gebruikers/:id" element={<AccountOverview />} />
+                    <Route path="/dashboard/boekingen" element={<BookingCalendar />} />
                   </>
                 )}
               </>

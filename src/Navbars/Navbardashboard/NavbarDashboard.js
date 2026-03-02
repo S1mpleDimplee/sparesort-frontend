@@ -118,7 +118,7 @@ const NavbarDashboard = () => {
       {
         id: "gebruikers",
         label: "Gebruikers",
-        path: "/dashboard/users",
+        path: "/dashboard/gebruikers",
         description: "Personeel beheer",
       },
       {

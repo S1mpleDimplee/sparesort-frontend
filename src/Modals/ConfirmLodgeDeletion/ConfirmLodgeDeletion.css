@@ -1,0 +1,305 @@
+.addcar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 50;
+}
+
+.addcar-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    width: 95vw;
+    max-width: 1000px;
+    padding: 3rem;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.addcar-close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addcar-close-btn:hover {
+    color: #111827;
+}
+
+.addcar-title {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #111827;
+    margin-bottom: 2.5rem;
+    margin-top: 0;
+}
+
+.addcar-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+}
+
+.addcar-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.addcar-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.addcar-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.addcar-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.75rem;
+}
+
+.addcar-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #e5e7eb;
+    background: transparent;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.addcar-input:focus {
+    border-bottom-color: #0d9488;
+}
+
+.addcar-input::placeholder {
+    color: #9ca3af;
+    font-size: 1rem;
+}
+
+.addcar-side-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.addcar-section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 1rem 0;
+}
+
+.addcar-license-section {
+    /* License plate section styles */
+}
+
+.addcar-license-plate {
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.addcar-license-country {
+    background-color: #2563eb;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    max-width: 70px;
+    min-width: 50px;
+    justify-content: center;
+}
+
+.addcar-license-country:focus {
+    outline: none;
+}
+
+.addcar-license-number {
+    background-color: #fbbf24;
+    color: black;
+    padding: 1rem 1.25rem;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    min-width: 140px;
+}
+
+.addcar-image-section {
+    /* Image section styles */
+}
+
+.addcar-image-container {
+    background-color: #f3f4f6;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.addcar-image {
+    max-width: 100px;
+    max-height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.75rem;
+}
+
+.addcar-no-image-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0 0 1rem 0;
+}
+
+.addcar-file-input {
+    display: none;
+}
+
+.addcar-upload-btn {
+    background-color: #0f766e;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
+    display: inline-block;
+}
+
+.addcar-upload-btn:hover {
+    background-color: #115e59;
+}
+
+.addcar-image-preview {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.addcar-preview-image {
+    max-width: 120px;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.addcar-remove-image {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.addcar-remove-image:hover {
+    background-color: #dc2626;
+}
+
+.addcar-image-note {
+    cursor: pointer;
+}
+
+.addcar-submit-btn {
+    width: 100%;
+    background-color: #0f766e;
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 1.25rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: auto;
+}
+
+.addcar-submit-btn:hover {
+    background-color: #115e59;
+}
+
+.addcar-submit-btn:active {
+    transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .addcar-container {
+        width: 95vw;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .addcar-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .addcar-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .addcar-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .addcar-container {
+        padding: 1rem;
+    }
+
+    .addcar-license-plate {
+        width: 100%;
+    }
+
+    .addcar-license-country,
+    .addcar-license-number {
+        flex: 1;
+        justify-content: center;
+    }
+}

@@ -1,26 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './verify.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useToast } from '../../toastmessage/toastmessage';
 import apiCall from '../../Calls/calls';
 
 const Verify = () => {
+  const [searchParams] = useSearchParams();
+  const verificationcodeFromUrl = searchParams.get("verificationcode");
+  const emailFromUrl = searchParams.get("email");
+
   const [verificationCode, setVerificationCode] = useState('');
+  const [linkResult, setLinkResult] = useState(null); // null | 'loading' | { success, message }
+  const linkConfirmStarted = useRef(false);
 
   const { openToast } = useToast();
-
   const navigate = useNavigate();
 
+  const userdata = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('userdata') || 'null');
+    } catch {
+      return null;
+    }
+  })();
+  const verificationinfo = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('verificationinfo') || 'null');
+    } catch {
+      return null;
+    }
+  })();
+  const userid = userdata?.userid;
+  const name = verificationinfo?.name ?? '';
+  const email = emailFromUrl || verificationinfo?.email || '';
 
-  const email = JSON.parse(localStorage.getItem('verificationinfo')).email;
-  const userid = JSON.parse(localStorage.getItem('userdata')).userid;
-  const name = JSON.parse(localStorage.getItem('verificationinfo')).name;
+  // Als er een link met code en email is: direct bevestigen via API
+  useEffect(() => {
+    if (!verificationcodeFromUrl || !emailFromUrl || linkConfirmStarted.current) return;
+    linkConfirmStarted.current = true;
+    setLinkResult('loading');
+
+    const confirm = async () => {
+      const response = await apiCall("confirmemailwithlink", {
+        email: emailFromUrl,
+        verificationcode: verificationcodeFromUrl
+      });
+      setLinkResult({
+        success: response.isSuccess,
+        message: response.message
+      });
+      if (response.isSuccess) {
+        openToast(response.message);
+      }
+    };
+    confirm();
+  }, [verificationcodeFromUrl, emailFromUrl, openToast]);
 
   const handleCodeChange = (e) => {
-    // Only allow numbers and format as XX-XX-XX
-    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 6) {
-      // Format as XX-XX-XX
       if (value.length > 2 && value.length <= 4) {
         value = value.slice(0, 2) + '-' + value.slice(2);
       } else if (value.length > 4) {
@@ -42,29 +80,81 @@ const Verify = () => {
       navigate('/inloggen');
     } else {
       openToast(response.message);
-      return;
     }
   };
 
   const handleResendCode = () => {
-    apiCall("sendverificationcode", {
+    apiCall("sendverificationmail", {
       email: email,
-      name: name
+      name: name,
+      verificationcode: Math.floor(100000 + Math.random() * 900000).toString()
     });
-    openToast('Een nieuwe verificatiecode is verzonden naar uw e-mailadres.');
+    openToast('Een nieuwe verificatielink is verzonden naar uw e-mailadres.');
   };
+
+  const goToLogin = () => navigate('/inloggen');
+
+  // Bevestiging via link: toon alleen resultaat op het scherm
+  if (verificationcodeFromUrl && emailFromUrl) {
+    return (
+      <div className="verification-page">
+        <div className="verification-container">
+          <div className="verification-card">
+            <h2 className="verification-title">E-mail bevestigen</h2>
+            <div className="title-underline"></div>
+            <div className="verification-content">
+              {linkResult === 'loading' && (
+                <p className="verification-message">Bezig met bevestigen...</p>
+              )}
+              {linkResult && linkResult !== 'loading' && (
+                <>
+                  <p className={`result-message ${linkResult.success ? 'result-success' : 'result-error'}`}>
+                    {linkResult.message}
+                  </p>
+                  {linkResult.success && (
+                    <button onClick={goToLogin} className="verify-button">
+                      Naar inloggen
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Geen link: handmatige code-invoer (als ze net geregistreerd hebben)
+  if (!email) {
+    return (
+      <div className="verification-page">
+        <div className="verification-container">
+          <div className="verification-card">
+            <h2 className="verification-title">Verificatie</h2>
+            <div className="title-underline"></div>
+            <p className="verification-message">
+              Gebruik de link uit uw e-mail om uw adres te bevestigen. Klik in de mail op de verificatielink.
+            </p>
+            <button onClick={() => navigate('/inloggen')} className="verify-button">
+              Naar inloggen
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="verification-page">
       <div className="verification-container">
         <div className="verification-card">
-          <h2 className="verification-title">Verficatie</h2>
+          <h2 className="verification-title">Verificatie</h2>
           <div className="title-underline"></div>
 
           <div className="verification-content">
             <p className="verification-message">
-              Er is een 6-cijferige code gestuurd naar
-              voer deze in om uw e-mailadres te verifiëren.
+              Er is een 6-cijferige code gestuurd naar uw e-mail. Voer deze in, of klik op de link in de e-mail.
             </p>
             <p className="email-address">{email}</p>
 
@@ -75,18 +165,18 @@ const Verify = () => {
                 onChange={handleCodeChange}
                 placeholder="67-02-12"
                 className="code-input"
-                maxLength="8" // XX-XX-XX format
+                maxLength="8"
               />
             </div>
 
             <button onClick={handleSubmit} className="verify-button">
-              Inloggen
+              Bevestigen
             </button>
 
             <div className="verification-footer">
               <p className="resend-text">Geen code ontvangen?</p>
               <button onClick={handleResendCode} className="resend-button">
-                Code opnieuw versturen
+                Verificatielink opnieuw versturen
               </button>
             </div>
           </div>
