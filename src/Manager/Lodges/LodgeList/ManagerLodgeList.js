@@ -4,7 +4,7 @@ import "./ManagerLodgeList.css";
 import apiCall from "../../../Calls/calls";
 import { useToast } from "../../../toastmessage/toastmessage";
 
-const STATUS_LABELS = {
+const type_of_status = {
   beschikbaar: "Beschikbaar",
   bezet: "Bezet",
   onderhoud: "Onderhoud",
@@ -22,7 +22,7 @@ const LodgeCard = ({ lodge, delay, onEdit }) => (
       <div className="manager-card-top-row">
         <h3 className="manager-card-name">{lodge.name}</h3>
         <span className={`manager-status-badge ${lodge.status}`}>
-          {STATUS_LABELS[lodge.status] ?? lodge.status}
+          {type_of_status[lodge.status] ?? lodge.status}
         </span>
       </div>
 
@@ -91,7 +91,7 @@ const ManagerLodgeList = () => {
         <input
           type="text"
           className="manager-list-search"
-          placeholder="🔍  Zoek op naam..."
+          placeholder="Zoek op naam..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -118,8 +118,7 @@ const ManagerLodgeList = () => {
           ))
         ) : (
           <div className="manager-list-empty">
-            <div className="manager-list-empty-icon">🏜️</div>
-            <p>Geen lodges gevonden voor deze zoekopdracht.</p>
+            <p>Geen lodges gevonden voor deze zoekopdracht, of er zijn nog geen lodges aangemaakt.</p>
           </div>
         )}
       </div>

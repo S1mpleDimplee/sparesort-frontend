@@ -5,22 +5,22 @@ import apiCall from "../../../Calls/calls";
 import { useToast } from "../../../toastmessage/toastmessage";
 
 
-const AMENITY_COLUMNS = [
+const Voorzieningen = [
   [
-    { key: "gratisWifi", icon: "📶", text: "Gratis wifi" },
-    { key: "airco", icon: "❄️", text: "Airco" },
-    { key: "wasmachine", icon: "🧺", text: "Wasmachine" },
-    { key: "droger", icon: "👕", text: "Droger" },
+    { key: "gratisWifi", icon: "", text: "Gratis wifi" },
+    { key: "airco", icon: "", text: "Airco" },
+    { key: "wasmachine", icon: "", text: "Wasmachine" },
+    { key: "droger", icon: "", text: "Droger" },
   ],
   [
-    { key: "parkeerplaats", icon: "🚗", text: "Parkeerplaats" },
-    { key: "bbqBuitenkeuken", icon: "🍖", text: "BBQ / Buitenkeuken" },
-    { key: "televisie", icon: "📺", text: "Televisie" },
-    { key: "hottub", icon: "🛁", text: "Hottub" },
+    { key: "parkeerplaats", icon: "", text: "Parkeerplaats" },
+    { key: "bbqBuitenkeuken", icon: "", text: "BBQ / Buitenkeuken" },
+    { key: "televisie", icon: "", text: "Televisie" },
+    { key: "hottub", icon: "", text: "Hottub" },
   ],
 ];
 
-const DEFAULT_AMENITIES = {
+const Standard_Voorzieningen = {
   gratisWifi: false, parkeerplaats: false, airco: false,
   wasmachine: false, droger: false, bbqBuitenkeuken: false,
   televisie: false, hottub: false,
@@ -57,12 +57,12 @@ const ManagerLodgeOverview = () => {
   const [lodgeData, setLodgeData] = useState({
     name: "", priceRegular: "", priceWinter: "",
     visible: true, status: "beschikbaar",
-    aantalPersonen: 2, slaapkamers: 1,
+    aantalPersonen: 0, slaapkamers: 0,
   });
 
-  const [amenities, setAmenities] = useState({ ...DEFAULT_AMENITIES });
-  const [extraAmenities, setExtraAmenities] = useState([]);
-  const [newAmenity, setNewAmenity] = useState("");
+  const [voorzieningen, setVoorzieningen] = useState({ ...Standard_Voorzieningen });
+  const [extraVoorzieningen, setExtraVoorzieningen] = useState([]);
+  const [newVoorziening, setNewVoorziening] = useState("");
   const [description, setDescription] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -94,17 +94,17 @@ const ManagerLodgeOverview = () => {
 
   const updateField = (key, value) => setLodgeData((prev) => ({ ...prev, [key]: value }));
 
-  const toggleAmenity = (key) => setAmenities((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggleVoorziening = (key) => setVoorzieningen((prev) => ({ ...prev, [key]: !prev[key] }));
 
-  const addExtraAmenity = () => {
-    if (newAmenity.trim()) {
-      setExtraAmenities((prev) => [...prev, { id: Date.now(), name: newAmenity.trim() }]);
-      setNewAmenity("");
+  const addVoorziening = () => {
+    if (newVoorziening.trim()) {
+      setExtraVoorzieningen((prev) => [...prev, { id: Date.now(), name: newVoorziening.trim() }]);
+      setNewVoorziening("");
     }
   };
 
-  const removeExtraAmenity = (extraId) =>
-    setExtraAmenities((prev) => prev.filter((a) => a.id !== extraId));
+  const verwijderExtraVoorziening = (extraId) =>
+    setExtraVoorzieningen((prev) => prev.filter((a) => a.id !== extraId));
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -135,7 +135,7 @@ const ManagerLodgeOverview = () => {
 
     let response;
     if (isCreate) {
-      response = await apiCall("addlodge", { ...payload, lodge_type_id: 1 });
+      response = await apiCall("addlodge", { ...payload });
     } else {
       response = await apiCall("updatelodge", { ...payload, id });
     }
@@ -148,12 +148,15 @@ const ManagerLodgeOverview = () => {
 
 
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm("Weet je zeker dat je deze lodge wilt verwijderen?")) {
-      console.log("Verwijder lodge id:", id);
-      navigate("/dashboard/lodges");
+      const response = await apiCall("deletelodge", { id });
+      openToast(response.message);
+      if (response.isSuccess) {
+        setTimeout(() => navigate("/dashboard/lodges"), 500);
+      } 
     }
-  };
+  }
 
   return (
     <div className="lodge-details-page">
@@ -163,7 +166,7 @@ const ManagerLodgeOverview = () => {
 
       <div className="lodge-details-page-header">
         <h1 className="lodge-details-page-title">
-          {isCreate ? "➕ Nieuwe lodge aanmaken" : `✏️ ${lodgeData.name || "Lodge bewerken"}`}
+          {isCreate ? "Nieuwe lodge aanmaken" : `${lodgeData.name || "Lodge bewerken"}`}
         </h1>
       </div>
 
@@ -186,7 +189,7 @@ const ManagerLodgeOverview = () => {
               onChange={handleImageChange}
             />
             <button className="lodge-details-image-btn" onClick={() => fileInputRef.current.click()}>
-              📷 Afbeelding wijzigen
+              Afbeelding wijzigen
             </button>
           </div>
 
@@ -224,7 +227,6 @@ const ManagerLodgeOverview = () => {
             </div>
           </div>
 
-          {/* Status / visibility / counters */}
           <div>
             <div className="lodge-details-status-row">
               <span className="lodge-details-status-label">Zichtbaar voor klanten</span>
@@ -265,45 +267,45 @@ const ManagerLodgeOverview = () => {
         <div className="lodge-details-amenities-grid">
           <div>
             <h4 className="lodge-details-amenities-col-title">Standaard</h4>
-            {AMENITY_COLUMNS[0].map((item) => (
-              <div key={item.key} className="lodge-details-amenity-item">
+            {Voorzieningen[0].map((item) => (
+              <div key={item.key} className="lodge-details-voorziening-item">
                 <span>{item.icon}</span>
-                <span className="lodge-details-amenity-text">{item.text}</span>
-                <input type="checkbox" className="lodge-details-amenity-checkbox"
-                  checked={amenities[item.key]} onChange={() => toggleAmenity(item.key)} />
+                <span className="lodge-details-voorziening-text">{item.text}</span>
+                <input type="checkbox" className="lodge-details-voorziening-checkbox"
+                  checked={voorzieningen[item.key]} onChange={() => toggleVoorziening(item.key)} />
               </div>
             ))}
           </div>
           <div>
-            <h4 className="lodge-details-amenities-col-title">&nbsp;</h4>
-            {AMENITY_COLUMNS[1].map((item) => (
-              <div key={item.key} className="lodge-details-amenity-item">
+            <h4 className="lodge-details-amenities-col-title"></h4>
+            {Voorzieningen[1].map((item) => (
+              <div key={item.key} className="lodge-details-voorziening-item">
                 <span>{item.icon}</span>
-                <span className="lodge-details-amenity-text">{item.text}</span>
-                <input type="checkbox" className="lodge-details-amenity-checkbox"
-                  checked={amenities[item.key]} onChange={() => toggleAmenity(item.key)} />
+                <span className="lodge-details-voorziening-text">{item.text}</span>
+                <input type="checkbox" className="lodge-details-voorziening-checkbox"
+                  checked={voorzieningen[item.key]} onChange={() => toggleVoorziening(item.key)} />
               </div>
             ))}
           </div>
           <div>
             <h4 className="lodge-details-amenities-col-title">Extra voorzieningen</h4>
-            {extraAmenities.map((a) => (
-              <div key={a.id} className="lodge-details-amenity-item">
+            {extraVoorzieningen.map((a) => (
+              <div key={a.id} className="lodge-details-voorziening-item">
                 <span>📋</span>
-                <span className="lodge-details-amenity-text">{a.name}</span>
-                <button className="lodge-details-remove-btn" onClick={() => removeExtraAmenity(a.id)}>✖</button>
+                <span className="lodge-details-voorziening-text">{a.name}</span>
+                <button className="lodge-details-remove-btn" onClick={() => verwijderExtraVoorziening(a.id)}>✖</button>
               </div>
             ))}
-            <div className="lodge-details-add-amenity-row">
+            <div className="lodge-details-add-voorziening-row">
               <input
                 type="text"
                 className="lodge-details-add-input"
                 placeholder="Nieuwe voorziening..."
-                value={newAmenity}
-                onChange={(e) => setNewAmenity(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && addExtraAmenity()}
+                value={newVoorziening}
+                onChange={(e) => setNewVoorziening(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && addVoorziening()}
               />
-              <button className="lodge-details-add-btn" onClick={addExtraAmenity}>+</button>
+              <button className="lodge-details-add-btn" onClick={addVoorziening}>+</button>
             </div>
           </div>
         </div>
@@ -311,7 +313,7 @@ const ManagerLodgeOverview = () => {
 
       <div className="lodge-details-actions">
         {!isCreate && (
-          <button className="lodge-details-delete-btn" onClick={handleDelete}>🗑 Verwijderen</button>
+          <button className="lodge-details-delete-btn" onClick={handleDelete}>Verwijderen</button>
         )}
         <button className="lodge-details-save-btn" onClick={HandleLodgSaved}>
           {isCreate ? "✓ Lodge aanmaken" : "✓ Wijzigingen opslaan"}

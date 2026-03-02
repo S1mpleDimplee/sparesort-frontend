@@ -282,7 +282,7 @@
   min-height: 1.2em;
 }
 
-.lodge-details-amenity-item {
+.lodge-details-voorziening-item {
   display: flex;
   align-items: center;
   gap: 0.65rem;
@@ -290,13 +290,13 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.lodge-details-amenity-text {
+.lodge-details-voorziening-text {
   flex: 1;
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.8);
 }
 
-.lodge-details-amenity-checkbox {
+.lodge-details-voorziening-checkbox {
   width: 18px;
   height: 18px;
   accent-color: var(--orange);
@@ -319,7 +319,7 @@
   opacity: 1;
 }
 
-.lodge-details-add-amenity-row {
+.lodge-details-add-voorziening-row {
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
