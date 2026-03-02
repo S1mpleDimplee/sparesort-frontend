@@ -28,6 +28,8 @@ const Register = () => {
   };
 
   const handleSubmit = async () => {
+    const verificationcode = Math.floor(100000 + Math.random() * 900000).toString();
+
     const response = await apiCall("addUser", {
       ...formData,
       phonenumber: countryCode + formData.phonenumber,
@@ -46,14 +48,11 @@ const Register = () => {
         userid: response.data.userid
       }));
 
-      apiCall("sendverificationcode", {
+      apiCall("sendverificationmail", {
         email: formData.email,
         name: formData.firstname,
+        verificationcode: verificationcode
       });
-
-      setTimeout(() => {
-        navigate("/verificatie");
-      }, 500);
     }
     else {
       openToast(response.message);
