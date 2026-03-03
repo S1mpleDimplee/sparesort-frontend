@@ -5,17 +5,24 @@ import { useNavigate } from "react-router-dom";
 
 const NavbarDashboard = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [role, setRole] = useState(4);
+  const [role, setRole] = useState(0);
+  const [selectedPage, setSelectedPage] = useState("dashboard");
+  
 
   useEffect(() => {
-    // setRole(localStorage.getItem('userRole'));
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    const currentRole = parseInt(userdata.role) || 0;
+    setRole(currentRole);
+
+    const currentPage = localStorage.getItem("currentPage") || "dashboard";
+    setSelectedPage(currentPage);
   }, []);
 
   const navigate = useNavigate();
 
   const menuItems = {
-    // Customer (role 1)
-    1: [
+    // Customer (role 0)
+    0: [
       {
         id: "dashboard",
         label: "Dashboard",
@@ -23,10 +30,10 @@ const NavbarDashboard = () => {
         description: "Overzicht van uw account",
       },
       {
-        id: "mijnauto",
-        label: "Mijn auto(s)",
-        path: "/dashboard/mijnauto",
-        description: "Voertuig informatie",
+        id: "mijnboekingen",
+        label: "Mijn boeking",
+        path: "/dashboard/mijnboekingen",
+        description: "Uw boekingsinformatie",
       },
       {
         id: "facturen",
@@ -41,8 +48,8 @@ const NavbarDashboard = () => {
         description: "Notificaties en berichten",
       },
     ],
-    // Balie (role 2)
-    2: [
+    // Balie (role 1)
+    1: [
       {
         id: "dashboard",
         label: "Dashboard",
@@ -54,8 +61,8 @@ const NavbarDashboard = () => {
         path: "/dashboard/lodges",
       },
     ],
-    // Onderhoud (role 3)
-    3: [
+    // Onderhoud (role 2)
+    2: [
       {
         id: "dashboard",
         label: "Dashboard",
@@ -87,8 +94,8 @@ const NavbarDashboard = () => {
         description: "Business intelligence",
       },
     ],
-    // Manager (role 4)
-    4: [
+    // Manager (role 3)
+    3: [
       {
         id: "dashboard",
         label: "Dashboard",
@@ -100,20 +107,6 @@ const NavbarDashboard = () => {
         label: "Lodges",
         path: "/dashboard/lodges",
         description: "Lodge beheer",
-        subitems: [
-          {
-            id: "alle-lodges",
-            label: "Alle Lodges",
-            path: "/dashboard/lodges/alle",
-            description: "Overzicht van alle lodges",
-          },
-          {
-            id: "nieuwe-lodge",
-            label: "Nieuwe Lodge",
-            path: "/dashboard/lodges/nieuw",
-            description: "Nieuwe lodge toevoegen",
-          },
-        ],
       },
       {
         id: "gebruikers",
@@ -122,10 +115,10 @@ const NavbarDashboard = () => {
         description: "Personeel beheer",
       },
       {
-        id: "afspraken",
-        label: "Afspraken",
-        path: "/dashboard/rooster",
-        description: "Alle afspraken beheren",
+        id: "Boekingen",
+        label: "Boekingen",
+        path: "/dashboard/boekingen",
+        description: "Alle boekingen beheren",
       },
     ],
   };
@@ -152,8 +145,11 @@ const NavbarDashboard = () => {
             menuItems[role].map((item) => (
               <div key={item.id} className="nav-dash-dropdown">
                 <a
-                  className="nav-dash-link"
-                  onClick={() => navigate(item.path)}
+                  className={`nav-dash-link ${selectedPage === item.id ? 'nav-dash-selected' : ''}`}
+                  onClick={() => {
+                    navigate(item.path);
+                    setSelectedPage(item.id);
+                  }}
                   onMouseEnter={() => setActiveDropdown(item.subitems ? item.id : null)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >

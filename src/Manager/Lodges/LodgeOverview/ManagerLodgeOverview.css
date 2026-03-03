@@ -118,21 +118,27 @@
   margin-bottom: 0.35rem;
 }
 
+
 .lodge-details-input {
-  width: 100%;
-  padding: 0.65rem 0.9rem;
-  border-radius: 10px;
-  border: 1px solid var(--inputborder);
+  padding: 0.8rem 1rem;
   background-color: var(--inputbackground);
+  border: 1px solid var(--cardborder);
+  border-radius: 6px;
   color: var(--inputtext);
   font-size: 0.9rem;
+  transition: all 0.3s ease;
   outline: none;
+  min-height: 44px;
   box-sizing: border-box;
-  transition: border-color 0.2s;
 }
 
 .lodge-details-input:focus {
   border-color: var(--orange);
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.1);
+}
+
+.lodge-details-input:hover {
+  border-color: var(--orangelight);
 }
 
 .lodge-details-status-row {
@@ -149,13 +155,16 @@
 }
 
 .lodge-details-status-select {
-  padding: 0.35rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid var(--inputborder);
+  padding: 0.8rem 1rem;
   background-color: var(--inputbackground);
+  border: 1px solid var(--cardborder);
+  border-radius: 6px;
   color: var(--inputtext);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
   outline: none;
+  min-height: 44px;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
@@ -252,15 +261,17 @@
   min-height: 160px;
   padding: 0.9rem;
   border-radius: 10px;
-  border: 1px solid var(--inputborder);
+  border: 1px solid var(--inputbackground);
   background-color: var(--inputbackground);
   color: var(--inputtext);
-  font-size: 0.875rem;
-  resize: vertical;
+  font-size: 0.9rem;
   outline: none;
-  box-sizing: border-box;
-  font-family: inherit;
   transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.lodge-details-textarea:hover {
+  border-color: var(--orangelight);
 }
 
 .lodge-details-textarea:focus {
@@ -329,7 +340,7 @@
   flex: 1;
   padding: 0.6rem 0.9rem;
   border-radius: 10px;
-  border: 1px solid var(--inputborder);
+  border: 1px solid var(--inputbackground);
   background-color: var(--inputbackground);
   color: var(--inputtext);
   font-size: 0.85rem;

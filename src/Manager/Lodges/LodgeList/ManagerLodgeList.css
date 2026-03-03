@@ -59,7 +59,7 @@
   min-width: 200px;
   padding: 0.65rem 1rem;
   border-radius: 10px;
-  border: 1px solid var(--inputborder);
+  border: 1px solid var(--inputbackground);
   background-color: var(--inputbackground);
   color: var(--inputtext);
   font-size: 0.9rem;
@@ -74,7 +74,7 @@
 .manager-list-filter-select {
   padding: 0.65rem 1rem;
   border-radius: 10px;
-  border: 1px solid var(--inputborder);
+  border: 1px solid var(--inputbackground);
   background-color: var(--inputbackground);
   color: var(--inputtext);
   font-size: 0.9rem;
