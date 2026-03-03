@@ -135,7 +135,7 @@ const ManagerLodgeOverview = () => {
 
     let response;
     if (isCreate) {
-      response = await apiCall("addlodge", { ...payload });
+      response = await apiCall("addlodge", { ...payload, lodge_type_id: 1 });
     } else {
       response = await apiCall("updatelodge", { ...payload, id });
     }
