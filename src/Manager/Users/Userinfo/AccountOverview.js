@@ -2,30 +2,19 @@ import React, { useState, useEffect } from "react";
 import "./AccountOverview.css";
 import apiCall from "../../../Calls/calls";
 import { useToast } from "../../../toastmessage/toastmessage";
+import { useNavigate } from "react-router-dom";
 
 const AccountOverview = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const [userData, setUserData] = useState({
-    email: "",
-    isVerified: false,
-    firstname: "",
-    addition: "",
-    lastname: "",
-    country: "",
-    websiteLanguage: "",
-    city: "",
-    postalcode: "",
-    streetname: "",
-    housenumber: "",
-    housenumberAddition: "",
-    registrationDates: ["1 januari 2023", "15 maart 2024"],
+    id: "", name: "", email: "", phonenumber: "",
+    role: "0", email_verified: 0, created_at: "",
+    street: "", housenumber: "", addition: "", zipcode: "", city: "",
   });
-  const [editedUserData, setEditedUserData] = useState({ ...userData });
 
   const { openToast } = useToast();
-
-    
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserData();
@@ -36,295 +25,240 @@ const AccountOverview = () => {
     const userid = JSON.parse(localStorage.getItem("selectedUserId")) || 1;
     try {
       const response = await apiCall("getuserdata", { userid });
-
       if (response.isSuccess) {
-        const data = response.data;
-        setUserData({ ...data, registrationDates: ["1 januari 2023", "15 maart 2024"] });
-        setEditedUserData({ ...data, registrationDates: ["1 januari 2023", "15 maart 2024"] });
-        console.log("Fetched user data:", data);
+        setUserData(response.data);
       } else {
         openToast(response.message);
       }
-
-      
     } catch (error) {
-      console.error("Error fetching user data:", error);
-      openToast("Fout bij het ophalen van gebruikersgegevens. Probeer het later opnieuw.");
+      openToast(error.message || "Er is een fout opgetreden bij het laden van de gebruikersgegevens.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleInputChange = (field, value) => {
-    setUserData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setUserData((prev) => ({ ...prev, [field]: value }));
     setHasChanges(true);
   };
 
   const handleSaveChanges = async () => {
     setIsLoading(true);
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Saving user data:", userData);
+    const response = await apiCall("updateuserdata", userData);
+    openToast(response.message);
+    if (response.isSuccess) {
       setHasChanges(false);
-    } catch (error) {
-      console.error("Error saving user data:", error);
-    } finally {
-      setIsLoading(false);
     }
+    setIsLoading(false);
   };
 
   const handleCancel = () => {
+    fetchUserData();
     setHasChanges(false);
   };
 
-  const handleDeleteAccount = () => {
-    const confirmed = window.confirm(
-      "Weet u zeker dat u uw account wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
-    );
-    if (confirmed) {
-      console.log("Account deletion requested");
+  const handleDeleteAccount = async () => {
+    if (window.confirm("Weet u zeker dat u dit account wilt verwijderen?")) {
+      const response = await apiCall("deleteuser", { userid: userData.id });
+      openToast(response.message);
+      if (response.isSuccess) {
+        navigate("/dashboard/gebruikers");
+      }
     }
   };
 
-  const getInitials = (firstName, lastName) => {
-    const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
-    const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
-    return firstInitial + lastInitial || "JA";
+  const getInitials = () => {
+    if (userData.name) {
+      const parts = userData.name.split(" ");
+      return (parts[0]?.[0] || "") + (parts[parts.length - 1]?.[0] || "");
+    }
+    return (userData.email?.[0] || "") + (userData.email?.[1] || "");
+  };
+
+  const getRoleLabel = (role) => {
+    switch (String(role)) {
+      case "1": return "Balimedewerker";
+      case "2": return "Monteur";
+      case "3": return "Manager";
+      default: return "Gast";
+    }
   };
 
   return (
     <div className="manage-account-overview page-enter">
       <div className="manage-account-container">
-        {/* Main Content Grid */}
+        <button className="lodge-details-back-btn" onClick={() => navigate(-1)}>
+          ← Terug naar overzicht
+        </button>
         <div className="manage-account-content-grid">
-          {/* Left Section - Profile + Form */}
+
+
           <div className="manage-account-left-section card">
-            {/* Header */}
             <div className="manage-account-header">
-              <h1 className="manage-account-title fade-in">
-                Account overzicht
-              </h1>
-              <p className="manage-account-subtitle fade-in-delayed">
-                Gast account
-              </p>
+              <h1 className="manage-account-title fade-in">Account overzicht</h1>
+              <p className="manage-account-subtitle fade-in-delayed">{getRoleLabel(userData.role)}</p>
             </div>
 
-            {/* Profile Section */}
             <div className="manage-account-profile-section card-entrance">
               <div className="manage-account-profile-avatar hover-scale">
-                {getInitials(userData.voornaam, userData.achternaam)}
+                {getInitials().toUpperCase()}
               </div>
               <div className="manage-account-profile-info">
-                <div className="manage-account-profile-email">
-                  {userData.email}
-                </div>
+                <div className="manage-account-profile-email">{userData.email}</div>
                 <div className="manage-account-profile-status">
-                  {userData.isVerified ? (
-                    <span className="manage-account-status-verified">
-                      <span className="manage-account-status-icon">✓</span>
-                      Geverifieerd
-                    </span>
+                  {userData.email_verified == 1 ? (
+                    <span className="manage-account-status-verified">✓ Geverifieerd</span>
                   ) : (
-                    <span className="manage-account-status-unverified">
-                      <span className="manage-account-status-icon">!</span>
-                      Niet geverifieerd
-                    </span>
+                    <span className="manage-account-status-unverified">! Niet geverifieerd</span>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Form Content Split */}
             <div className="manage-account-form-content">
-              {/* Left Content */}
               <div className="manage-account-content-left">
                 <div className="manage-account-form-column">
                   <div className="manage-account-form-group">
-                    <label>Voornaam</label>
+                    <label>Naam</label>
                     <input
                       type="text"
-                      value={userData.firstname}
-                      onChange={(e) =>
-                        handleInputChange("firstname", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      value={userData.name || ""}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      className="manage-account-form-input" />
                   </div>
 
                   <div className="manage-account-form-group">
-                    <label>Tussenvoegsel</label>
+                    <label>Email</label>
                     <input
                       type="text"
-                      value={userData.addition}
-                      onChange={(e) =>
-                        handleInputChange("addition", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      value={userData.email || ""}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      className="manage-account-form-input" />
                   </div>
 
                   <div className="manage-account-form-group">
-                    <label>Achternaam</label>
+                    <label>Telefoonnummer</label>
                     <input
-                      type="text"
-                      value={userData.lastname}
-                      onChange={(e) =>
-                        handleInputChange("achternaam", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      type="text" value={userData.phonenumber || ""}
+                      onChange={(e) => handleInputChange("phonenumber", e.target.value)}
+                      className="manage-account-form-input" />
                   </div>
+
+                  <div className="manage-account-form-group">
+                    <label>Role</label>
+                    <select
+                      value={userData.role || "0"}
+                      onChange={(e) => handleInputChange("role", e.target.value)}
+                      className="manage-account-form-input">
+                      <option value="0">Gast</option>
+                      <option value="1">Balimedewerker</option>
+                      <option value="2">Monteur</option>
+                      <option value="3">Manager</option>
+                    </select>
+                  </div>
+
+                  <div className="manage-account-form-group">
+                    <label>Status</label>
+                    <select
+                      value={userData.email_verified || 0}
+                      onChange={(e) => handleInputChange("email_verified", e.target.value)}
+                      className="manage-account-form-input">
+                      <option value="1">Actief</option>
+                      <option value="0">Inactief</option>
+                    </select>
+                  </div>
+
                 </div>
               </div>
 
-              {/* Right Content */}
               <div className="manage-account-content-right">
                 <div className="manage-account-form-column">
-                  <div className="manage-account-form-row-two">
-                    <div className="manage-account-form-group">
-                      <label>Land</label>
-                      <input
-                        type="text"
-                        value={userData.country}
-                        onChange={(e) =>
-                          handleInputChange("country", e.target.value)
-                        }
-                        className="manage-account-form-input"
-                      />
-                    </div>
-                    <div className="manage-account-form-group">
-                      <label>Website Taal</label>
-                      <input
-                        type="text"
-                        value={userData.websiteLanguage}
-                        onChange={(e) =>
-                          handleInputChange("websiteLanguage", e.target.value)
-                        }
-                        className="manage-account-form-input"
-                      />
-                    </div>
-                  </div>
 
                   <div className="manage-account-form-group">
-                    <label>Stad</label>
+                    <label>Straatnaam</label>
                     <input
                       type="text"
-                      value={userData.city}
-                      onChange={(e) =>
-                        handleInputChange("stad", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      value={userData.street || ""}
+                      onChange={(e) => handleInputChange("street", e.target.value)}
+                      className="manage-account-form-input" />
+                  </div>
+
+                  <div className="manage-account-form-row-two">
+                    <div className="manage-account-form-group">
+                      <label>Huisnummer</label>
+                      <input
+                        type="text"
+                        value={userData.housenumber || ""}
+                        onChange={(e) => handleInputChange("housenumber", e.target.value)}
+                        className="manage-account-form-input" />
+                    </div>
+                    <div className="manage-account-form-group">
+                      <label>Toevoeging</label>
+                      <input
+                        type="text"
+                        value={userData.addition || ""}
+                        onChange={(e) => handleInputChange("addition", e.target.value)}
+                        className="manage-account-form-input" />
+                    </div>
                   </div>
 
                   <div className="manage-account-form-group">
                     <label>Postcode</label>
                     <input
                       type="text"
-                      value={userData.postalcode}
-                      onChange={(e) =>
-                        handleInputChange("postalcode", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      value={userData.zipcode || ""}
+                      onChange={(e) => handleInputChange("zipcode", e.target.value)}
+                      className="manage-account-form-input" />
                   </div>
 
                   <div className="manage-account-form-group">
-                    <label>Straatnaam</label>
+                    <label>Stad</label>
                     <input
                       type="text"
-                      value={userData.streetname}
-                      onChange={(e) =>
-                        handleInputChange("streetname", e.target.value)
-                      }
-                      className="manage-account-form-input"
-                    />
+                      value={userData.city || ""}
+                      onChange={(e) => handleInputChange("city", e.target.value)}
+                      className="manage-account-form-input" />
                   </div>
 
-                  <div className="manage-account-form-row-two">
-                    <div className="manage-account-form-group">
-                      <label>Housenummer</label>
-                      <input
-                        type="text"
-                        value={userData.housenumber}
-                        onChange={(e) =>
-                          handleInputChange("housenumber", e.target.value)
-                        }
-                        className="manage-account-form-input"
-                      />
-                    </div>
-                    <div className="manage-account-form-group">
-                      <label>Toevoeging</label>
-                      <input
-                        type="text"
-                        value={userData.housenumberAddition}
-                        onChange={(e) =>
-                          handleInputChange("housenumberAddition", e.target.value)
-                        }
-                        className="manage-account-form-input"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Action Buttons */}
             <div className="manage-account-actions fade-in-delayed">
               <div className="manage-account-buttons-left">
                 <button
-                  type="button"
                   className={`manage-account-btn manage-account-btn-primary ${!hasChanges ? "manage-account-btn-disabled" : ""}`}
                   onClick={handleSaveChanges}
                   disabled={!hasChanges || isLoading}
                 >
                   {isLoading ? "Opslaan..." : "Aanpassingen opslaan"}
                 </button>
-                <button
-                  type="button"
-                  className="manage-account-btn manage-account-btn-secondary"
-                  onClick={handleCancel}
-                  disabled={isLoading}
-                >
+                <button className="manage-account-btn manage-account-btn-secondary" onClick={handleCancel} disabled={isLoading}>
                   Annuleren
                 </button>
               </div>
               <div className="manage-account-buttons-right">
-                <button
-                  type="button"
-                  className="manage-account-btn manage-account-btn-danger hover-glow"
-                  onClick={handleDeleteAccount}
-                >
+                <button className="manage-account-btn manage-account-btn-danger hover-glow" onClick={handleDeleteAccount}>
                   Account verwijderen
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Right Section - Extra Information */}
-          <div
-            className="manage-account-info-panel card-entrance-delayed"
-            style={{ animationDelay: "0.2s" }}
-          >
+          <div className="manage-account-info-panel card-entrance-delayed" style={{ animationDelay: "0.2s" }}>
             <h3 className="manage-account-info-title">Extra informatie</h3>
             <div className="manage-account-info-list">
-              {userData.registrationDates.map((date, index) => (
-                <div
-                  key={index}
-                  className="manage-account-info-item slide-right"
-                  style={{ animationDelay: `${0.1 + index * 0.1}s` }}
-                >
-                  <span className="manage-account-info-label">
-                    Geregistreerd sinds:
-                  </span>
-                  <span className="manage-account-info-value">{date}</span>
-                </div>
-              ))}
+              <div className="manage-account-info-item slide-right">
+                <span className="manage-account-info-label">Geregistreerd op:</span>
+                <span className="manage-account-info-value">{userData.created_at}</span>
+              </div>
+              <div className="manage-account-info-item slide-right" style={{ animationDelay: "0.1s" }}>
+                <span className="manage-account-info-label">Gebruiker ID:</span>
+                <span className="manage-account-info-value">#{userData.id}</span>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

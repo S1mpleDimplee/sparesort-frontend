@@ -3,6 +3,7 @@ import "./ManagerUsers.css";
 import { useToast } from "../../toastmessage/toastmessage";
 import apiCall from "../../Calls/calls";
 import { useNavigate } from "react-router-dom";
+import * as Icons from "../../Icons/Icons";
 
 const ManagerUsers = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -23,7 +24,7 @@ const ManagerUsers = () => {
       setUsers(response.data);
       console.log("Fetched users:", response.data);
     } else {
-      openToast("Fout bij het ophalen van gebruikers: " + response.message);
+      openToast(response.message);
     }
   };
 
@@ -51,42 +52,25 @@ const ManagerUsers = () => {
 
   return (
     <div className="manager-users-page">
-      {/* Header Section */}
       <div className="manager-users-header">
-        <div className="manager-users-search-section">
-          <div className="manager-users-search-wrapper">
-            <input
-              type="text"
-              placeholder="Zoeken..."
-              className="manager-users-search-input"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        <div className="manager-list-header">
+          <div>
+            <div className="manager-list-header-content">
+              <img src={Icons.user} alt="Users Icon" className="manager-list-icon" width={"40px"} />
+              <h1 className="manager-list-title">Gebruikers</h1>
+            </div>
+            <p className="manager-list-subtitle">Beheer al je gebruikers op één plek</p>
           </div>
+        </div>
+        <div className="manager-list-filters">
+          <input
+            type="text"
+            className="manager-list-search"
+            placeholder="Zoek op naam..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
 
-          <select className="manager-users-filter-select">
-            <option value="">Alle rollen</option>
-            <option value="0">Gast</option>
-            <option value="1">Balimedewerker</option>
-            <option value="2">Monteur</option>
-            <option value="3">Manager</option>
-          </select>
-
-          <select className="manager-users-filter-select">
-            <option value="">Alle statussen</option>
-            <option value="active">Actief</option>
-            <option value="inactive">Inactief</option>
-          </select>
-
-          <div className="manager-users-header-actions">
-            <div className="manager-users-view-toggle"></div>
-            <button
-              className="manager-users-create-btn"
-              onClick={() => setShowCreateModal(true)}
-            >
-              Account aanmaken
-            </button>
-          </div>
         </div>
       </div>
       <div className="manager-users-table-section">
@@ -111,12 +95,12 @@ const ManagerUsers = () => {
                         <span className="manager-users-avatar-text">
                           {user.name
                             ? user.name
-                                ?.split(" ")
-                                .map((n) => n[0])
-                                .join("")
-                                .toUpperCase()
+                              ?.split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                              .toUpperCase()
                             : user.email?.charAt(0).toUpperCase() +
-                              user.email?.charAt(1).toUpperCase()}
+                            user.email?.charAt(1).toUpperCase()}
                         </span>
                       </div>
                       <span className="manager-users-user-name">
@@ -151,14 +135,14 @@ const ManagerUsers = () => {
                   </td>
                   <td className="manager-users-table-cell">
                     <div className="manager-users-actions">
-                      <button className="manager-users-action-btn manager-users-deactivate-btn">
+                      {/* <button className="manager-users-action-btn manager-users-deactivate-btn">
                         Deactiveren
-                      </button>
-                      <button className="manager-users-action-btn manager-users-view-btn" 
-                      onClick={() => {
-                        localStorage.setItem("selectedUserId", JSON.stringify(user.id));
-                        navigate(`/dashboard/gebruikers/${user.id}`);
-                      }}>
+                      </button> */}
+                      <button className="manager-users-action-btn manager-users-view-btn"
+                        onClick={() => {
+                          localStorage.setItem("selectedUserId", JSON.stringify(user.id));
+                          navigate(`/dashboard/gebruikers/${user.id}`);
+                        }}>
                         Inzien
                       </button>
                     </div>
@@ -166,7 +150,7 @@ const ManagerUsers = () => {
                 </tr>
               ))}
             </tbody>
-            
+
             <td className="manager-users-table-footer">
               <span className="manager-users-end-message">
                 Einde van de lijst
@@ -175,7 +159,6 @@ const ManagerUsers = () => {
           </table>
         </div>
       </div>
-      {/* Create Account Modal (placeholder) */}
       {showCreateModal && (
         <div
           className="manager-users-modal-overlay"

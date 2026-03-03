@@ -256,7 +256,7 @@ body {
 .hover-scale {
   transition: transform 0.3s ease;
 }
-
+  
 .hover-scale:hover {
   transform: scale(1.05);
 }
@@ -266,7 +266,7 @@ body {
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 20px rgba(255, 159, 16, 0.3);
+  box-shadow: 0 5px 30px rgba(22, 22, 22, 0.829);
 }
 
 .pulse {
