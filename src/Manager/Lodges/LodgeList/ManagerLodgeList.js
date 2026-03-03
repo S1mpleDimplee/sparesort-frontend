@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./ManagerLodgeList.css";
 import apiCall from "../../../Calls/calls";
 import { useToast } from "../../../toastmessage/toastmessage";
+import * as Icons from "../../../Icons/Icons";
 
 const type_of_status = {
   beschikbaar: "Beschikbaar",
@@ -81,7 +82,10 @@ const ManagerLodgeList = () => {
     <div className="manager-list-page">
       <div className="manager-list-header">
         <div>
-          <h1 className="manager-list-title">🏡 Lodges</h1>
+          <div className="manager-list-header-content">
+            <img src={Icons.house} alt="House Icon" className="manager-list-icon" width={"40px"} />
+            <h1 className="manager-list-title">Lodges</h1>
+          </div>
           <p className="manager-list-subtitle">Beheer al je lodges op één plek</p>
         </div>
         <button className="manager-list-create-btn" onClick={handleCreate}>+ Nieuwe lodge</button>

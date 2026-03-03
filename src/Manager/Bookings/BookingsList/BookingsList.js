@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import "./BookingsList.css";
 import { useToast } from "../../../toastmessage/toastmessage";
 import apiCall from "../../../Calls/calls";
+import * as Icons from "../../../Icons/Icons";
 
 const STATUS_COLORS = {
-  bevestigd: { bg: "#1a3a2a", color: "#40f1b6" },
-  geannuleerd: { bg: "#3a1a1a", color: "#ff7272" },
-  gepland: { bg: "#2a2a1a", color: "#d9ff72" },
+  bevestigd: { bg: "#22c55e", color: "white" },
+  geannuleerd: { bg: "#ef4444", color: "white" },
+  gepland: { bg: "#f59e0b", color: "white" },
+  pending: { bg: "#6b7280", color: "white" },
 };
 
-const BookingsList = () => {
+const BookingList = () => {
   const { openToast } = useToast();
   const navigate = useNavigate();
 
@@ -19,18 +21,13 @@ const BookingsList = () => {
   const [statusFilter, setStatusFilter] = useState("alle");
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchBookings();
-  }, []);
+  useEffect(() => { fetchBookings(); }, []);
 
   const fetchBookings = async () => {
     setIsLoading(true);
     const response = await apiCall("getallbookings", {});
-    if (response.isSuccess) {
-      setBookings(response.data);
-    } else {
-      openToast(response.message);
-    }
+    if (response.isSuccess) setBookings(response.data);
+    else openToast(response.message);
     setIsLoading(false);
   };
 
@@ -57,131 +54,164 @@ const BookingsList = () => {
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("nl-NL", { day: "numeric", month: "short", year: "numeric" });
 
+  const getInitials = (name, email) => {
+    if (name) return name.split(" ").map(n => n[0]).join("").toUpperCase();
+    return ((email?.[0] || "") + (email?.[1] || "")).toUpperCase();
+  };
+
   if (isLoading) return <div className="booking-overview-loading">Laden...</div>;
 
   return (
-    <div className="booking-overview-page">
+    <div className="manager-users-page">
 
-      <div className="booking-overview-header">
+      <div className="manager-users-header">
         <div>
-          <h1 className="booking-overview-title">📋 Boekingen</h1>
-          <p className="booking-overview-subtitle">{filtered.length} boeking{filtered.length !== 1 ? "en" : ""} gevonden</p>
+          <div className="manager-list-header-content">
+            <img src={Icons.calendar} alt="Calendar Icon" className="manager-list-icon" width={"40px"} />
+            <h1 className="manager-list-title">Boekingen</h1>
+          </div>
+          <p className="manager-list-subtitle">{filtered.length} boeking{filtered.length !== 1 ? "en" : ""} gevonden</p>
         </div>
-        <button className="booking-overview-create-btn" onClick={() => navigate("/dashboard/boekingen/nieuw")}>
-          + Nieuwe boeking
-        </button>
+        <div className="manager-list-filters">
+          <input
+            type="text"
+            className="manager-list-search"
+            placeholder="Zoek op naam, email, lodge..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <select
+            className="manager-users-filter-select"
+            value={statusFilter}
+            onChange={e => setStatusFilter(e.target.value)}
+          >
+            <option value="alle">Alle statussen</option>
+            <option value="bevestigd">Bevestigd</option>
+            <option value="gepland">Gepland</option>
+            <option value="geannuleerd">Geannuleerd</option>
+          </select>
+          <button
+            className="manager-users-create-btn"
+            onClick={() => navigate("/dashboard/boekingen/nieuw")}
+          >
+            + Nieuwe boeking
+          </button>
+        </div>
       </div>
 
-      <div className="booking-overview-filters">
-        <input
-          type="text"
-          placeholder="🔍 Zoek op naam, email, lodge..."
-          className="booking-overview-search"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-        <select
-          className="booking-overview-select"
-          value={statusFilter}
-          onChange={e => setStatusFilter(e.target.value)}
-        >
-          <option value="alle">Alle statussen</option>
-          <option value="bevestigd">Bevestigd</option>
-          <option value="gepland">Gepland</option>
-          <option value="geannuleerd">Geannuleerd</option>
-        </select>
-      </div>
+      <div className="manager-users-table-section">
+        <div className="manager-users-table-wrapper">
+          <table className="manager-users-table">
+            <thead>
+              <tr className="manager-users-table-header">
+                <th className="manager-users-header-cell">#</th>
+                <th className="manager-users-header-cell">Gast</th>
+                <th className="manager-users-header-cell">Lodge</th>
+                <th className="manager-users-header-cell">Inchecken</th>
+                <th className="manager-users-header-cell">Uitchecken</th>
+                <th className="manager-users-header-cell">Nachten</th>
+                <th className="manager-users-header-cell">Totaal</th>
+                <th className="manager-users-header-cell">Status</th>
+                <th className="manager-users-header-cell">Actie</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.length > 0 ? filtered.map(b => (
+                <tr key={b.id} className="manager-users-table-row">
 
-      <div className="booking-overview-table-wrapper">
-        <table className="booking-overview-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Gast</th>
-              <th>Lodge</th>
-              <th>Inchecken</th>
-              <th>Uitchecken</th>
-              <th>Nachten</th>
-              <th>Totaal</th>
-              <th>Status</th>
-              <th>Actie</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.length > 0 ? filtered.map(b => (
-              <tr key={b.id} className="booking-overview-row">
+                  <td className="manager-users-table-cell">
+                    <span className="manager-users-date">#{b.id}</span>
+                  </td>
 
-                <td className="booking-overview-id">#{b.id}</td>
-
-                <td>
-                  <div className="booking-overview-guest">
-                    <div className="booking-overview-avatar">
-                      {(b.user_name || b.user_email || "?")[0].toUpperCase()}
+                  <td className="manager-users-table-cell">
+                    <div className="manager-users-user-info">
+                      <div className="manager-users-user-avatar">
+                        <span className="manager-users-avatar-text">
+                          {getInitials(b.user_name, b.user_email)}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="manager-users-user-name">{b.user_name || "Onbekend"}</span>
+                        <div className="manager-users-email">{b.user_email}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="booking-overview-guest-name">{b.user_name || "Onbekend"}</div>
-                      <div className="booking-overview-guest-email">{b.user_email}</div>
+                  </td>
+
+                  <td className="manager-users-table-cell">
+                    <div className="manager-users-user-info">
+                      {b.lodge_image
+                        ? <img src={`data:image/jpeg;base64,${b.lodge_image}`} alt={b.lodge_name} className="booking-lodge-img" />
+                        : <div className="booking-lodge-placeholder">🏡</div>
+                      }
+                      <span className="manager-users-user-name">{b.lodge_name}</span>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td>
-                  <div className="booking-overview-lodge">
-                    {b.lodge_image
-                      ? <img src={`data:image/jpeg;base64,${b.lodge_image}`} alt={b.lodge_name} className="booking-overview-lodge-img" />
-                      : <div className="booking-overview-lodge-placeholder">🏡</div>
-                    }
-                    <span>{b.lodge_name}</span>
-                  </div>
-                </td>
+                  <td className="manager-users-table-cell">
+                    <span className="manager-users-date">{formatDate(b.check_in)}</span>
+                  </td>
 
-                <td>{formatDate(b.check_in)}</td>
-                <td>{formatDate(b.check_out)}</td>
-                <td>{nights(b.check_in, b.check_out)} nachten</td>
-                <td className="booking-overview-price">€{parseFloat(b.total_price).toFixed(2)}</td>
+                  <td className="manager-users-table-cell">
+                    <span className="manager-users-date">{formatDate(b.check_out)}</span>
+                  </td>
 
-                <td>
-                  <span
-                    className="booking-overview-status"
-                    style={{
-                      background: STATUS_COLORS[b.status]?.bg ?? "#2a2a3e",
-                      color: STATUS_COLORS[b.status]?.color ?? "#fff"
-                    }}
-                  >
-                    {b.status}
-                  </span>
-                </td>
+                  <td className="manager-users-table-cell">
+                    <span className="manager-users-date">{nights(b.check_in, b.check_out)}n</span>
+                  </td>
 
-                <td>
-                  <div className="booking-overview-actions">
-                    <button
-                      className="booking-overview-btn-view"
-                      onClick={() => navigate(`/dashboard/boekingen/${b.id}`)}
+                  <td className="manager-users-table-cell">
+                    <span className="booking-price">€{parseFloat(b.total_price).toFixed(2)}</span>
+                  </td>
+
+                  <td className="manager-users-table-cell">
+                    <span
+                      className="manager-users-status-badge"
+                      style={{
+                        background: STATUS_COLORS[b.status]?.bg ?? "#6b7280",
+                        color: STATUS_COLORS[b.status]?.color ?? "white",
+                        boxShadow: `0 2px 8px ${STATUS_COLORS[b.status]?.bg ?? "#6b7280"}55`
+                      }}
                     >
-                      Inzien
-                    </button>
-                    {b.status !== "geannuleerd" && (
-                      <button
-                        className="booking-overview-btn-cancel"
-                        onClick={() => handleCancel(b.id)}
-                      >
-                        Annuleren
-                      </button>
-                    )}
-                  </div>
-                </td>
+                      {b.status}
+                    </span>
+                  </td>
 
-              </tr>
-            )) : (
-              <tr>
-                <td colSpan="9" className="booking-overview-empty">Geen boekingen gevonden</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                  <td className="manager-users-table-cell">
+                    <div className="manager-users-actions">
+                      {/* <button
+                        className="manager-users-action-btn manager-users-view-btn"
+                        onClick={() => navigate(`/dashboard/boekingen/${b.id}`)}
+                      >
+                        Inzien
+                      </button> */}
+                      {b.status !== "geannuleerd" && (
+                        <button
+                          className="manager-users-action-btn manager-users-deactivate-btn"
+                          onClick={() => handleCancel(b.id)}
+                        >
+                          Annuleren
+                        </button>
+                      )}
+                    </div>
+                  </td>
+
+                </tr>
+              )) : (
+                <tr>
+                  <td colSpan="9" className="manager-users-table-cell" style={{ textAlign: "center", padding: "3rem", color: "#aaa" }}>
+                    Geen boekingen gevonden
+                  </td>
+                </tr>
+              )}
+            </tbody>
+            <td className="manager-users-table-footer">
+              <span className="manager-users-end-message">Einde van de lijst</span>
+            </td>
+          </table>
+        </div>
       </div>
     </div>
   );
 };
 
-export default BookingsList;
+export default BookingList;
