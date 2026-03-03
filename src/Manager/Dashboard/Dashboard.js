@@ -33,7 +33,7 @@ const ManagerDashboard = () => {
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
-      const response = await apiCall("getmanagerdashboardinfo", {});
+      const response = await apiCall("getmanagerdashboardinfo");
 
       if (!response.isSuccess) return;
 

@@ -56,22 +56,22 @@ const ManagerUsers = () => {
         <div className="manager-list-header">
           <div>
             <div className="manager-list-header-content">
-              <img src={Icons.user} alt="Users Icon" className="manager-list-icon" width={"40px"}  />
+              <img src={Icons.user} alt="Users Icon" className="manager-list-icon" width={"40px"} />
               <h1 className="manager-list-title">Gebruikers</h1>
             </div>
             <p className="manager-list-subtitle">Beheer al je gebruikers op één plek</p>
           </div>
         </div>
         <div className="manager-list-filters">
-        <input
-          type="text"
-          className="manager-list-search"
-          placeholder="Zoek op naam..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      
-      </div>
+          <input
+            type="text"
+            className="manager-list-search"
+            placeholder="Zoek op naam..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
+        </div>
       </div>
       <div className="manager-users-table-section">
         <div className="manager-users-table-wrapper">

@@ -26,6 +26,8 @@ import AccountOverview from "./Manager/Users/Userinfo/AccountOverview";
 import BookingCalendar from "./Manager/Users/BookingCalendar/BookingCalendar";
 import ManagerLodgeList from "./Manager/Lodges/LodgeList/ManagerLodgeList";
 import ManagerLodgeOverview from "./Manager/Lodges/LodgeOverview/ManagerLodgeOverview";
+import BookingsList from "./Manager/Bookings/BookingsList/BookingsList";
+import PlaceBooking from "./Manager/Bookings/PlaceBooking/PlaceBooking";
 
 function AppContent() {
   const location = useLocation();
@@ -102,7 +104,10 @@ function AppContent() {
                     <Route path="/dashboard/lodges/:id" element={<ManagerLodgeOverview />} />
                     <Route path="/dashboard/gebruikers" element={<ManagerUsers />} />
                     <Route path="/dashboard/gebruikers/:id" element={<AccountOverview />} />
-                    <Route path="/dashboard/boekingen" element={<BookingCalendar />} />
+                    <Route path="/dashboard/boekingen" element={<BookingsList />} />
+                    {/* <Route path="/dashboard/boekingen/:id" element={<BookingDetails />} /> */}
+                    <Route path="/dashboard/boekingen/nieuw" element={<PlaceBooking />} />
+
                   </>
                 )}
               </>

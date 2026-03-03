@@ -115,10 +115,10 @@ const NavbarDashboard = () => {
         description: "Personeel beheer",
       },
       {
-        id: "afspraken",
-        label: "Afspraken",
-        path: "/dashboard/rooster",
-        description: "Alle afspraken beheren",
+        id: "Boekingen",
+        label: "Boekingen",
+        path: "/dashboard/boekingen",
+        description: "Alle boekingen beheren",
       },
     ],
   };
