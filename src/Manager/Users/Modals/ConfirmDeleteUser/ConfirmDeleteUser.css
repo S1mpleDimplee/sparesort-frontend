@@ -7,12 +7,12 @@
   justify-content: center;
   padding: 1rem;
   z-index: 50;
-  animation: fadeIn 0.3s ease-out;
   backdrop-filter: blur(3px);
-
+  animation: fadeIn 0.3s ease-out;
 }
 
 .ConfirmDeleteUser-container {
+  animation: fadeIn 0.3s ease-out;
   background-color: var(--card);
   border-radius: 12px;
   border: 1px solid var(--cardborder);
@@ -29,14 +29,12 @@
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-  color: var(--text);
+  color: var(--orange);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  font-size: 1.5rem;
-  width: 32px;
-  height: 32px;
+  font-size: 2rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +42,7 @@
 }
 
 .ConfirmDeleteUser-close-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.04);
 }
 
 .ConfirmDeleteUser-title {
