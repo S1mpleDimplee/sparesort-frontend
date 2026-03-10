@@ -111,7 +111,7 @@ const AccountOverview = () => {
                   {userData.email_verified == 1 ? (
                     <span className="manage-account-status-verified">✓ Geverifieerd</span>
                   ) : (
-                    <span className="manage-account-status-unverified">! Niet geverifieerd</span>
+                    <span className="manage-account-status-unverified">Niet geverifieerd</span>
                   )}
                 </div>
               </div>
