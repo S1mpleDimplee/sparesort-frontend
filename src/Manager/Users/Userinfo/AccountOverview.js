@@ -3,10 +3,12 @@ import "./AccountOverview.css";
 import apiCall from "../../../Calls/calls";
 import { useToast } from "../../../toastmessage/toastmessage";
 import { useNavigate } from "react-router-dom";
+import ConfirmDeleteUser from "../Modals/ConfirmDeleteUser/ConfirmDeleteUser";
 
 const AccountOverview = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [userData, setUserData] = useState({
     id: "", name: "", email: "", phonenumber: "",
     role: "0", email_verified: 0, created_at: "",
@@ -58,14 +60,14 @@ const AccountOverview = () => {
   };
 
   const handleDeleteAccount = async () => {
-    if (window.confirm("Weet u zeker dat u dit account wilt verwijderen?")) {
-      const response = await apiCall("deleteuser", { userid: userData.id });
-      openToast(response.message);
-      if (response.isSuccess) {
-        navigate("/dashboard/gebruikers");
-      }
+    const response = await apiCall("deleteuser", { userid: userData.id });
+    openToast(response.message);
+    if (response.isSuccess) {
+      navigate("/dashboard/gebruikers");
     }
-  };
+    else {
+    }
+  }
 
   const getInitials = () => {
     if (userData.name) {
@@ -109,7 +111,7 @@ const AccountOverview = () => {
                   {userData.email_verified == 1 ? (
                     <span className="manage-account-status-verified">✓ Geverifieerd</span>
                   ) : (
-                    <span className="manage-account-status-unverified">! Niet geverifieerd</span>
+                    <span className="manage-account-status-unverified">Niet geverifieerd</span>
                   )}
                 </div>
               </div>
@@ -238,7 +240,7 @@ const AccountOverview = () => {
                 </button>
               </div>
               <div className="manage-account-buttons-right">
-                <button className="manage-account-btn manage-account-btn-danger hover-glow" onClick={handleDeleteAccount}>
+                <button className="manage-account-btn manage-account-btn-danger hover-glow" onClick={() => setShowDeleteConfirm(true)}>
                   Account verwijderen
                 </button>
               </div>
@@ -261,7 +263,13 @@ const AccountOverview = () => {
 
         </div>
       </div>
+      <ConfirmDeleteUser
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        onConfirm={() => handleDeleteAccount()}
+      />
     </div>
+
   );
 };
 

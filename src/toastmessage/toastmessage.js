@@ -4,7 +4,7 @@ import './toastmessage.css';
 
 function ToastMessage({ message, close }) {
     return (
-        <div className="toast show">
+        <div className="toast show scale-in">
             <span className="toast-message">{message}</span>
             <button className="toast-close" onClick={close}>
                 ×
