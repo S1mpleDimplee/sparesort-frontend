@@ -148,13 +148,6 @@ const Home = () => {
                 />
               </div>
 
-              <div className="filter-group filter-rating">
-                <div className="rating-display" title="Rating filter komt later">
-                  <span className="stars">★★★★★</span>
-                  <span className="dropdown-arrow">▼</span>
-                </div>
-              </div>
-
               <div className="filter-group">
                 <label>Slaapkamers</label>
                 <div className="bedrooms-badge" style={{ justifyContent: "space-between" }}>
@@ -221,7 +214,7 @@ const Home = () => {
               <div key={lodge.id} className="lodge-card slide-up">
                 <div className="lodge-image-wrapper">
                   <img
-                    src={lodge.image || "https://via.placeholder.com/800x600"}
+                    src={lodge.image ? `data:image/jpeg;base64,${lodge.image}` : "https://via.placeholder.com/800x600"}
                     alt={lodge.name}
                     className="lodge-image"
                   />
