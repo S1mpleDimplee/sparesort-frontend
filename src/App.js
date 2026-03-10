@@ -20,6 +20,7 @@ import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
 import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 import ManagerDashboard from "./Manager/Dashboard/Dashboard";
+import MonteurDashboard from "./monteur/Dashboard/dashboard"; 
 import ManagerUsers from "./Manager/Users/ManagerUsers";
 import NotFound from "./404/404";
 import AccountOverview from "./Manager/Users/Userinfo/AccountOverview";
@@ -91,6 +92,7 @@ function AppContent() {
                 {/* Monteur (role 2) */}
                 {currentRole === 2 && (
                   <>
+                    <Route path="/dashboard" element={<MonteurDashboard />} />
                     {/* add monteur routes here */}
                   </>
                 )}
