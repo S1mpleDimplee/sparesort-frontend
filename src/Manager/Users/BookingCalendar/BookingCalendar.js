@@ -129,10 +129,9 @@ const BookingCalendar = ({
   };
 
   return (
-    <div className="booking-calendar-container page-enter">
-      {/* Header Controls */}
+    <div className="booking-calendar-container">
       {(showSearch || showRoleFilter) && (
-        <div className="calendar-header-controls fade-in">
+        <div className="calendar-header-controls">
           {showSearch && (
             <div className="calendar-search">
               <input
@@ -166,9 +165,7 @@ const BookingCalendar = ({
         </div>
       )}
 
-      {/* Calendar */}
       <div className="booking-calendar card-entrance">
-        {/* Calendar Header */}
         <div className="calendar-header">
           <button 
             className="calendar-nav-btn hover-scale" 
@@ -191,7 +188,6 @@ const BookingCalendar = ({
           </button>
         </div>
 
-        {/* Days of week header */}
         <div className="calendar-weekdays">
           {['Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za', 'Zo'].map((day, index) => (
             <div key={index} className="calendar-weekday">
@@ -200,7 +196,6 @@ const BookingCalendar = ({
           ))}
         </div>
 
-        {/* Calendar Grid */}
         <div className="calendar-grid slide-up">
           {generateCalendarDays()}
         </div>
