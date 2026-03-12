@@ -1,6 +1,4 @@
 
-/* BookingCalendar.css */
-
 .booking-calendar-container {
   width: 100%;
   max-width: 1000px;
@@ -10,7 +8,6 @@
   color: var(--text);
 }
 
-/* Header Controls */
 .calendar-header-controls {
   display: flex;
   justify-content: space-between;
@@ -82,7 +79,6 @@
   box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
 }
 
-/* Main Calendar */
 .booking-calendar {
   background-color: var(--card);
   border: 1px solid var(--cardborder);
@@ -91,7 +87,6 @@
   box-shadow: 0 4px 20px var(--shadow);
 }
 
-/* Calendar Header */
 .calendar-header {
   display: flex;
   justify-content: between;
@@ -131,7 +126,6 @@
   color: var(--text);
 }
 
-/* Days of Week Header */
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -151,7 +145,6 @@
   color: var(--text);
 }
 
-/* Calendar Grid */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -161,7 +154,6 @@
   overflow: hidden;
 }
 
-/* Calendar Days */
 .calendar-day {
   background-color: var(--card);
   min-height: 80px;
@@ -181,7 +173,6 @@
   transform: scale(1.02);
 }
 
-/* Current Month Days */
 .calendar-day-current-month {
   color: var(--text);
 }
@@ -190,7 +181,6 @@
   border-color: var(--orange);
 }
 
-/* Other Month Days (Previous/Next) */
 .calendar-day-other-month {
   color: #666;
   cursor: default;
@@ -203,14 +193,12 @@
   border-color: transparent;
 }
 
-/* Selected Day */
 .calendar-day-selected {
   background-color: var(--blue) !important;
   color: white !important;
   border-color: var(--blue) !important;
 }
 
-/* Booked Days */
 .calendar-day-booked {
   background-color: var(--orange) !important;
   color: white !important;
@@ -221,7 +209,6 @@
   border-color: var(--orangelight) !important;
 }
 
-/* Unavailable Days */
 .calendar-day-unavailable {
   background-color: var(--red) !important;
   color: white !important;
@@ -233,14 +220,12 @@
   background-color: var(--darkred) !important;
 }
 
-/* Day Number */
 .calendar-day-number {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.2rem;
 }
 
-/* Booking Status */
 .booking-status {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -252,79 +237,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .booking-calendar-container {
-    padding: 0.5rem;
-  }
-
-  .calendar-header-controls {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-  }
-
-  .calendar-search {
-    max-width: none;
-  }
-
-  .calendar-filters {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .booking-calendar {
-    padding: 1rem;
-  }
-
-  .calendar-month-title {
-    font-size: 1.4rem;
-  }
-
-  .calendar-day {
-    min-height: 60px;
-    padding: 0.3rem;
-  }
-
-  .calendar-day-number {
-    font-size: 0.9rem;
-  }
-
-  .booking-status {
-    font-size: 0.6rem;
-    padding: 0.1rem 0.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .calendar-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-
-  .calendar-nav-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-
-  .calendar-month-title {
-    font-size: 1.2rem;
-  }
-
-  .calendar-day {
-    min-height: 50px;
-    padding: 0.2rem;
-  }
-
-  .calendar-weekday {
-    padding: 0.5rem 0.2rem;
-    font-size: 0.75rem;
-  }
-}
-
-/* Animation Enhancements */
 .calendar-day {
   animation: fadeInScale 0.3s ease-out;
 }
@@ -340,7 +252,6 @@
   }
 }
 
-/* Loading States */
 .calendar-loading {
   display: flex;
   align-items: center;
@@ -350,7 +261,6 @@
   font-size: 1.1rem;
 }
 
-/* Custom Scrollbar for Select */
 .calendar-role-select option {
   background-color: var(--inputbackground);
   color: var(--inputtext);
