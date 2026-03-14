@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./NavbarDashboard.css";
 import logo from "../../media/logo.png";
 import { useNavigate } from "react-router-dom";
+import { calendar } from "../../Icons/Icons";
 
 const NavbarDashboard = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [role, setRole] = useState(0);
   const [selectedPage, setSelectedPage] = useState("dashboard");
-  
+
 
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("userdata"));
@@ -60,6 +61,12 @@ const NavbarDashboard = () => {
         label: "Lodges",
         path: "/dashboard/lodges",
       },
+      {
+        id: "calendar",
+        label: "kalender",
+        path: "/dashboard/calendar",
+      },
+
     ],
     // Onderhoud (role 2)
     2: [
@@ -155,15 +162,15 @@ const NavbarDashboard = () => {
                 >
                   {item.label}
                   {item.subitems && (
-                    <svg 
+                    <svg
                       className={`nav-dash-arrow ${activeDropdown === item.id ? 'open' : ''}`}
                       width="12" height="12" viewBox="0 0 12 12"
                     >
-                      <path 
-                        d="M2 4L6 8L10 4" 
-                        stroke="currentColor" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round" 
+                      <path
+                        d="M2 4L6 8L10 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
@@ -171,7 +178,7 @@ const NavbarDashboard = () => {
                 </a>
 
                 {item.subitems && activeDropdown === item.id && (
-                  <div 
+                  <div
                     className="nav-dropdown-menu"
                     onMouseEnter={() => setActiveDropdown(item.id)}
                     onMouseLeave={() => setActiveDropdown(null)}
@@ -200,7 +207,7 @@ const NavbarDashboard = () => {
           {/* <button className="navbar-dash-login-btn" onClick={() => navigate('/inloggen')}>Inloggen</button> */}
         </div>
       </div>
-      
+
     </div>
   );
 };

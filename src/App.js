@@ -85,6 +85,7 @@ function AppContent() {
                   <>
                     <Route path="/dashboard" element={<BalieDashboard />} />
                     <Route path="/dashboard/lodges" element={<BalieLodges />} />
+                    <Route path="/dashboard/calendar" element={<BookingCalendar />} />
                   </>
                 )}
 
