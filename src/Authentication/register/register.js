@@ -3,6 +3,7 @@ import "./register.css";
 import { useNavigate } from "react-router-dom";
 import apiCall from "../../Calls/calls";
 import { useToast } from "../../toastmessage/toastmessage";
+import ConfirmUser from "../../Manager/Users/Modals/ConfirmUser/ConfirmUser";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Register = () => {
     password: "",
     phonenumber: "",
   });
+
+  const [showConfirmUser, setShowConfirmUser] = useState(false);
 
   const { openToast } = useToast();
   const [countryCode, setCountryCode] = useState("+31");
@@ -36,7 +39,7 @@ const Register = () => {
     });
 
     if (response.isSuccess) {
-      openToast(response.message);
+      setShowConfirmUser(true);
 
       localStorage.setItem("verificationinfo", JSON.stringify({
         email: formData.email,
@@ -143,6 +146,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <ConfirmUser isOpen={showConfirmUser} onClose={() => navigate("/inloggen")} />
     </div>
   );
 };

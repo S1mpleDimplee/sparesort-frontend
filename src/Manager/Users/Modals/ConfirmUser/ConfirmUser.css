@@ -1,0 +1,90 @@
+.ConfirmUser-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.ConfirmUser-container {
+  animation: fadeIn 0.3s ease-out;
+  background-color: var(--card);
+  border-radius: 12px;
+  border: 1px solid var(--cardborder);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  width: 95vw;
+  max-width: 500px;
+  padding: 2rem;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.ConfirmUser-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: var(--orange);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.ConfirmUser-close-btn:hover {
+  transform: scale(1.04);
+}
+
+.ConfirmUser-title {
+  color: var(--text);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ConfirmUser-message {
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.ConfirmUser-confirm-btn {
+  background-color: var(--red);
+  color: var(--text);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ConfirmUser-confirm-btn:hover {
+  background-color: var(--darkred);
+}
+
+.ConfirmUser-cancel-btn {
+  background-color: var(--inputbackground);
+  color: var(--text);
+  border: 1px solid var(--cardborder);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.ConfirmUser-cancel-btn:hover {
+  background-color: var(--lightcard);
+}
