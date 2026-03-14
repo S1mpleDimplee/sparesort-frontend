@@ -1,5 +1,3 @@
-/* ManageAccountOverview.css */
-
 .manage-account-overview {
   min-height: 100vh;
   background-color: var(--background);
@@ -8,19 +6,12 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.manage-account-container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* Main Content Grid */
 .manage-account-content-grid {
   display: grid;
   grid-template-columns: 1fr 260px;
   gap: 2rem;
 }
 
-/* Left Section */
 .manage-account-left-section {
   display: flex;
   flex-direction: column;
@@ -29,7 +20,6 @@
   border-radius: 8px;
 }
 
-/* Header */
 .manage-account-header {
   margin-bottom: 1rem;
 }
@@ -49,7 +39,6 @@
   font-weight: 400;
 }
 
-/* Profile Section */
 .manage-account-profile-section {
   display: flex;
   align-items: center;
@@ -128,7 +117,6 @@
   color: white;
 }
 
-/* Form Content Split */
 .manage-account-form-content {
   display: grid;
   grid-template-columns: 300px 1fr;
@@ -188,7 +176,6 @@
   border-color: var(--orangelight);
 }
 
-/* Extra Information Panel */
 .manage-account-info-panel {
   background-color: var(--card);
   border: 1px solid var(--cardborder);
@@ -233,7 +220,6 @@
   font-weight: 500;
 }
 
-/* Action Buttons */
 .manage-account-actions {
   display: flex;
   justify-content: space-between;
@@ -315,7 +301,6 @@
   transform: none;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .manage-account-content-grid {
     grid-template-columns: 1fr;

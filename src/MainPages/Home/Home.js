@@ -15,14 +15,12 @@ const parsePrice = (value) => {
 };
 
 const Home = () => {
-  // editable inputs
   const [filters, setFilters] = useState({
     priceFrom: "",
     priceTo: "",
     bedrooms: 1,
   });
 
-  // only applied when clicking "Filteren"
   const [applied, setApplied] = useState({
     priceFrom: "",
     priceTo: "",
@@ -42,8 +40,6 @@ const Home = () => {
         const res = await fetch(API_ROUTER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          // You don't need cookies for getalllodges; removing avoids CORS pain.
-          // If your backend requires session cookies, add back: credentials: "include",
           body: JSON.stringify({ function: "getalllodges", data: {} }),
         });
 
@@ -67,15 +63,12 @@ const Home = () => {
   const minBedrooms = Number(applied.bedrooms) || 1;
 
   return lodges.filter((l) => {
-    // ✅ Only available lodges
     if (Number(l.visable) !== 1) return false;
     if (String(l.status || "").toLowerCase() !== "beschikbaar") return false;
 
-    // Bedrooms
     const lodgeBedrooms = Number(l.bedrooms) || 0;
     if (lodgeBedrooms < minBedrooms) return false;
 
-    // Price (only if parseable)
     const lodgePrice = parsePrice(l.price);
     if (Number.isFinite(lodgePrice)) {
       if (applied.priceFrom !== "" && Number.isFinite(min) && lodgePrice < min) return false;
@@ -155,14 +148,6 @@ const Home = () => {
                 />
               </div>
 
-              {/* rating UI stays, but doesn't affect filtering */}
-              <div className="filter-group filter-rating">
-                <div className="rating-display" title="Rating filter komt later">
-                  <span className="stars">★★★★★</span>
-                  <span className="dropdown-arrow">▼</span>
-                </div>
-              </div>
-
               <div className="filter-group">
                 <label>Slaapkamers</label>
                 <div className="bedrooms-badge" style={{ justifyContent: "space-between" }}>
@@ -229,7 +214,7 @@ const Home = () => {
               <div key={lodge.id} className="lodge-card slide-up">
                 <div className="lodge-image-wrapper">
                   <img
-                    src={lodge.image || "https://via.placeholder.com/800x600"}
+                    src={lodge.image ? `data:image/jpeg;base64,${lodge.image}` : "https://via.placeholder.com/800x600"}
                     alt={lodge.name}
                     className="lodge-image"
                   />

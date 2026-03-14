@@ -1,0 +1,267 @@
+/* ── Page shell ── */
+.ot-page {
+  min-height: 100vh;
+  background-color: var(--background);
+}
+
+/* ── Hero ── */
+.ot-hero {
+  position: relative;
+  height: 380px;
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
+    url('../../media/homeimg.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ot-hero-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ot-hero-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.ot-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #d97706;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.ot-hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.ot-hero-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Section ── */
+.ot-section {
+  padding: 4rem 0 5rem;
+}
+
+.ot-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Main schedule card ── */
+.ot-card {
+  background: #282828;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.ot-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #383838;
+}
+
+.ot-card-icon {
+  font-size: 1.4rem;
+}
+
+.ot-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ── Schedule rows ── */
+.ot-schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ot-row {
+  display: flex;
+  align-items: center;
+  padding: 0.95rem 2rem;
+  border-bottom: 1px solid #333;
+  transition: background 0.2s ease;
+}
+
+.ot-row:last-child {
+  border-bottom: none;
+}
+
+.ot-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ot-row--today {
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.ot-row--today:hover {
+  background: rgba(217, 119, 6, 0.18);
+}
+
+.ot-day {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.ot-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #d97706;
+  color: white;
+  padding: 0.15rem 0.55rem;
+  border-radius: 20px;
+}
+
+.ot-divider {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #4b4b4b 0,
+    #4b4b4b 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  margin: 0 1.25rem;
+}
+
+.ot-hours {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f97316;
+  white-space: nowrap;
+}
+
+/* ── Extra info cards ── */
+.ot-extras {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 560px) {
+  .ot-extras {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ot-extra-card {
+  background: #282828;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ot-extra-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(172, 112, 0, 0.2);
+}
+
+.ot-extra-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+}
+
+.ot-extra-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+/* ── Notice ── */
+.ot-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: #282828;
+  border-left: 3px solid #d97706;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ot-notice-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ot-notice p {
+  font-size: 0.92rem;
+  color: #9ca3af;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ot-notice p strong {
+  color: #e5e7eb;
+}
+
+/* ── Animations (reuse same class names as Home) ── */
+.fade-in {
+  animation: fadeIn 0.8s ease both;
+}
+
+.fade-slide {
+  animation: fadeslide 0.7s ease both;
+}
+
+.fade-slide-up {
+  animation: fadeSlideUp 0.6s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeslide {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

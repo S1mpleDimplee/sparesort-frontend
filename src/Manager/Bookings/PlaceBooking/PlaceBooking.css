@@ -1,7 +1,7 @@
 .place-booking-page {
   padding: 2rem;
-  max-width: 600px;
   margin: 0 auto;
+  animation: slideUp 0.6s ease-out;
 }
 
 .place-booking-title {
@@ -143,6 +143,7 @@
 .place-booking-user-name {
   font-weight: 500;
   font-size: 0.9rem;
+  color: var(--text);
 }
 
 .place-booking-user-email {
