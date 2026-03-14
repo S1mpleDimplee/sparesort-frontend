@@ -69,7 +69,7 @@ const NavbarHome = () => {
             )}
           </div>
           
-          <a className={`nav-link ${currentPage === "../Openingstijden" ? "active" : ""}`} onClick={() => navigate("/Openingstijden")}>
+          <a className={`nav-link ${currentPage === "/Openingstijden" ? "active" : ""}`} onClick={() => navigate("/Openingstijden")}>
             Openingstijden
           </a>
         </nav>

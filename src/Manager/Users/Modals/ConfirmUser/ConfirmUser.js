@@ -12,7 +12,7 @@ const ConfirmUser = ({ isOpen, onClose, onConfirm}) => {
           ✕
         </button>
 
-        <h2 className="ConfirmUser-title">Acount aangemaakt</h2>
+        <h2 className="ConfirmUser-title">Account aangemaakt</h2>
 
         <div>
           <p className="ConfirmUser-message">
@@ -21,7 +21,7 @@ const ConfirmUser = ({ isOpen, onClose, onConfirm}) => {
             Als je de mail niet ziet, controleer dan je spamfolder.
           </p>
           <button onClick={onClose} className="ConfirmUser-cancel-btn">
-            confirm
+            Bevestigen
           </button>
         </div>
       </div>
