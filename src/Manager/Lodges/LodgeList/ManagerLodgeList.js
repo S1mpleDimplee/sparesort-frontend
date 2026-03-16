@@ -28,8 +28,8 @@ const LodgeCard = ({ lodge, delay, onEdit }) => (
       </div>
 
       <div className="manager-card-meta">
-        <span>👤 {lodge.people} personen</span>
-        <span>🛏️ {lodge.bedrooms} slaapkamer{lodge.bedrooms !== 1 ? "s" : ""}</span>
+        <span>{lodge.people} personen</span>
+        <span>{lodge.bedrooms} slaapkamer{lodge.bedrooms !== 1 ? "s" : ""}</span>
       </div>
 
       <div className="manager-card-price">
@@ -43,8 +43,8 @@ const LodgeCard = ({ lodge, delay, onEdit }) => (
       </div>
 
       <div className="manager-card-actions">
-        <button className="manager-card-edit-btn" onClick={() => onEdit(lodge)}>✏️ Bewerken</button>
-        <button className="manager-card-view-btn" onClick={() => onEdit(lodge)}>Inzien →</button>
+        <button className="manager-card-edit-btn" onClick={() => onEdit(lodge)}>Bewerken</button>
+        <button className="manager-card-view-btn" onClick={() => onEdit(lodge)}>Inzien</button>
       </div>
     </div>
   </div>
