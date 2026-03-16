@@ -1,5 +1,5 @@
 import React from "react";
-import "./OpeningsTijden.css";
+import "./Openingstijden.css";
 
 const schedule = [
   { day: "Maandag",    open: "09:00", close: "18:00", today: false },

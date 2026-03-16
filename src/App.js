@@ -12,6 +12,7 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
+import OpeningsTijden from "./MainPages/Home/Openingstijden/Openingstijden";
 import Register from "./Authentication/register/register";
 import Login from "./Authentication/login/login";
 import Verify from "./Authentication/emailverify/verify";
@@ -30,13 +31,14 @@ import ManagerLodgeOverview from "./Manager/Lodges/LodgeOverview/ManagerLodgeOve
 import BookingsList from "./Manager/Bookings/BookingsList/BookingsList";
 import PlaceBooking from "./Manager/Bookings/PlaceBooking/PlaceBooking";
 
+
 function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [currentRole, setCurrentRole] = useState(4);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const nonLoggedInUrls = ["/", "/home", "/inloggen", "/registreren", "/verificatie"];
+  const nonLoggedInUrls = ["/", "/home", "/inloggen", "/registreren", "/verificatie", "/Openingstijden"];
   const loginpages = ["/inloggen", "/registreren", "/verificatie"];
 
   const isDashboard = location.pathname.startsWith("/dashboard");
@@ -77,6 +79,8 @@ function AppContent() {
             <Route path="/registreren" element={<Register />} />
             <Route path="/inloggen" element={<Login />} />
             <Route path="/verificatie" element={<Verify />} />
+            <Route path="/Openingstijden" element={<OpeningsTijden />} />
+            
             <Route path="*" element={<NotFound />} />
 
             {isLoggedIn && (
