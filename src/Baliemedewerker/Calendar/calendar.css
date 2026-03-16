@@ -1,0 +1,152 @@
+/* calendar.css */
+
+.rooster-container {
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    padding: 20px;
+}
+
+/* Schedule Content Box */
+.schedule-content {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Week Navigation Header */
+.week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.week-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0;
+}
+
+.week-display {
+    background: linear-gradient(135deg, #08504a 0%, #00D4C4 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.week-nav-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(15, 23, 42, 0.6);
+    color: #cbd5e1;
+    border: 2px solid rgba(100, 116, 139, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.week-nav-btn:hover {
+    border-color: #00B4A6;
+    background: rgba(0, 180, 166, 0.2);
+}
+
+/* The Grid Layout: 1 label column + 5 day columns */
+.calendar-grid {
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 15px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.calendar-header,
+.time-row {
+    display: grid;
+    /* 120px for the Lodge Name, then 5 equal flexible columns */
+    grid-template-columns: 120px repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.day-header {
+    background-color: #016863;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.day-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.day-date {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Individual Slots */
+.time-slot {
+    min-height: 100px;
+    background: rgba(30, 41, 59, 0.6);
+    border-radius: 12px;
+    padding: 0.5rem;
+    border: 2px solid rgba(100, 116, 139, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* The vertical label for Lodges */
+.lodge-label {
+    background: rgba(255, 255, 255, 0.05) !important;
+    font-weight: bold;
+    color: #00D4C4;
+    text-align: center;
+}
+
+/* Cleaning Task Cards */
+.appointment-card {
+    border-radius: 10px;
+    padding: 0.8rem;
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+.appointment-card:hover {
+    transform: scale(1.02);
+}
+
+/* Status colors */
+.appointment-card.gepland {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+    border-left: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.appointment-card.done,
+.appointment-card.voltooid {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.appointment-time {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Custom Scrollbar for the grid */
+.time-slots-grid {
+    max-height: 600px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #00B4A6 transparent;
+}

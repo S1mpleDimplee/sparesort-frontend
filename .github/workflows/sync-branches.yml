@@ -1,0 +1,38 @@
+name: Sync branches with master
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    strategy:
+      matrix:
+        branch: [gio, jaylano, Joshua, Ruben]
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge master into ${{ matrix.branch }}
+        run: |
+          git checkout ${{ matrix.branch }}
+          if git merge-base --is-ancestor origin/master HEAD; then
+            echo "${{ matrix.branch }} is already up to date with master"
+          else
+            git merge origin/master -m "Merge master into ${{ matrix.branch }}: bring branch up to date"
+            git push origin ${{ matrix.branch }}
+          fi
