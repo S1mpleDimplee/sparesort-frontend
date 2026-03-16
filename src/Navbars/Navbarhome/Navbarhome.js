@@ -53,19 +53,19 @@ const NavbarHome = () => {
 
             {isLodgeDropdownOpen && (
               <div className="nav-dropdown-menu">
-                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/lodges')}>
-                  :beach: All Lodges
+                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/inloggen')}>
+                  🏖️ All Lodges
                 </div>
-                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/lodges/beach')}>
-                  :beach: Beach Lodges
+                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/inloggen')}>
+                  🏖️ Beach Lodges
                 </div>
-                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/lodges/mountain')}>
-                  :mountain_snow: Mountain Lodges
-                </div>
-                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/lodges/luxury')}>
-                  :sparkles: Luxury Suites
-                </div>
-              </div>
+                <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/inloggen')}>
+                  🏔️ Mountain Lodges
+               </div>
+               <div className="nav-dropdown-item" onClick={() => handleLodgeNavigation('/inloggen')}>
+                  ✨ Luxury Suites
+               </div>
+  </div>
             )}
           </div>
           

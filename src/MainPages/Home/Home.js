@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const API_ROUTER_URL = "http://localhost/sparesort-api/router/router.php";
@@ -15,6 +16,7 @@ const parsePrice = (value) => {
 };
 
 const Home = () => {
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     priceFrom: "",
     priceTo: "",
@@ -244,7 +246,7 @@ const Home = () => {
                     <p className="lodge-description">
                       {lodge.description || "Meer informatie over de lodge? Klik op de knop"}
                     </p>
-                    <button className="book-button">Boek nu</button>
+                    <button className="book-button" onClick={() => navigate('/inloggen')}>Boek nu</button>
                   </div>
                 </div>
               </div>
