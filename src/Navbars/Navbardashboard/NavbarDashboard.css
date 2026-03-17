@@ -13,6 +13,26 @@
   flex-shrink: 0;
 }
 
+.nav-dash-logout {
+  padding: 0.4rem 1.5rem;
+  background: transparent;
+  color: rgb(255, 249, 249);
+  margin-top: 1.5vh !important;
+  border: 2px solid #df3a0d;
+  border-radius: 30px;
+  font-size: 1rem;
+  margin-left: 19vw;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dash-logout:hover {
+  color: #ff4b4b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 85, 85, 0.3);
+}
+
 .logo-image {
   width: 140px;
   height: 140px;
@@ -133,6 +153,8 @@
   margin: 0;
   width: max-content;
 }
+
+nav-dash-link
 
 /* .nav-dropdown-menu:not(:hover):not(.nav-item:hover) {
   animation: dropdownFadeOut 0.3s ease-out forwards;

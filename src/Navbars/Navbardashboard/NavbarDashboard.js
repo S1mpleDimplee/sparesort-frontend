@@ -9,7 +9,6 @@ const NavbarDashboard = () => {
   const [role, setRole] = useState(0);
   const [selectedPage, setSelectedPage] = useState("dashboard");
 
-
   useEffect(() => {
     const userdata = JSON.parse(localStorage.getItem("userdata"));
     const currentRole = parseInt(userdata.role) || 0;
@@ -60,7 +59,6 @@ const NavbarDashboard = () => {
         label: "kalender",
         path: "/dashboard/calendar",
       },
-
     ],
     // Onderhoud (role 2)
     2: [
@@ -146,20 +144,24 @@ const NavbarDashboard = () => {
             menuItems[role].map((item) => (
               <div key={item.id} className="nav-dash-dropdown">
                 <a
-                  className={`nav-dash-link ${selectedPage === item.id ? 'nav-dash-selected' : ''}`}
+                  className={`nav-dash-link ${selectedPage === item.id ? "nav-dash-selected" : ""}`}
                   onClick={() => {
-  navigate(item.path);
-  setSelectedPage(item.id);
-  localStorage.setItem("currentPage", item.id);
-}}
-                  onMouseEnter={() => setActiveDropdown(item.subitems ? item.id : null)}
+                    navigate(item.path);
+                    setSelectedPage(item.id);
+                    localStorage.setItem("currentPage", item.id);
+                  }}
+                  onMouseEnter={() =>
+                    setActiveDropdown(item.subitems ? item.id : null)
+                  }
                   onMouseLeave={() => setActiveDropdown(null)}
                 >
                   {item.label}
                   {item.subitems && (
                     <svg
-                      className={`nav-dash-arrow ${activeDropdown === item.id ? 'open' : ''}`}
-                      width="12" height="12" viewBox="0 0 12 12"
+                      className={`nav-dash-arrow ${activeDropdown === item.id ? "open" : ""}`}
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
                     >
                       <path
                         d="M2 4L6 8L10 4"
@@ -185,9 +187,13 @@ const NavbarDashboard = () => {
                         onClick={() => handleSubitemClick(subitem.path)}
                       >
                         <div className="nav-dash-dropdown-content">
-                          <span className="nav-dash-dropdown-label">{subitem.label}</span>
+                          <span className="nav-dash-dropdown-label">
+                            {subitem.label}
+                          </span>
                           {subitem.description && (
-                            <span className="nav-dash-dropdown-description">{subitem.description}</span>
+                            <span className="nav-dash-dropdown-description">
+                              {subitem.description}
+                            </span>
                           )}
                         </div>
                       </div>
@@ -196,13 +202,16 @@ const NavbarDashboard = () => {
                 )}
               </div>
             ))}
+            <button className="nav-dash-logout" onClick={() => {
+              localStorage.removeItem("userdata");
+              navigate("/");
+            }}>Uitloggen</button>
         </nav>
 
         <div className="navbar-dash-actions">
           {/* <button className="navbar-dash-login-btn" onClick={() => navigate('/inloggen')}>Inloggen</button> */}
         </div>
       </div>
-
     </div>
   );
 };
