@@ -233,7 +233,7 @@ const ManagerViewBooking = () => {
                 className="booking-info-lodge-img"
               />
             ) : (
-              <div className="booking-info-lodge-img-placeholder">🏡</div>
+              <div className="booking-info-lodge-img-placeholder"></div>
             )}
             <div>
               <p className="booking-info-lodge-name">{booking.lodge_name}</p>
@@ -277,7 +277,7 @@ const ManagerViewBooking = () => {
 
       <div className="booking-info-two-col">
         <div className="booking-info-card">
-          <h2 className="booking-info-section-title">💶Factuur & Betaling</h2>
+          <h2 className="booking-info-section-title">Factuur & Betaling</h2>
 
           {invoice ? (
             <>

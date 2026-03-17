@@ -44,7 +44,6 @@ const LodgeCard = ({ lodge, delay, onEdit }) => (
 
       <div className="manager-card-actions">
         <button className="manager-card-edit-btn" onClick={() => onEdit(lodge)}>Bewerken</button>
-        <button className="manager-card-view-btn" onClick={() => onEdit(lodge)}>Inzien</button>
       </div>
     </div>
   </div>
