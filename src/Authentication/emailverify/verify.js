@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useRef } from 'react';
-import './verify.css';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useToast } from '../../toastmessage/toastmessage';
-import apiCall from '../../Calls/calls';
+import React, { useEffect, useState, useRef } from "react";
+import "./verify.css";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useToast } from "../../toastmessage/toastmessage";
+import apiCall from "../../Calls/calls";
 
 const Verify = () => {
   const [searchParams] = useSearchParams();
   const verificationcodeFromUrl = searchParams.get("verificationcode");
   const emailFromUrl = searchParams.get("email");
 
-  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationCode, setVerificationCode] = useState("");
   const [linkResult, setLinkResult] = useState(null); // null | 'loading' | { success, message }
   const linkConfirmStarted = useRef(false);
 
@@ -18,36 +18,37 @@ const Verify = () => {
 
   const userdata = (() => {
     try {
-      return JSON.parse(localStorage.getItem('userdata') || 'null');
+      return JSON.parse(localStorage.getItem("userdata") || "null");
     } catch {
       return null;
     }
   })();
   const verificationinfo = (() => {
     try {
-      return JSON.parse(localStorage.getItem('verificationinfo') || 'null');
+      return JSON.parse(localStorage.getItem("verificationinfo") || "null");
     } catch {
       return null;
     }
   })();
   const userid = userdata?.userid;
-  const name = verificationinfo?.name ?? '';
-  const email = emailFromUrl || verificationinfo?.email || '';
+  const name = verificationinfo?.name ?? "";
+  const email = emailFromUrl || verificationinfo?.email || "";
 
   // Als er een link met code en email is: direct bevestigen via API
   useEffect(() => {
-    if (!verificationcodeFromUrl || !emailFromUrl || linkConfirmStarted.current) return;
+    if (!verificationcodeFromUrl || !emailFromUrl || linkConfirmStarted.current)
+      return;
     linkConfirmStarted.current = true;
-    setLinkResult('loading');
+    setLinkResult("loading");
 
     const confirm = async () => {
       const response = await apiCall("confirmemailwithlink", {
         email: emailFromUrl,
-        verificationcode: verificationcodeFromUrl
+        verificationcode: verificationcodeFromUrl,
       });
       setLinkResult({
         success: response.isSuccess,
-        message: response.message
+        message: response.message,
       });
       if (response.isSuccess) {
         openToast(response.message);
@@ -57,12 +58,13 @@ const Verify = () => {
   }, [verificationcodeFromUrl, emailFromUrl, openToast]);
 
   const handleCodeChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '');
+    let value = e.target.value.replace(/\D/g, "");
     if (value.length <= 6) {
       if (value.length > 2 && value.length <= 4) {
-        value = value.slice(0, 2) + '-' + value.slice(2);
+        value = value.slice(0, 2) + "-" + value.slice(2);
       } else if (value.length > 4) {
-        value = value.slice(0, 2) + '-' + value.slice(2, 4) + '-' + value.slice(4);
+        value =
+          value.slice(0, 2) + "-" + value.slice(2, 4) + "-" + value.slice(4);
       }
       setVerificationCode(value);
     }
@@ -71,13 +73,16 @@ const Verify = () => {
   const handleSubmit = async () => {
     const response = await apiCall("checkverificationcode", {
       email: email,
-      code: verificationCode.replace(/-/g, ''),
-      userid: userid
+      code: verificationCode.replace(/-/g, ""),
+      userid: userid,
     });
 
     if (response.isSuccess) {
-      openToast('E-mail succesvol geverifieerd! U wordt nu doorgestuurd naar de inlogpagina.');
-      navigate('/inloggen');
+      openToast(
+        "E-mail succesvol geverifieerd! U wordt nu doorgestuurd naar de inlogpagina.",
+      );
+      localStorage.removeItem("userdata");
+      navigate("/inloggen");
     } else {
       openToast(response.message);
     }
@@ -87,12 +92,15 @@ const Verify = () => {
     apiCall("sendverificationmail", {
       email: email,
       name: name,
-      verificationcode: Math.floor(100000 + Math.random() * 900000).toString()
+      verificationcode: Math.floor(100000 + Math.random() * 900000).toString(),
     });
-    openToast('Een nieuwe verificatielink is verzonden naar uw e-mailadres.');
+    openToast("Een nieuwe verificatielink is verzonden naar uw e-mailadres.");
   };
 
-  const goToLogin = () => navigate('/inloggen');
+  const goToLogin = () => {
+    localStorage.removeItem("userdata");
+    navigate("/inloggen");
+  };
 
   // Bevestiging via link: toon alleen resultaat op het scherm
   if (verificationcodeFromUrl && emailFromUrl) {
@@ -103,12 +111,14 @@ const Verify = () => {
             <h2 className="verification-title">E-mail bevestigen</h2>
             <div className="title-underline"></div>
             <div className="verification-content">
-              {linkResult === 'loading' && (
+              {linkResult === "loading" && (
                 <p className="verification-message">Bezig met bevestigen...</p>
               )}
-              {linkResult && linkResult !== 'loading' && (
+              {linkResult && linkResult !== "loading" && (
                 <>
-                  <p className={`result-message ${linkResult.success ? 'result-success' : 'result-error'}`}>
+                  <p
+                    className={`result-message ${linkResult.success ? "result-success" : "result-error"}`}
+                  >
                     {linkResult.message}
                   </p>
                   {linkResult.success && (
@@ -134,9 +144,13 @@ const Verify = () => {
             <h2 className="verification-title">Verificatie</h2>
             <div className="title-underline"></div>
             <p className="verification-message">
-              Gebruik de link uit uw e-mail om uw adres te bevestigen. Klik in de mail op de verificatielink.
+              Gebruik de link uit uw e-mail om uw adres te bevestigen. Klik in
+              de mail op de verificatielink.
             </p>
-            <button onClick={() => navigate('/inloggen')} className="verify-button">
+            <button
+              onClick={() => navigate("/inloggen")}
+              className="verify-button"
+            >
               Naar inloggen
             </button>
           </div>
@@ -154,7 +168,8 @@ const Verify = () => {
 
           <div className="verification-content">
             <p className="verification-message">
-              Er is een 6-cijferige code gestuurd naar uw e-mail. Voer deze in, of klik op de link in de e-mail.
+              Er is een 6-cijferige code gestuurd naar uw e-mail. Voer deze in,
+              of klik op de link in de e-mail.
             </p>
             <p className="email-address">{email}</p>
 
