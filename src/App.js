@@ -18,7 +18,9 @@ import Login from "./Authentication/login/login";
 import Verify from "./Authentication/emailverify/verify";
 import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
 import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
+import KlantDashboard from "./Klant/Klantdashboard/Klantdashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
+import MijnBoekingen from "./Klant/Klantdashboard/MijnBoekingen/Mijnboekingen";
 import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 import ManagerDashboard from "./Manager/Dashboard/Dashboard";
 import MonteurDashboard from "./monteur/Dashboard/dashboard"; 
@@ -85,6 +87,12 @@ function AppContent() {
 
             {isLoggedIn && (
               <>
+                {currentRole === 0 && (
+                 <>
+                  <Route path="/dashboard" element={<KlantDashboard />} />
+                  <Route path="/dashboard/mijnboekingen" element={<MijnBoekingen />} />
+                </>
+                )}
                 {/* Balimedewerker (role 1) */}
                 {currentRole === 1 && (
                   <>
