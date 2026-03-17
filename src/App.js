@@ -12,12 +12,15 @@ import { ToastProvider, useToast } from "./toastmessage/toastmessage";
 import postCall from "./Calls/calls";
 
 import Footer from "./Footer/Footer";
+import OpeningsTijden from "./MainPages/Home/Openingstijden/Openingstijden";
 import Register from "./Authentication/register/register";
 import Login from "./Authentication/login/login";
 import Verify from "./Authentication/emailverify/verify";
 import NavbarHome from "./Navbars/Navbarhome/Navbarhome";
 import BalieDashboard from "./Baliemedewerker/Dashboard/Dashboard";
+import KlantDashboard from "./Klant/Klantdashboard/Klantdashboard";
 import BalieLodges from "./Baliemedewerker/Lodges/Lodges";
+import MijnBoekingen from "./Klant/Klantdashboard/MijnBoekingen/Mijnboekingen";
 import NavbarDashboard from "./Navbars/Navbardashboard/NavbarDashboard";
 import ManagerDashboard from "./Manager/Dashboard/Dashboard";
 import MonteurDashboard from "./monteur/Dashboard/dashboard"; 
@@ -31,13 +34,14 @@ import BookingsList from "./Manager/Bookings/BookingsList/BookingsList";
 import PlaceBooking from "./Manager/Bookings/PlaceBooking/PlaceBooking";
 import ManagerViewBooking from "./Manager/Bookings/ViewBooking/ViewBooking";
 
+
 function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
   const [currentRole, setCurrentRole] = useState(4);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const nonLoggedInUrls = ["/", "/home", "/inloggen", "/registreren", "/verificatie"];
+  const nonLoggedInUrls = ["/", "/home", "/inloggen", "/registreren", "/verificatie", "/Openingstijden"];
   const loginpages = ["/inloggen", "/registreren", "/verificatie"];
 
   const isDashboard = location.pathname.startsWith("/dashboard");
@@ -78,10 +82,18 @@ function AppContent() {
             <Route path="/registreren" element={<Register />} />
             <Route path="/inloggen" element={<Login />} />
             <Route path="/verificatie" element={<Verify />} />
+            <Route path="/Openingstijden" element={<OpeningsTijden />} />
+            
             <Route path="*" element={<NotFound />} />
 
             {isLoggedIn && (
               <>
+                {currentRole === 0 && (
+                 <>
+                  <Route path="/dashboard" element={<KlantDashboard />} />
+                  <Route path="/dashboard/mijnboekingen" element={<MijnBoekingen />} />
+                </>
+                )}
                 {/* Balimedewerker (role 1) */}
                 {currentRole === 1 && (
                   <>

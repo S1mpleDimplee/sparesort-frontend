@@ -42,12 +42,6 @@ const NavbarDashboard = () => {
         path: "/dashboard/facturen",
         description: "Uw factuuroverzicht",
       },
-      {
-        id: "berichten",
-        label: "Berichten",
-        path: "/dashboard/berichten",
-        description: "Notificaties en berichten",
-      },
     ],
     // Balie (role 1)
     1: [
@@ -154,9 +148,10 @@ const NavbarDashboard = () => {
                 <a
                   className={`nav-dash-link ${selectedPage === item.id ? 'nav-dash-selected' : ''}`}
                   onClick={() => {
-                    navigate(item.path);
-                    setSelectedPage(item.id);
-                  }}
+  navigate(item.path);
+  setSelectedPage(item.id);
+  localStorage.setItem("currentPage", item.id);
+}}
                   onMouseEnter={() => setActiveDropdown(item.subitems ? item.id : null)}
                   onMouseLeave={() => setActiveDropdown(null)}
                 >

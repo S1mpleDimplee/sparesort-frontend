@@ -9,7 +9,7 @@
   position: relative;
   height: 380px;
   background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
-    url('../../media/homeimg.png') center/cover no-repeat;
+    url('../../../media/homeimg.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
