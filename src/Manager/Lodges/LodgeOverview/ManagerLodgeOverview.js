@@ -262,7 +262,7 @@ const ManagerLodgeOverview = () => {
         />
       </div>
 
-      <div className="lodge-details-card">
+      {/* <div className="lodge-details-card">
         <h2 className="lodge-details-section-title">Voorzieningen</h2>
         <div className="lodge-details-amenities-grid">
           <div>
@@ -309,14 +309,14 @@ const ManagerLodgeOverview = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="lodge-details-actions">
         {!isCreate && (
           <button className="lodge-details-delete-btn" onClick={handleDelete}>Verwijderen</button>
         )}
         <button className="lodge-details-save-btn" onClick={HandleLodgSaved}>
-          {isCreate ? "✓ Lodge aanmaken" : "✓ Wijzigingen opslaan"}
+          {isCreate ? "Lodge aanmaken" : "Wijzigingen opslaan"}
         </button>
       </div>
     </div>
