@@ -23,6 +23,11 @@ const BalieDashboard = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
+  const [editDates, setEditDates] = useState(false);
+  const [editCheckIn, setEditCheckIn] = useState("");
+  const [editCheckOut, setEditCheckOut] = useState("");
+  const [editLoading, setEditLoading] = useState(false);
+  const [editError, setEditError] = useState("");
   const [filters, setFilters] = useState({
     naam: "",
     datum: "",
@@ -36,7 +41,6 @@ const BalieDashboard = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch bookings
   useEffect(() => {
     fetchBookings();
   }, []);
@@ -61,7 +65,6 @@ const BalieDashboard = () => {
     }
   };
 
-  // Update a booking in all state lists
   const updateBookingInState = (id, updates) => {
     const update = (list) => list.map((b) => b.id === id ? { ...b, ...updates } : b);
     setAllBookings(update);
@@ -70,6 +73,12 @@ const BalieDashboard = () => {
     if (selectedBooking?.id === id) {
       setSelectedBooking((prev) => ({ ...prev, ...updates }));
     }
+  };
+
+  const closeModal = () => {
+    setSelectedBooking(null);
+    setEditDates(false);
+    setEditError("");
   };
 
   const handleCheckIn = async (booking) => {
@@ -124,11 +133,43 @@ const BalieDashboard = () => {
       setAllBookings((prev) => prev.filter((b) => b.id !== bookingId));
       setCheckIns((prev) => prev.filter((b) => b.id !== bookingId));
       setCheckOuts((prev) => prev.filter((b) => b.id !== bookingId));
-      setSelectedBooking(null);
+      closeModal();
     } catch (e) {
       alert("Verwijderen mislukt: " + e.message);
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const updateDates = async () => {
+    setEditError("");
+    if (!editCheckIn || !editCheckOut) {
+      setEditError("Vul beide datums in.");
+      return;
+    }
+    if (editCheckOut <= editCheckIn) {
+      setEditError("Check-out moet na check-in zijn.");
+      return;
+    }
+    setEditLoading(true);
+    try {
+      const res = await fetch(API_ROUTER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          function: "updatebookingdates",
+          data: { id: selectedBooking.id, check_in: editCheckIn, check_out: editCheckOut },
+        }),
+      });
+      const json = await res.json();
+      if (!json.success) throw new Error(json.message);
+      updateBookingInState(selectedBooking.id, { check_in: editCheckIn, check_out: editCheckOut });
+      setEditDates(false);
+      setEditError("");
+    } catch (e) {
+      setEditError(e.message);
+    } finally {
+      setEditLoading(false);
     }
   };
 
@@ -178,11 +219,11 @@ const BalieDashboard = () => {
 
       {/* ── Detail modal ── */}
       {selectedBooking && (
-        <div className="balie-dash-modal-overlay" onClick={() => setSelectedBooking(null)}>
+        <div className="balie-dash-modal-overlay" onClick={closeModal}>
           <div className="balie-dash-modal" onClick={(e) => e.stopPropagation()}>
             <div className="balie-dash-modal-header">
               <h2>Boeking details</h2>
-              <button className="balie-dash-modal-close" onClick={() => setSelectedBooking(null)}>✕</button>
+              <button className="balie-dash-modal-close" onClick={closeModal}>✕</button>
             </div>
 
             <div className="balie-dash-modal-body">
@@ -208,17 +249,47 @@ const BalieDashboard = () => {
 
                 <div className="balie-dash-modal-section">
                   <h3>📅 Boeking</h3>
-                  <p><span>Check-in datum</span><strong>{selectedBooking.check_in ?? "-"}</strong></p>
+                  <p>
+                    <span>Check-in datum</span>
+                    {editDates ? (
+                      <input
+                        type="date"
+                        className="balie-dash-search-input"
+                        style={{ maxWidth: "160px" }}
+                        value={editCheckIn}
+                        onChange={(e) => setEditCheckIn(e.target.value)}
+                      />
+                    ) : (
+                      <strong>{selectedBooking.check_in ?? "-"}</strong>
+                    )}
+                  </p>
                   <p><span>Check-in tijd</span><strong>{selectedBooking.check_in_time ?? "Nog niet ingechecked"}</strong></p>
-                  <p><span>Check-out datum</span><strong>{selectedBooking.check_out ?? "-"}</strong></p>
+                  <p>
+                    <span>Check-out datum</span>
+                    {editDates ? (
+                      <input
+                        type="date"
+                        className="balie-dash-search-input"
+                        style={{ maxWidth: "160px" }}
+                        value={editCheckOut}
+                        onChange={(e) => setEditCheckOut(e.target.value)}
+                      />
+                    ) : (
+                      <strong>{selectedBooking.check_out ?? "-"}</strong>
+                    )}
+                  </p>
                   <p><span>Check-out tijd</span><strong>{selectedBooking.check_out_time ?? "Nog niet uitgechecked"}</strong></p>
                   <p><span>Totaalprijs</span><strong>€{selectedBooking.total_price ?? "-"}</strong></p>
                   <p><span>Status</span><StatusBadge status={selectedBooking.status} /></p>
+                  {editError && (
+                    <p style={{ color: "#ef4444", fontSize: "0.85rem", margin: "0.5rem 0 0 0" }}>{editError}</p>
+                  )}
                 </div>
               </div>
             </div>
 
             <div className="balie-dash-modal-footer">
+              {/* Delete button for cancelled bookings */}
               {selectedBooking.status === "geannuleerd" && (
                 <button
                   className="balie-dash-action-btn balie-dash-delete-btn"
@@ -228,27 +299,65 @@ const BalieDashboard = () => {
                   Verwijderen
                 </button>
               )}
-              {selectedBooking.status !== "geannuleerd" && selectedBooking.status !== "uitgechecked" && selectedBooking.status !== "ingechecked" && (
-                <button
-                  className="balie-dash-action-btn balie-dash-checkin-btn"
-                  onClick={() => handleCheckIn(selectedBooking)}
-                  disabled={actionLoading}
-                >
-                  Check-in
-                </button>
+
+              {/* Edit dates mode */}
+              {editDates ? (
+                <>
+                  <button
+                    className="balie-dash-action-btn balie-dash-inzien-btn"
+                    onClick={() => { setEditDates(false); setEditError(""); }}
+                  >
+                    Annuleren
+                  </button>
+                  <button
+                    className="balie-dash-action-btn balie-dash-checkin-btn"
+                    onClick={updateDates}
+                    disabled={editLoading}
+                  >
+                    {editLoading ? "Opslaan..." : "Opslaan"}
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Edit dates button */}
+                  <button
+                    className="balie-dash-action-btn balie-dash-inzien-btn"
+                    onClick={() => {
+                      setEditDates(true);
+                      setEditCheckIn(selectedBooking.check_in ?? "");
+                      setEditCheckOut(selectedBooking.check_out ?? "");
+                    }}
+                  >
+                    ✏️ Datums wijzigen
+                  </button>
+
+                  {/* Check-in button */}
+                  {selectedBooking.status !== "geannuleerd" && selectedBooking.status !== "uitgechecked" && selectedBooking.status !== "ingechecked" && (
+                    <button
+                      className="balie-dash-action-btn balie-dash-checkin-btn"
+                      onClick={() => handleCheckIn(selectedBooking)}
+                      disabled={actionLoading}
+                    >
+                      Check-in
+                    </button>
+                  )}
+
+                  {/* Check-out button */}
+                  {selectedBooking.status === "ingechecked" && (
+                    <button
+                      className="balie-dash-action-btn balie-dash-checkout-btn"
+                      onClick={() => handleCheckOut(selectedBooking)}
+                      disabled={actionLoading}
+                    >
+                      Check-out
+                    </button>
+                  )}
+
+                  <button className="balie-dash-action-btn balie-dash-inzien-btn" onClick={closeModal}>
+                    Sluiten
+                  </button>
+                </>
               )}
-              {selectedBooking.status === "ingechecked" && (
-                <button
-                  className="balie-dash-action-btn balie-dash-checkout-btn"
-                  onClick={() => handleCheckOut(selectedBooking)}
-                  disabled={actionLoading}
-                >
-                  Check-out
-                </button>
-              )}
-              <button className="balie-dash-action-btn balie-dash-inzien-btn" onClick={() => setSelectedBooking(null)}>
-                Sluiten
-              </button>
             </div>
           </div>
         </div>
