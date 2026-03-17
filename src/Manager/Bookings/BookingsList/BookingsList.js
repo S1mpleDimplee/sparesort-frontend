@@ -178,12 +178,12 @@ const BookingList = () => {
 
                   <td className="manager-users-table-cell">
                     <div className="manager-users-actions">
-                      {/* <button
+                      <button
                         className="manager-users-action-btn manager-users-view-btn"
                         onClick={() => navigate(`/dashboard/boekingen/${b.id}`)}
                       >
                         Inzien
-                      </button> */}
+                      </button>
                       {b.status !== "geannuleerd" && (
                         <button
                           className="manager-users-action-btn manager-users-deactivate-btn"
