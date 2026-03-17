@@ -14,6 +14,9 @@ const StatusBadge = ({ status }) => {
   return <span className={`mb-status-badge ${cls}`}>{status}</span>;
 };
 
+const canPayOrCancel = (status) =>
+  status === "gepland" || status === "bevestigd";
+
 const MijnBoekingen = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -123,7 +126,7 @@ const MijnBoekingen = () => {
               <a className="mb-btn-phone" href="tel:+31201234567">
                 📞 +31 20 123 4567
               </a>
-              {selectedBooking.status !== "geannuleerd" && (
+              {canPayOrCancel(selectedBooking.status) && (
                 <button
                   className="mb-btn-cancel"
                   onClick={() => cancelBooking(selectedBooking.id)}
@@ -194,15 +197,15 @@ const MijnBoekingen = () => {
                 </div>
 
                 <div className="mb-card-actions">
-  <button className="mb-btn-primary" onClick={() => setSelectedBooking(booking)}>
-    Inzien
-  </button>
-  {booking.status !== "geannuleerd" && booking.status !== "uitgechecked" && (
-    <button className="mb-btn-betalen" onClick={() => window.location.href = "/404"}>
-      Betalen
-    </button>
-  )}
-</div>
+                  <button className="mb-btn-primary" onClick={() => setSelectedBooking(booking)}>
+                    Inzien
+                  </button>
+                  {canPayOrCancel(booking.status) && (
+                    <button className="mb-btn-betalen" onClick={() => window.location.href = "/404"}>
+                      Betalen
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
