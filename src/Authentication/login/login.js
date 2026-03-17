@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import apiCall from "../../Calls/calls";
@@ -10,9 +10,20 @@ const Login = () => {
     password: "",
   });
 
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, []);
+
   const { openToast } = useToast();
 
   const navigate = useNavigate();
+
+  const checkIfLoggedIn = () => {
+    const userData = localStorage.getItem("userdata");
+    if (userData) {
+      navigate("/dashboard");
+    }
+  };  
 
   const handleChange = (e) => {
     setFormData({

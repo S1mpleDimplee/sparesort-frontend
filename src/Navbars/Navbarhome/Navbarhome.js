@@ -26,7 +26,6 @@ const NavbarHome = () => {
             Home
           </a>
           
-          {/* Lodge's Dropdown with Hover */}
           <div 
             className="nav-dropdown"
             onMouseEnter={() => setIsLodgeDropdownOpen(true)}
