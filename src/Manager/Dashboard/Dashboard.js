@@ -52,13 +52,28 @@ const ManagerDashboard = () => {
         totalLodges: data.totalLodges,
       });
 
-      const statusColors = { geannuleerd: "#ff7272", bevestigd: "#40f1b6", gepland: "#d9ff72" };
+      const statusColors = {
+        geannuleerd: "#ff7272",
+        bevestigd: "#40f1b6",
+        gepland: "#d9ff72",
+        ingechecked: "#0fc102",
+        uitgechecked: "#e48e32",
+      };
       setBookingStatusData(
-        data.bookingStatus.map(s => ({
-          label: s.status,
-          amount: parseInt(s.total),
-          color: statusColors[s.status] ?? "#3b82f6"
-        }))
+        data.bookingStatus.map((s) => {
+          let amount = parseInt(s.total);
+          if (
+            (s.status === "ingechecked" || s.status === "uitgechecked") &&
+            data.bookingsToday > 0
+          ) {
+            amount = Math.min(amount, 1);
+          }
+          return {
+            label: s.status,
+            amount: amount,
+            color: statusColors[s.status] ?? "#3b82f6",
+          };
+        }),
       );
 
       setMonthlyBookingsData(data.monthlyBookings);
@@ -66,28 +81,38 @@ const ManagerDashboard = () => {
 
       setProgressMetrics([
         {
-          id: 1, label: "Lodge Bezetting",
-          value: data.lodgeOccupancy, max: 100, color: "#10b981",
-          info: `${data.occupiedLodges} van ${data.totalLodges} lodges bezet`
+          id: 1,
+          label: "Lodge Bezetting",
+          value: data.lodgeOccupancy,
+          max: 100,
+          color: "#10b981",
+          info: `${data.occupiedLodges} van ${data.totalLodges} lodges bezet`,
         },
         {
-          id: 2, label: "Klanttevredenheid",
-          value: 92, max: 100, color: "#3b82f6",
-          info: "Gemiddelde score: 4.6/5"
+          id: 2,
+          label: "Klanttevredenheid",
+          value: 92,
+          max: 100,
+          color: "#3b82f6",
+          info: "Gemiddelde score: 4.6/5",
         },
         {
-          id: 3, label: "Maandelijkse Target",
+          id: 3,
+          label: "Maandelijkse Target",
           value: Math.min(Math.round((data.revenue / 100000) * 100), 100),
-          max: 100, color: "#f59e0b",
-          info: `€${data.revenue.toFixed(0)} van €100.000`
+          max: 100,
+          color: "#f59e0b",
+          info: `€${data.revenue.toFixed(0)} van €100.000`,
         },
         {
-          id: 4, label: "Onderhoud Compleet",
-          value: 45, max: 100, color: "#ec4899",
-          info: "9 van 20 taken voltooid"
-        }
+          id: 4,
+          label: "Onderhoud Compleet",
+          value: 45,
+          max: 100,
+          color: "#ec4899",
+          info: "9 van 20 taken voltooid",
+        },
       ]);
-
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     } finally {
@@ -101,7 +126,7 @@ const ManagerDashboard = () => {
 
   const calculateGrowth = (current, previous) => {
     if (previous === 0) return 0;
-    return ((current - previous) / previous * 100).toFixed(0);
+    return (((current - previous) / previous) * 100).toFixed(0);
   };
 
   if (isLoading) {
@@ -117,10 +142,17 @@ const ManagerDashboard = () => {
       <div className="dashboard-stats-row">
         <div className="stat-card card-entrance hover-glow">
           <div className="stat-icon">
-            <img src={Icons.managerCalendar} alt="Boekingen vandaag" width="32" height="32" />
+            <img
+              src={Icons.managerCalendar}
+              alt="Boekingen vandaag"
+              width="32"
+              height="32"
+            />
           </div>
           <div className="stat-content">
-            <div className="stat-value scale-in">{dashboardData.bookingsToday}</div>
+            <div className="stat-value scale-in">
+              {dashboardData.bookingsToday}
+            </div>
             <div className="stat-label">Boekingen vandaag</div>
             <ProgressBar
               value={dashboardData.bookingsLastMonth}
@@ -130,17 +162,27 @@ const ManagerDashboard = () => {
               secondColor={"#7f97c9"}
             />
             <div className="stat-sublabel">
-              Ingecheckte boekingen: <span className="stat-highlight">{dashboardData.bookingsLastMonth}</span>
+              Ingecheckte boekingen:{" "}
+              <span className="stat-highlight">
+                {dashboardData.bookingsLastMonth}
+              </span>
             </div>
           </div>
         </div>
 
         <div className="stat-card card-entrance-delayed hover-glow">
           <div className="stat-icon stat-icon-green">
-            <img src={Icons.managerUser} alt="Geregistreerde accounts" width="32" height="32" />
+            <img
+              src={Icons.managerUser}
+              alt="Geregistreerde accounts"
+              width="32"
+              height="32"
+            />
           </div>
           <div className="stat-content">
-            <div className="stat-value scale-in-bounce">{dashboardData.registeredAccounts}</div>
+            <div className="stat-value scale-in-bounce">
+              {dashboardData.registeredAccounts}
+            </div>
             <div className="stat-label">Geregistreerde accounts</div>
             <ProgressBar
               value={dashboardData.accountsGrowth}
@@ -155,9 +197,17 @@ const ManagerDashboard = () => {
           </div>
         </div>
 
-        <div className="stat-card card-entrance-delayed hover-glow" style={{ animationDelay: "0.4s" }}>
+        <div
+          className="stat-card card-entrance-delayed hover-glow"
+          style={{ animationDelay: "0.4s" }}
+        >
           <div className="stat-icon stat-icon-orange shimmer">
-            <img src={Icons.managerWrench} alt="Reparaties" width="32" height="32" />
+            <img
+              src={Icons.managerWrench}
+              alt="Reparaties"
+              width="32"
+              height="32"
+            />
           </div>
           <div className="stat-content">
             <div className="stat-value scale-in">{dashboardData.Repairs}</div>
@@ -170,22 +220,33 @@ const ManagerDashboard = () => {
               secondColor={"#ffb74d"}
             />
             <div className="stat-sublabel">
-              Van totale  <span className="stat-highlight-orange">{dashboardData.totalLodges}</span> lodges
+              Van totale{" "}
+              <span className="stat-highlight-orange">
+                {dashboardData.totalLodges}
+              </span>{" "}
+              lodges
             </div>
           </div>
         </div>
 
-        <div className="stat-card card-entrance-delayed hover-glow hover-glow" style={{ animationDelay: "0.6s" }}>
+        <div
+          className="stat-card card-entrance-delayed hover-glow hover-glow"
+          style={{ animationDelay: "0.6s" }}
+        >
           <div className="stat-icon stat-icon-currency pulse">
             <img src={Icons.managerEuro} alt="Omzet" width="32" height="32" />
           </div>
           <div className="stat-content">
-            <div className="stat-value scale-in-bounce">{formatCurrency(dashboardData.revenue)}</div>
+            <div className="stat-value scale-in-bounce">
+              {formatCurrency(dashboardData.revenue)}
+            </div>
             <div className="stat-label">Omzet deze maand</div>
             <div className="stat-sublabel stat-revenue">
               <span className="revenue-icon">€</span>
               <span>Omzet vorige maand</span>
-              <span className="revenue-amount">{formatCurrency(dashboardData.revenueLastMonth)}</span>
+              <span className="revenue-amount">
+                {formatCurrency(dashboardData.revenueLastMonth)}
+              </span>
             </div>
           </div>
         </div>
@@ -197,28 +258,36 @@ const ManagerDashboard = () => {
             <div className="legend-inline fade-in-delayed">
               {bookingStatusData.map((item, index) => (
                 <div key={index} className="legend-item">
-                  <span className="legend-dot" style={{ backgroundColor: item.color }}></span>
+                  <span
+                    className="legend-dot"
+                    style={{ backgroundColor: item.color }}
+                  ></span>
                   <span className="legend-label">{item.label}</span>
                 </div>
               ))}
             </div>
           </div>
           <div className="chart-content">
-            <PieChart
-              items={bookingStatusData}
-              size={280}
-              legendpos="none"
-            />
+            <PieChart items={bookingStatusData} size={280} legendpos="none" />
           </div>
         </div>
 
-        <div className="latest-bookings-card hover-glow" style={{ animationDelay: "0.2s" }}>
+        <div
+          className="latest-bookings-card hover-glow"
+          style={{ animationDelay: "0.2s" }}
+        >
           <h3 className="card-title  mb-2">Laatste boekigen</h3>
           <div className="bookings-list">
             {latestBookings.length > 0 ? (
               latestBookings.map((booking, index) => (
-                <div key={booking.id} className="booking-item slide-right" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
-                  <div className="booking-avatar hover-scale">{booking.initials}</div>
+                <div
+                  key={booking.id}
+                  className="booking-item slide-right"
+                  style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                >
+                  <div className="booking-avatar hover-scale">
+                    {booking.initials}
+                  </div>
                   <div className="booking-details">
                     <div className="booking-name">{booking.guestName}</div>
                     <div className="booking-status">{booking.status}</div>
@@ -234,11 +303,10 @@ const ManagerDashboard = () => {
       </div>
 
       <div className="dashboard-bar-chart hover-glow">
-        <h3 className="chart-section-title fade-in-delayed">Boekingen 12 maand overzicht</h3>
-        <BarChart
-          data={monthlyBookingsData}
-          height="350px"
-        />
+        <h3 className="chart-section-title fade-in-delayed">
+          Boekingen 12 maand overzicht
+        </h3>
+        <BarChart data={monthlyBookingsData} height="350px" />
       </div>
     </div>
   );

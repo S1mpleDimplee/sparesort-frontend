@@ -18,12 +18,17 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const checkIfLoggedIn = () => {
-    const userData = localStorage.getItem("userdata");
-    if (userData) {
-      navigate("/dashboard");
+  const checkIfLoggedIn = async () => {
+    const userData = JSON.parse(localStorage.getItem("userdata"));
+    const userID = userData?.userid;
+    
+    const response = await apiCall("getuserdata", { userid: userID });
+    if (response.isSuccess) {
+      if (response.data.email_verified === "1") {
+        navigate("/dashboard");
+      }
     }
-  };  
+  };
 
   const handleChange = (e) => {
     setFormData({
